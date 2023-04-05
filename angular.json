@@ -36,7 +36,11 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": [
+              "src/styles/variables.scss",
+              "src/global.scss",
+              "src/styles/mixin.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -116,7 +120,11 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": [
+              "src/styles/variables.scss",
+              "src/global.scss",
+              "src/styles/mixin.scss"
+            ],
             "scripts": []
           },
           "configurations": {

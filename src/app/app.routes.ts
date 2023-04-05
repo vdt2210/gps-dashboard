@@ -1,19 +1,15 @@
 import { Routes } from '@angular/router';
+import { AppRoutes } from './utilities/app-routes';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
-    path: 'message/:id',
+    path: AppRoutes.dashboard.path,
     loadComponent: () =>
-      import('./view-message/view-message.page').then((m) => m.ViewMessagePage),
+      import('./pages/dashboard/dashboard.page').then((m) => m.DashboardPage),
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: AppRoutes.dashboard.path,
     pathMatch: 'full',
   },
 ];
-
