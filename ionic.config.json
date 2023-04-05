@@ -1,0 +1,7 @@
+{
+  "name": "GPS Dashboard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
