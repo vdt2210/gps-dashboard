@@ -1,7 +1,8 @@
 {
-  "name": "GPS Dashboard",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
+	"name": "GPS Dashboard",
+	"integrations": {
+		"capacitor": {}
+	},
+	"type": "angular"
 }
+

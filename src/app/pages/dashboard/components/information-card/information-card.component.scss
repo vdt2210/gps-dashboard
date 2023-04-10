@@ -1,0 +1,25 @@
+@import "src/styles/mixin.scss";
+
+.information-container {
+	font-size: 16px;
+	background: linear-gradient(
+		to top,
+		var(--ion-color-step-50),
+		var(--ion-color-step-100)
+	);
+	border-radius: 30px;
+	padding: 5px 15px;
+	border: 2px solid var(--ion-color-step-150);
+
+	@include landscape {
+		display: none;
+	}
+
+	.detail-card {
+		padding-block: 10px;
+
+		&:not(:last-child) {
+			border-bottom: 2px solid var(--ion-color-step-150);
+		}
+	}
+}

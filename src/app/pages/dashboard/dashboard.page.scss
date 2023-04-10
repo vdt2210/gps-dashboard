@@ -1,0 +1,66 @@
+@import "src/styles/mixin.scss";
+
+.header-bar,
+.footer-bar {
+	padding: 5px 10px;
+	min-height: 40px;
+	align-items: center;
+	font-size: 22px;
+	gap: 10%;
+
+	// .left-side,
+	// .right-side {
+	// 	width: 100%;
+	// }
+
+	// .right-side {
+	// 	justify-content: right;
+	// }
+}
+
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	// height: calc(100vh - 80px);
+	height: 100%;
+}
+
+.speed-container {
+	width: 80%;
+	aspect-ratio: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@include landscape {
+		width: 30%;
+		border-radius: 50%;
+		background: linear-gradient(
+			to top,
+			var(--ion-color-step-50),
+			var(--ion-color-step-100)
+		);
+		border: 2px solid var(--ion-color-step-150);
+	}
+
+	.speed {
+		font-size: 100px;
+
+		@include landscape {
+			font-size: 70px;
+		}
+	}
+}
+
+.landscape-coordinates {
+	font-size: 14px;
+	color: var(--ion-color-step-600);
+	display: inline-flex;
+	gap: 5px;
+
+	@include portrait {
+		display: none;
+	}
+}

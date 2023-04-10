@@ -1,7 +1,63 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>dashboard</ion-title>
-  </ion-toolbar>
+<ion-header>
+	<div class="d-flex ion-justify-content-between header-bar">
+		<div class="left-side ion-align-items-center d-flex">
+			<ion-icon id="gpsStatus" name="locate" [color]="location.gpsStatus" />
+		</div>
+
+		<p class="ion-no-margin">{{ totalTime }}</p>
+
+		<div class="right-side d-flex">
+			<ion-buttons>
+				<ion-button [routerLink]="'/' + appRoutes.settings.path">
+					<ion-icon slot="icon-only" name="settings-outline" />
+				</ion-button>
+			</ion-buttons>
+		</div>
+	</div>
 </ion-header>
 
-<ion-content [fullscreen]="true"> </ion-content>
+<ion-content [fullscreen]="true">
+	<div class="center">
+		<div class="speed-container">
+			<div>
+				<div class="speed">{{ calculatedData.speed }}</div>
+				<!-- <div class="unit" (click)="changeUnit()">
+					{{ speedUnit }}
+				  </div> -->
+			</div>
+		</div>
+	</div>
+</ion-content>
+
+<ion-footer>
+	<div class="footer-bar">
+		<div class="d-flex ion-justify-content-between">
+			<div class="left-side ion-align-items-center d-flex"></div>
+
+			<p class="ion-no-margin">{{ calculatedData.trip }}</p>
+
+			<div class="right-side d-flex">
+				<span class="landscape-coordinates">
+					<span class="ion-text-left">
+						<div>{{ "latitude" | translate }}:</div>
+						<div>{{ "longitude" | translate }}:</div>
+					</span>
+					<span class="ion-text-left">
+						<div>{{ location.latitude }}</div>
+						<div>{{ location.longitude }}</div>
+					</span>
+				</span>
+			</div>
+		</div>
+
+		<app-information-card
+			[topSpeed]="calculatedData.topSpeed"
+			[accuracy]="calculatedData.accuracy"
+			[altitude]="calculatedData.altitude"
+			[averageSpeed]="calculatedData.averageSpeed"
+			[latitude]="location.latitude"
+			[longitude]="location.longitude"
+		/>
+	</div>
+</ion-footer>
+

@@ -1,0 +1,14 @@
+<ion-card button class="ion-text-center" (click)="onClick()">
+	<ion-card-content>
+		<div class="card-top">
+			<ion-icon [name]="icon" />
+			<p *ngIf="value !== undefined" class="card-value">
+				+{{value}}%
+			</p>
+		</div>
+
+		<div class="card-bottom">
+			<p class="text-ellipsis" [translate]="cardLabel"></p>
+		</div>
+	</ion-card-content>
+</ion-card>

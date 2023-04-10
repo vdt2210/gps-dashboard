@@ -1,0 +1,16 @@
+{
+	"accuracy": "Độ chính xác",
+	"account": "Tài khoản",
+	"altitude": "Độ cao",
+	"averageSpeed": "Tốc độ trung bình",
+	"checkForUpdate": "Kiểm tra cập nhật",
+	"clearData": "Xóa dữ liệu",
+	"language": "Ngôn ngữ",
+	"latitude": "Vĩ độ",
+	"longitude": "Kinh độ",
+	"settings": "Cài đặt",
+	"speedCorrection": "Hiệu chỉnh tốc độ",
+	"topSpeed": "Tốc độ cao nhất",
+	"unit": "Đơn vị",
+	"version": "Phiên bản {{value}}"
+}

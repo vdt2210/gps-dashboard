@@ -1,0 +1,16 @@
+{
+	"accuracy": "Accuracy",
+	"account": "Account",
+	"altitude": "Altitude",
+	"averageSpeed": "Average speed",
+	"checkForUpdate": "Check for update",
+	"clearData": "Clear data",
+	"language": "Language",
+	"latitude": "Latitude",
+	"longitude": "Longitude",
+	"settings": "Settings",
+	"speedCorrection": "Speed correction",
+	"topSpeed": "Top speed",
+	"unit": "Unit",
+	"version": "Version {{value}}"
+}

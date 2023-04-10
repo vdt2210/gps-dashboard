@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button
+				text=""
+				icon="arrow-back-outline"
+				[defaultHref]="appRoutes.dashboard.path"
+			/>
+		</ion-buttons>
+
+		<ion-title translate="settings" />
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-row>
+		<ion-col
+			*ngFor="let setting of settingsList"
+			sizeXs="12"
+			sizeSm="4"
+			sizeMd="4"
+			sizeLg="3"
+			sizeXl="2"
+		>
+			<app-button-card
+				[icon]="setting.icon"
+				[cardLabel]="setting.label"
+				[value]="setting.value"
+				(clickEmit)="onClickCard(setting.action)"
+			/>
+		</ion-col>
+	</ion-row>
+</ion-content>
+
+<ion-footer [translucent]="true" class="ion-no-border ion-text-center">
+	<ion-toolbar>
+		<div class="version-text">
+			<ion-text
+				color="medium"
+				translate="version"
+				[translateParams]="{value: appVersion}"
+			>
+			</ion-text>
+		</div>
+	</ion-toolbar>
+</ion-footer>
+
