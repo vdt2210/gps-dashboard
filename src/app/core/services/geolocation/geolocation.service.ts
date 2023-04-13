@@ -4,6 +4,10 @@ import { BackgroundGeolocationPlugin } from "@capacitor-community/background-geo
 import { BehaviorSubject } from "rxjs";
 import { Geolocation } from "../../models/geolocation.model";
 import AppConstant from "src/app/utilities/app-constant";
+import { TopSpeedService } from "../top-speed/top-speed.service";
+import AppUtil from "src/app/utilities/app-util";
+import { TimerService } from "../timer/timer.service";
+import { StorageService } from "./../storage/storage.service";
 const BackgroundGeolocation = registerPlugin<BackgroundGeolocationPlugin>(
 	"BackgroundGeolocation"
 );
@@ -12,7 +16,7 @@ const BackgroundGeolocation = registerPlugin<BackgroundGeolocationPlugin>(
 	providedIn: "root",
 })
 export class GeolocationService {
-	private watcherId: string = "";
+	private watcherId = "";
 	private speedCorrection$ = new BehaviorSubject<number>(0);
 	private location$ = new BehaviorSubject<Geolocation>({
 		latitude: "-.-",
@@ -33,13 +37,19 @@ export class GeolocationService {
 		stale: false,
 		distanceFilter: 0,
 	};
+	private lastTimestamp: number = 0;
 
-	constructor(private zone: NgZone) {}
+	constructor(
+		private zone: NgZone,
+		private topSpeedService: TopSpeedService,
+		private timerService: TimerService,
+		private storageService: StorageService
+	) {}
 
-	public startBackgroundGeolocation() {
-		if (this.watcherId) {
-			return;
-		}
+	public startBackgroundGeolocation(): void {
+		if (this.watcherId) return;
+
+		this.setInitialSpeedCorrection();
 
 		BackgroundGeolocation.addWatcher(
 			this.options,
@@ -47,20 +57,18 @@ export class GeolocationService {
 		).then((watcherId) => (this.watcherId = watcherId));
 	}
 
-	public getLocation() {
+	public getLocation(): BehaviorSubject<Geolocation> {
 		return this.location$;
 	}
 
-	public stopBackgroundGeolocation() {
+	public stopBackgroundGeolocation(): void {
 		if (this.watcherId) {
-			BackgroundGeolocation.removeWatcher({
-				id: this.watcherId,
-			});
+			BackgroundGeolocation.removeWatcher({ id: this.watcherId });
 			this.watcherId = "";
 		}
 	}
 
-	private handleWatcher(location: any, error: any) {
+	private handleWatcher(location: any, error: any): any {
 		if (error) {
 			if (error.code === "NOT_AUTHORIZED") {
 				const message =
@@ -74,23 +82,21 @@ export class GeolocationService {
 			return error;
 		}
 
-		this.zone.run(() => {
-			location.speed =
-				location.speed &&
-				location.speed +
-					(location.speed / 100) *
-						parseInt(
-							localStorage.getItem(AppConstant.storageKeys.speedCorrection)!
-						);
-
+		this.zone.run(async () => {
+			location.speed = AppUtil.calculateSpeed(
+				location.speed,
+				await this.storageService.get(AppConstant.storageKeys.speedCorrection)!
+			);
+			location.time = this.setTime(location.time, location.speed);
 			location.gpsStatus = this.getGpsStatus(location.accuracy);
 			this.location$.next(location);
+			this.topSpeedService.setTopSpeed(location.speed);
 		});
 
 		return location;
 	}
 
-	getGpsStatus(accuracy: number) {
+	private getGpsStatus(accuracy: number): string {
 		return accuracy
 			? accuracy <= 6
 				? "success"
@@ -100,19 +106,55 @@ export class GeolocationService {
 			: "";
 	}
 
-	public setInitialSpeedCorrection() {
-		this.setSpeedCorrection(
-			localStorage.getItem(AppConstant.storageKeys.speedCorrection) || "5"
-		);
+	public async setInitialSpeedCorrection(): Promise<void> {
+		await this.storageService
+			.get(AppConstant.storageKeys.speedCorrection)
+			.then((val) => {
+				if (val) {
+					this.speedCorrection$.next(val);
+				} else {
+					this.setSpeedCorrection(5);
+				}
+			});
 	}
 
 	public getSpeedCorrection() {
 		return this.speedCorrection$;
 	}
 
-	public async setSpeedCorrection(value: string) {
-		this.speedCorrection$.next(parseInt(value));
-		localStorage.setItem(AppConstant.storageKeys.speedCorrection, value);
+	public async setSpeedCorrection(speedCorrection: number): Promise<void> {
+		if (speedCorrection == null) return;
+
+		const currentSpeedCorrection = await this.storageService.get(
+			AppConstant.storageKeys.speedCorrection
+		);
+
+		if (speedCorrection > currentSpeedCorrection) {
+			this.storageService.set(
+				AppConstant.storageKeys.speedCorrection,
+				speedCorrection
+			);
+			this.speedCorrection$.next(speedCorrection);
+
+			// Update the speed of the current location.
+			const currentLocation = this.location$.getValue();
+			if (currentLocation && currentLocation.speed != null) {
+				currentLocation.speed +=
+					(currentLocation.speed / 100) * speedCorrection;
+				this.location$.next(currentLocation);
+			}
+		}
+	}
+
+	private setTime(time: number, speed: number) {
+		let newTime: number;
+		newTime =
+			this.lastTimestamp && speed ? (time - this.lastTimestamp) / 1000 : 0;
+		this.lastTimestamp = time;
+
+		this.timerService.saveTotalTime(newTime);
+
+		return newTime;
 	}
 }
 

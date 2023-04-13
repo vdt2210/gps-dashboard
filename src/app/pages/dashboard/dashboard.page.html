@@ -20,6 +20,7 @@
 	<div class="center">
 		<div class="speed-container">
 			<div>
+				<!-- {{location | json}} -->
 				<div class="speed">{{ calculatedData.speed }}</div>
 				<!-- <div class="unit" (click)="changeUnit()">
 					{{ speedUnit }}
@@ -54,7 +55,7 @@
 			[topSpeed]="calculatedData.topSpeed"
 			[accuracy]="calculatedData.accuracy"
 			[altitude]="calculatedData.altitude"
-			[averageSpeed]="calculatedData.averageSpeed"
+			[avgSpeed]="calculatedData.avgSpeed"
 			[latitude]="location.latitude"
 			[longitude]="location.longitude"
 		/>

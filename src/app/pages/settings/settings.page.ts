@@ -48,8 +48,6 @@ export class SettingsPage implements OnInit {
 	}
 
 	onClickCard(action: string) {
-		console.log(action);
-
 		switch (action) {
 			case "account":
 				break;

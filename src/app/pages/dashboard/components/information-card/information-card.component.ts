@@ -14,11 +14,11 @@ interface data {
 })
 export class InformationCardComponent implements OnChanges {
 	@Input() topSpeed: number | string = "-.-";
-	@Input() averageSpeed: string = "-.-";
+	@Input() avgSpeed: number | string = "-.-";
 	@Input() accuracy: number | string = "-";
-	@Input() altitude: string = "-.-";
-	@Input() latitude: string = "-.-";
-	@Input() longitude: string = "-.-";
+	@Input() altitude: number | string = "-.-";
+	@Input() latitude: number | string = "-.-";
+	@Input() longitude: number | string = "-.-";
 
 	public dataList: data[] = [];
 
@@ -31,7 +31,7 @@ export class InformationCardComponent implements OnChanges {
 			},
 			{
 				label: "averageSpeed",
-				value: this.averageSpeed,
+				value: this.avgSpeed,
 				unit: AppConstant.unitSystem.metric.speedUnit,
 			},
 			{

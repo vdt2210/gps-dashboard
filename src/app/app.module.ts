@@ -4,6 +4,8 @@ import { RouteReuseStrategy } from "@angular/router";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
+import { IonicStorageModule } from "@ionic/storage-angular";
+import { Drivers } from "@ionic/storage";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -21,6 +23,7 @@ export function createTranslateLoader(http: HttpClient) {
 	imports: [
 		BrowserModule,
 		IonicModule.forRoot({ mode: "ios" }),
+		IonicStorageModule.forRoot({ driverOrder: [Drivers.LocalStorage] }),
 		AppRoutingModule,
 		HttpClientModule,
 		TranslateModule.forRoot({

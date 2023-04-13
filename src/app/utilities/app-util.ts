@@ -63,6 +63,16 @@ const AppUtil = {
 
 		return JSON.parse(jsonPayload);
 	},
+
+	calculateSpeed(speed: number, correction: string) {
+		if (speed) {
+			speed = parseFloat(this.toFixedNoRounding(speed, 1));
+		}
+
+		return speed && correction
+			? speed + (speed / 100) * parseInt(correction)
+			: speed || null;
+	},
 };
 
 export default AppUtil;

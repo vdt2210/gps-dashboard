@@ -1,12 +1,14 @@
 import { EventEmitter, Injectable, Output } from "@angular/core";
-import { GeolocationService } from "../services/geolocation/geolocation.service";
+import { GeolocationService } from "../../services/geolocation/geolocation.service";
 import AppUtil from "src/app/utilities/app-util";
 import { BehaviorSubject } from "rxjs";
 import AppConstant from "src/app/utilities/app-constant";
-import { CalculatedData } from "../models/calculate.model";
-// import { OdoTripService } from '../odo-trip/odo-trip.service';
-// import { TimerService } from '../timer/timer.service';
-// import { TopSpeedService } from '../top-speed/top-speed.service';
+import { CalculatedData } from "../../models/calculate.model";
+import { TimerService } from "../timer/timer.service";
+import { TopSpeedService } from "../top-speed/top-speed.service";
+import { Geolocation } from "../../models/geolocation.model";
+import { DistanceService } from "../distance/distance.service";
+import { DistanceParams } from "../../models/distance.model";
 // import { UnitService } from '../unit/unit.service';
 
 interface speedTime {
@@ -28,7 +30,7 @@ export class CalculateService {
 		altitude: "-.-",
 		odo: 0,
 		trip: "-.-",
-		averageSpeed: "-.-",
+		avgSpeed: "-.-",
 	});
 
 	public speed!: number | string;
@@ -40,21 +42,25 @@ export class CalculateService {
 	private rawTopSpeed!: number | null;
 	private rawAccuracy!: number | null;
 	private rawAltitude!: number | null;
-	private averageSpeedTotalTime!: number;
+	private avgSpeedTotalTime!: number;
 
-	public trip!: string | string;
-	public altitude!: string;
-	public averageSpeed!: string | string;
+	public trip!: number | string;
+	public altitude!: number | string;
+	public avgSpeed!: number | string;
 
 	private value = [...VALUE];
 
-	private distanceObj: any = { odo: null, trip: null, averageTrip: null };
+	private distanceObj: DistanceParams = {
+		odo: 0,
+		trip: 0,
+		avgSpeedTotalDistance: 0,
+	};
 
 	constructor(
 		// private unitService: UnitService,
-		// private topSpeedService: TopSpeedService,
-		// private odoTripService: OdoTripService,
-		// private timerService: TimerService,
+		private topSpeedService: TopSpeedService,
+		private distanceService: DistanceService,
+		private timerService: TimerService,
 		private geolocationService: GeolocationService
 	) {}
 
@@ -63,22 +69,18 @@ export class CalculateService {
 	}
 
 	public initialCalculate() {
-		// this.geolocationService
-		// 	.getSpeedCorrection()
-		// 	.subscribe(() => this.convert());
-		this.geolocationService.getLocation().subscribe((data) => {
-			this.rawSpeed = data.speed;
-			this.rawAccuracy = data.accuracy;
-			this.rawAltitude = data.altitude;
+		this.geolocationService.getLocation().subscribe((value: Geolocation) => {
+			this.rawSpeed = value.speed;
+			this.rawAccuracy = value.accuracy;
+			this.rawAltitude = value.altitude;
 
-			//TODO improve this function
-			if (data.speed && data.time) {
+			if (value.speed && value.time) {
 				this.value = [
 					...this.value,
 					{
 						// speed: this.correctedSpeed,
-						speed: data.speed,
-						time: data.time,
+						speed: value.speed,
+						time: value.time,
 					},
 				];
 
@@ -87,37 +89,29 @@ export class CalculateService {
 					trip = val.speed * val.time;
 				}
 
-				// this.odoTripService.saveOdo(trip);
-				// this.odoTripService.saveTrip(trip);
-				// this.odoTripService.saveAverageSpeedTrip(trip);
+				// this.distanceService.saveOdo(trip);
+				// this.distanceService.saveTrip(trip);
+				// this.distanceService.saveAverageSpeedTrip(trip);
+				this.distanceService.setAvgSpeedTotalDistance(trip);
 			}
-
-			// if (this.speedCorrection != null && data.speed != null) {
-			// 	this.correctedSpeed =
-			// 		data.speed + (data.speed / 100) * this.speedCorrection;
-			// }
 
 			this.convert();
 		});
 
-		// this.topSpeedService.storageObservable.subscribe((res: number) => {
-		// 	this.rawTopSpeed = res;
-		// 	this.convert();
-		// });
+		this.topSpeedService.getTopSpeed().subscribe((value: number | null) => {
+			this.rawTopSpeed = value;
+			this.convert();
+		});
 
-		// this.odoTripService.storageObservable.subscribe(
-		// 	(res: { odo: number; trip: number; averageSpeedTrip: number }) => {
-		// 		this.distanceObj = res;
-		// 		this.convert();
-		// 	}
-		// );
+		this.distanceService.getDistance().subscribe((value: DistanceParams) => {
+			this.distanceObj = value;
+			this.convert();
+		});
 
-		// this.timerService.storageObservable.subscribe(
-		// 	(res: { averageSpeedTotalTime: number }) => {
-		// 		this.averageSpeedTotalTime = res.averageSpeedTotalTime;
-		// 		this.convert();
-		// 	}
-		// );
+		this.timerService.getAvgSpeedTotalTime().subscribe((value: number) => {
+			this.avgSpeedTotalTime = value;
+			this.convert();
+		});
 	}
 
 	public convert() {
@@ -190,15 +184,15 @@ export class CalculateService {
 		}
 
 		if (
-			this.distanceObj.averageSpeedTrip >= 0 &&
-			this.averageSpeedTotalTime > 0
+			this.distanceObj.avgSpeedTotalDistance >= 0 &&
+			this.avgSpeedTotalTime > 0
 		) {
-			this.averageSpeed = AppUtil.toFixedNoRounding(
-				(this.distanceObj.averageSpeedTrip / this.averageSpeedTotalTime) * 3.6,
+			this.avgSpeed = AppUtil.toFixedNoRounding(
+				(this.distanceObj.avgSpeedTotalDistance / this.avgSpeedTotalTime) * 3.6,
 				1
 			);
 		} else {
-			this.averageSpeed = "-.-";
+			this.avgSpeed = "-.-";
 		}
 
 		this.calculateData$.next({
@@ -208,7 +202,7 @@ export class CalculateService {
 			altitude: this.altitude,
 			odo: this.odo,
 			trip: this.trip,
-			averageSpeed: this.averageSpeed,
+			avgSpeed: this.avgSpeed,
 		});
 	}
 
@@ -257,16 +251,16 @@ export class CalculateService {
 		}
 
 		if (
-			this.distanceObj.averageSpeedTrip >= 0 &&
-			this.averageSpeedTotalTime > 0
+			this.distanceObj.avgSpeedTotalDistance >= 0 &&
+			this.avgSpeedTotalTime > 0
 		) {
-			this.averageSpeed = AppUtil.toFixedNoRounding(
-				(this.distanceObj.averageSpeedTrip / this.averageSpeedTotalTime) *
+			this.avgSpeed = AppUtil.toFixedNoRounding(
+				(this.distanceObj.avgSpeedTotalDistance / this.avgSpeedTotalTime) *
 					2.23693629,
 				1
 			);
 		} else {
-			this.averageSpeed = "-.-";
+			this.avgSpeed = "-.-";
 		}
 
 		this.calculateData$.next({
@@ -276,7 +270,7 @@ export class CalculateService {
 			altitude: this.altitude,
 			odo: this.odo,
 			trip: this.trip,
-			averageSpeed: this.averageSpeed,
+			avgSpeed: this.avgSpeed,
 		});
 	}
 }
