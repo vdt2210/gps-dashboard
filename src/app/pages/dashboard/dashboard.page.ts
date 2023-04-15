@@ -1,18 +1,21 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { KeepAwake } from "@capacitor-community/keep-awake";
-import { CalculateService } from "src/app/core/calculate/calculate.service";
+import { Component, OnInit } from "@angular/core";
+import { CalculateService } from "src/app/core/services/calculate/calculate.service";
 import { CalculatedData } from "src/app/core/models/calculate.model";
 import { GeolocationDashboard } from "src/app/core/models/geolocation.model";
 
 import { GeolocationService } from "src/app/core/services/geolocation/geolocation.service";
 import { AppRoutes } from "src/app/utilities/app-routes";
+import { TimerService } from "src/app/core/services/timer/timer.service";
+import { UnitService } from "src/app/core/services/unit/unit.service";
+import { UnitParams } from "src/app/core/models/unit.model";
+import AppConstant from "src/app/utilities/app-constant";
 
 @Component({
 	selector: "app-dashboard",
 	templateUrl: "dashboard.page.html",
 	styleUrls: ["dashboard.page.scss"],
 })
-export class DashboardPage implements OnInit, OnDestroy {
+export class DashboardPage implements OnInit {
 	public appRoutes = AppRoutes;
 
 	public totalTime = "00:00:00";
@@ -27,34 +30,44 @@ export class DashboardPage implements OnInit, OnDestroy {
 		topSpeed: "-",
 		accuracy: "-",
 		altitude: "-.-",
-		odo: "-",
-		trip: "-.-",
-		averageSpeed: "-.-",
+		totalDistance: "-",
+		tripDistance: "-.-",
+		avgSpeed: "-.-",
+	};
+
+	public unitData: UnitParams = {
+		unit: "",
+		speedUnit: "",
+		distanceUnit: "",
+		lengthUnit: "",
 	};
 
 	constructor(
 		private geolocationService: GeolocationService,
-		private calculateService: CalculateService
+		private calculateService: CalculateService,
+		private timerService: TimerService,
+		private unitService: UnitService
 	) {}
 
 	public async ngOnInit() {
-		const { isSupported } = await KeepAwake.isSupported();
-		if (isSupported) {
-			await KeepAwake.keepAwake();
-		}
+		this.timerService.getTotalTime().subscribe((data) => {
+			this.totalTime = data;
+		});
 
-		this.geolocationService.getLocation().subscribe((res) => {
-			this.location = res;
-			this.updateGpsStatusIcon(res.gpsStatus);
+		this.geolocationService.getLocation().subscribe((data) => {
+			console.log(JSON.stringify(data));
+
+			this.location = data;
+			this.updateGpsStatusIcon(data.gpsStatus);
 		});
 
 		this.calculateService.getCalculateData().subscribe((data) => {
 			this.calculatedData = data;
 		});
-	}
 
-	public async ngOnDestroy() {
-		await KeepAwake.allowSleep();
+		this.unitService.getUnit().subscribe((data) => {
+			this.unitData = data;
+		});
 	}
 
 	private updateGpsStatusIcon(status: string) {
@@ -79,6 +92,18 @@ export class DashboardPage implements OnInit, OnDestroy {
 			default:
 				gpsStatus?.classList.remove("error-blink");
 				gpsStatus?.classList.add("standby-blink");
+				break;
+		}
+	}
+
+	public switchUnit() {
+		switch (this.unitData.unit) {
+			case AppConstant.unitSystem.metric.unit:
+				this.unitService.setUnit(AppConstant.unitSystem.imperial.unit);
+				break;
+
+			default:
+				this.unitService.setUnit(AppConstant.unitSystem.metric.unit);
 				break;
 		}
 	}

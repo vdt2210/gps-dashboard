@@ -7,4 +7,7 @@
     <string name="capacitor_background_geolocation_notification_channel_name">
       Background Tracking
     </string>
+    <string name="capacitor_background_geolocation_notification_icon">
+        drawable/ic_tracking
+    </string>
 </resources>

@@ -1,43 +1,80 @@
 const AppConstant = Object.freeze({
 	storageKeys: {
 		unit: "unit",
-		odo: "odo",
-		trip: "trip",
-		averageSpeedTrip: "averageSpeedTrip",
+		totalDistance: "totalDistance",
+		tripDistance: "tripDistance",
+		avgSpeedTotalDistance: "avgSpeedTotalDistance",
 		language: "language",
 		totalTime: "totalTime",
-		averageSpeedTotalTime: "averageSpeedTotalTime",
+		avgSpeedTotalTime: "avgSpeedTotalTime",
 		topSpeed: "topSpeed",
 		speedCorrection: "speedCorrection",
 	},
 
 	backUpKeys: [
-		"odo",
-		"trip",
-		"averageSpeedTrip",
+		"totalDistance",
+		"tripDistance",
+		"avgSpeedTotalDistance",
 		"totalTime",
-		"averageSpeedTotalTime",
+		"avgSpeedTotalTime",
 		"topSpeed",
 	],
 
 	unitSystem: {
 		metric: {
-			label: "metric",
+			unit: "metric",
 			speedUnit: "km/h",
-			meterUnit: "m",
-			kilometerUnit: "km",
+			distanceUnit: "km",
+			lengthUnit: "m",
 		},
 		imperial: {
-			label: "imperial",
+			unit: "imperial",
 			speedUnit: "mph",
-			feetUnit: "ft",
-			mileUnit: "mi",
+			distanceUnit: "mi",
+			lengthUnit: "ft",
 		},
 	},
 
 	languages: {
 		vi: "vi",
 		en: "en",
+	},
+
+	inputType: {
+		text: "text",
+		number: "number",
+		email: "email",
+		password: "password",
+	},
+
+	buttonType: {
+		button: "button",
+		submit: "submit",
+		reset: "reset",
+	},
+
+	buttonExpand: {
+		block: "block",
+		full: "full",
+	},
+
+	fill: {
+		clear: "clear",
+		default: "default",
+		outline: "outline",
+		solid: "solid",
+	},
+
+	color: {
+		danger: "danger",
+		dark: "dark",
+		light: "light",
+		medium: "medium",
+		primary: "primary",
+		secondary: "secondary",
+		success: "success",
+		tertiary: "tertiary",
+		warning: "warning",
 	},
 });
 
