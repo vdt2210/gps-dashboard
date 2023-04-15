@@ -12,5 +12,11 @@
 	"speedCorrection": "Speed correction",
 	"topSpeed": "Top speed",
 	"unit": "Unit",
-	"version": "Version {{value}}"
+	"version": "Version {{value}}",
+	"login": "Login",
+	"signUp": "Sign up",
+	"email": "Email",
+	"password": "Password",
+	"confirmPassword": "Confirm password",
+	"fullName": "Full name"
 }

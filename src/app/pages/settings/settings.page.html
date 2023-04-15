@@ -45,8 +45,24 @@
 	</ion-toolbar>
 </ion-footer>
 
-<app-modal
-	[isModalOpen]="isAccountModalOpen"
-	(closeEmit)="isAccountModalOpen = false"
-/>
+<ion-modal
+	[isOpen]="isModalOpen"
+	(didDismiss)="onModalDismiss()"
+	[initialBreakpoint]="1"
+	[breakpoints]="[0, 1]"
+>
+	<ng-template>
+		<div class="modal-content">
+			<app-login-form
+				*ngIf="isLogin"
+				(buttonEmit)="modalButtonAction($event)"
+			/>
+
+			<app-sign-up-form
+				*ngIf="isSignUp"
+				(buttonEmit)="modalButtonAction($event)"
+			/>
+		</div>
+	</ng-template>
+</ion-modal>
 

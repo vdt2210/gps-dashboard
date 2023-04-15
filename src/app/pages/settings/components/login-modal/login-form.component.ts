@@ -1,22 +1,25 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import AppConstant from "src/app/utilities/app-constant";
 
+const ICONS = {
+	eyeOff: "eye-off",
+	eye: "eye",
+};
+
 @Component({
-	selector: "app-modal",
-	templateUrl: "./modal.component.html",
-	styleUrls: ["./modal.component.scss"],
+	selector: "app-login-form",
+	templateUrl: "./login-form.component.html",
+	styleUrls: ["./login-form.component.scss"],
 })
-export class ModalComponent {
-	@Input() isModalOpen: boolean = false;
-	@Output() closeEmit = new EventEmitter();
+export class LoginFormComponent {
+	@Output() buttonEmit = new EventEmitter();
 
 	public appConstant = AppConstant;
 
-	loginForm: FormGroup;
-	isShowPassword = false;
-	passwordType: string = "password";
-	passwordIcon: string = "eye-off";
+	public loginForm: FormGroup;
+	public isShowPassword = false;
+	public passwordIcon = ICONS.eyeOff;
 
 	constructor(private formBuilder: FormBuilder) {
 		this.loginForm = this.formBuilder.group({
@@ -34,11 +37,11 @@ export class ModalComponent {
 
 	hideShowPassword() {
 		this.isShowPassword = !this.isShowPassword;
-		this.passwordIcon = this.isShowPassword ? "eye" : "eye-off";
+		this.passwordIcon = this.isShowPassword ? ICONS.eye : ICONS.eyeOff;
 	}
 
-	onCloseModal() {
-		this.closeEmit.emit();
+	buttonClick(action: string) {
+		this.buttonEmit.emit(action);
 	}
 }
 

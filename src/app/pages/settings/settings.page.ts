@@ -38,7 +38,9 @@ export class SettingsPage implements OnInit {
 
 	public appVersion = "-";
 
-	public isAccountModalOpen = false;
+	public isLogin = false;
+	public isSignUp = false;
+	public isModalOpen = false;
 
 	constructor(private geolocationService: GeolocationService) {}
 
@@ -52,7 +54,9 @@ export class SettingsPage implements OnInit {
 	onClickCard(action: string) {
 		switch (action) {
 			case "account":
-				this.isAccountModalOpen = true;
+				//TODO check if logged in show account detail
+				this.isLogin = true;
+				this.isModalOpen = true;
 				break;
 			case "language":
 				break;
@@ -63,6 +67,26 @@ export class SettingsPage implements OnInit {
 			case "clearData":
 				break;
 			case "checkForUpdate":
+				break;
+		}
+	}
+
+	public onModalDismiss() {
+		this.isModalOpen = false;
+		this.isLogin = false;
+		this.isSignUp = false;
+	}
+
+	modalButtonAction(action: string) {
+		switch (action) {
+			case "signUp":
+				this.isLogin = false;
+				this.isSignUp = true;
+				break;
+
+			case "login":
+				this.isSignUp = false;
+				this.isLogin = true;
 				break;
 		}
 	}
