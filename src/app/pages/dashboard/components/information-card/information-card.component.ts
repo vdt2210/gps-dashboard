@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges } from "@angular/core";
+import { UnitParams } from "src/app/core/models/unit.model";
 import AppConstant from "src/app/utilities/app-constant";
 
 interface data {
@@ -19,6 +20,12 @@ export class InformationCardComponent implements OnChanges {
 	@Input() altitude: number | string = "-.-";
 	@Input() latitude: number | string = "-.-";
 	@Input() longitude: number | string = "-.-";
+	@Input() unitData: UnitParams = {
+		unit: AppConstant.unitSystem.metric.unit,
+		speedUnit: AppConstant.unitSystem.metric.speedUnit,
+		distanceUnit: AppConstant.unitSystem.metric.distanceUnit,
+		lengthUnit: AppConstant.unitSystem.metric.lengthUnit,
+	};
 
 	public dataList: data[] = [];
 
@@ -27,22 +34,22 @@ export class InformationCardComponent implements OnChanges {
 			{
 				label: "topSpeed",
 				value: this.topSpeed,
-				unit: AppConstant.unitSystem.metric.speedUnit,
+				unit: this.unitData.speedUnit,
 			},
 			{
 				label: "averageSpeed",
 				value: this.avgSpeed,
-				unit: AppConstant.unitSystem.metric.speedUnit,
+				unit: this.unitData.speedUnit,
 			},
 			{
 				label: "accuracy",
 				value: this.accuracy,
-				unit: AppConstant.unitSystem.metric.meterUnit,
+				unit: this.unitData.lengthUnit,
 			},
 			{
 				label: "altitude",
 				value: this.altitude,
-				unit: AppConstant.unitSystem.metric.meterUnit,
+				unit: this.unitData.lengthUnit,
 			},
 			{
 				label: "latitude",

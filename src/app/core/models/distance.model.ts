@@ -1,5 +1,5 @@
 export interface DistanceParams {
-	odo: number;
-	trip: number;
+	totalDistance: number;
+	tripDistance: number;
 	avgSpeedTotalDistance: number;
 }

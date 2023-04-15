@@ -12,10 +12,9 @@ import { Router } from "@angular/router";
 import { AppRoutes } from "./utilities/app-routes";
 import { Location } from "@angular/common";
 import { CalculateService } from "./core/services/calculate/calculate.service";
-import { Storage } from "@ionic/storage-angular";
 import { TimerService } from "./core/services/timer/timer.service";
 import { KeepAwake } from "@capacitor-community/keep-awake";
-// import { BackgroundTask } from '@capawesome/capacitor-background-task';
+import { BackgroundTask } from "@capawesome/capacitor-background-task";
 
 @Component({
 	selector: "app-root",
@@ -37,32 +36,27 @@ export class AppComponent implements OnInit {
 		this.getStorageValue();
 		SplashScreen.hide();
 		this.hardwareBackButton();
-		this.keepScreenOn();
 	}
 
 	async ngOnInit(): Promise<void> {
+		this.keepScreenOn();
+		// let taskId: string;
 		App.addListener("appStateChange", async ({ isActive }) => {
 			if (isActive) {
 				this.keepScreenOn();
+				// if (taskId) {
+				// 	BackgroundTask.finish({ taskId });
+				// }
 				return;
 			}
-
 			KeepAwake.allowSleep();
 
-			// The app state has been changed to inactive.
-			// Start the background task by calling `beforeExit`.
-			//   const taskId = await BackgroundTask.beforeExit(async () => {
-			//     // this.guess_location(10000);
-			//     // To start listening for changes in the device's location, add a new watcher.
-			//     // You do this by calling 'addWatcher' with an options object and a callback. A
-			//     // Promise is returned, which resolves to the callback ID used to remove the
-			//     // watcher in the future. The callback will be called every time a new location
-			//     // is available. Watchers can not be paused, only removed. Multiple watchers may
-			//     // exist simultaneously.
-			//     // Run your code...
-			//     // Finish the background task as soon as everything is done.
-			//     BackgroundTask.finish({ taskId });
-			//   });
+			// taskId = await BackgroundTask.beforeExit(async () => {
+			// 	let i = 0;
+			// 	setInterval(() => {
+			// 		console.log(i++);
+			// 	}, 1000);
+			// });
 		});
 	}
 

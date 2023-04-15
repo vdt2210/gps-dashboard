@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, Observer } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import AppConstant from "src/app/utilities/app-constant";
 import { DistanceParams } from "../../models/distance.model";
 import { StorageService } from "../storage/storage.service";
@@ -8,135 +8,95 @@ import { StorageService } from "../storage/storage.service";
 	providedIn: "root",
 })
 export class DistanceService {
-	// public odo: number;
-	// public trip: number;
-	// public avgSpeedTotalDistance: number;
-	public params = {
-		odo: null,
-		trip: null,
-		avgSpeedTotalDistance: null,
-	};
-
 	private distanceParams$: BehaviorSubject<DistanceParams>;
 
-	private storageObserver: any;
-	public storageObservable: any;
-
 	constructor(private storageService: StorageService) {
-		this.storageObservable = new Observable((observer: Observer<object>) => {
-			this.storageObserver = observer;
-		});
-
 		this.distanceParams$ = new BehaviorSubject<DistanceParams>({
-			odo: 0,
-			trip: 0,
+			totalDistance: 0,
+			tripDistance: 0,
 			avgSpeedTotalDistance: 0,
 		});
+		this.setInitialDistance();
 	}
-
-	public getOdoTrip() {
-		// this.getOdo();
-		// this.getTrip();
-	}
-
-	// public async saveOdo(newOdo: number) {
-	// 	if (!isNaN(newOdo) && !isNaN(this.odo)) {
-	// 		this.odo = this.odo + newOdo;
-	// 		this.params = { ...this.params, odo: this.odo };
-	// 		await this.storageService.set(ODO_KEY, this.odo);
-	// 		this.storageObserver.next(this.params);
-	// 	}
-	// }
-
-	// public async saveTrip(newTrip: number) {
-	// 	if (!isNaN(newTrip) && !isNaN(this.trip)) {
-	// 		this.trip = this.trip + newTrip;
-	// 		this.params = { ...this.params, trip: this.trip };
-	// 		await this.storageService.set(TRIP_KEY, this.trip);
-	// 		this.storageObserver.next(this.params);
-	// 	}
-	// }
 
 	public async setInitialDistance() {
-		await this.storageService
-			.get(AppConstant.storageKeys.avgSpeedTotalDistance)
-			.then((val) => {
-				if (val) {
-					this.distanceParams$.next({
-						...this.distanceParams$.getValue(),
-						avgSpeedTotalDistance: val,
-					});
-				} else {
-					this.setAvgSpeedTotalDistance(0);
-				}
-			})
-			.catch(() => {});
+		if (
+			!(await this.storageService.get(AppConstant.storageKeys.totalDistance)) ||
+			!(await this.storageService.get(AppConstant.storageKeys.tripDistance)) ||
+			!(await this.storageService.get(
+				AppConstant.storageKeys.avgSpeedTotalDistance
+			))
+		) {
+			this.setDistance(0);
+		}
+
+		this.distanceParams$.next({
+			totalDistance: await this.storageService.get(
+				AppConstant.storageKeys.totalDistance
+			),
+			tripDistance: await this.storageService.get(
+				AppConstant.storageKeys.tripDistance
+			),
+			avgSpeedTotalDistance: await this.storageService.get(
+				AppConstant.storageKeys.avgSpeedTotalDistance
+			),
+		});
 	}
 
-	public getDistance() {
+	public getDistances() {
 		return this.distanceParams$;
 	}
 
-	public async setAvgSpeedTotalDistance(distance: number) {
+	public async setDistance(distance: number) {
+		const currentTotalDistance = await this.storageService.get(
+			AppConstant.storageKeys.totalDistance
+		);
+
+		const newTotalDistance = currentTotalDistance + distance;
+
+		await this.storageService.set(
+			AppConstant.storageKeys.totalDistance,
+			newTotalDistance
+		);
+
+		const currentTripDistance = await this.storageService.get(
+			AppConstant.storageKeys.tripDistance
+		);
+
+		const newTripDistance = currentTripDistance + distance;
+
+		await this.storageService.set(
+			AppConstant.storageKeys.tripDistance,
+			newTripDistance
+		);
+
 		const currentAvgSpeedTotalDistance = await this.storageService.get(
 			AppConstant.storageKeys.avgSpeedTotalDistance
 		);
 
 		const newAvgSpeedTotalDistance = currentAvgSpeedTotalDistance + distance;
 
-		await this.storageService
-			.set(
-				AppConstant.storageKeys.avgSpeedTotalDistance,
-				newAvgSpeedTotalDistance
-			)
-			.then(() =>
-				this.distanceParams$.next({
-					...this.distanceParams$.getValue(),
-					avgSpeedTotalDistance: newAvgSpeedTotalDistance,
-				})
-			);
+		await this.storageService.set(
+			AppConstant.storageKeys.avgSpeedTotalDistance,
+			newAvgSpeedTotalDistance
+		);
+
+		this.distanceParams$.next({
+			totalDistance: newTotalDistance,
+			tripDistance: newTripDistance,
+			avgSpeedTotalDistance: newAvgSpeedTotalDistance,
+		});
 	}
 
-	// public async clearTrip() {
-	// 	await this.storageService.remove(TRIP_KEY).then(() => this.getTrip());
-	// }
+	public async removeTripDistance() {
+		await this.storageService
+			.remove(AppConstant.storageKeys.tripDistance)
+			.then(() => this.setInitialDistance());
+	}
 
-	// public async clearAverageSpeedTrip() {
-	// 	await this.storageService
-	// 		.remove(AVERAGE_SPEED_TRIP)
-	// 		.then(() => this.getAverageSpeedTrip());
-	// }
-
-	// private async getOdo() {
-	// 	await this.storage
-	// 		.get(AppConstant.storageKeys.odo)
-	// 		.then((val) => {
-	// 			this.odo = val;
-	// 			this.params = { ...this.params, odo: val };
-	// 			this.storageObserver.next(this.params);
-	// 		})
-	// 		.catch(() => {});
-	// }
-
-	// private async getTrip() {
-	// 	await this.storage
-	// 		.get(AppConstant.storageKeys.trip)
-	// 		.then((val) => {
-	// 			this.trip = val;
-	// 			this.params = { ...this.params, trip: val };
-	// 			this.storageObserver.next(this.params);
-	// 		})
-	// 		.catch(() => {});
-	// }
-
-	// private async getAverageSpeedTrip() {
-	// 	await this.storageService
-	// 		.get(AppConstant.storageKeys.avgSpeedTotalDistance)
-	// 		.then((val) => {
-	// 			this.avgSpeedTotalDistance = val;
-	// 			this.params = { ...this.params, avgSpeedTotalDistance: val };
-	// 			this.storageObserver.next(this.params);
-	// 		})
-	// 		.catch(() => {});
-	// }
+	public async removeAvgSpeedTotalDistance() {
+		await this.storageService
+			.remove(AppConstant.storageKeys.avgSpeedTotalDistance)
+			.then(() => this.setInitialDistance());
+	}
 }

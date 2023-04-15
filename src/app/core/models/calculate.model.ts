@@ -3,7 +3,7 @@ export interface CalculatedData {
 	topSpeed: number | string;
 	accuracy: number | string;
 	altitude: number | string;
-	odo: number | string;
-	trip: number | string;
+	totalDistance: number | string;
+	tripDistance: number | string;
 	avgSpeed: number | string;
 }

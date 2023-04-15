@@ -46,7 +46,7 @@ export class TimerService {
 	}
 
 	public async saveTotalTime(time: number) {
-		if (time <= 0) return;
+		if (time < 0) return;
 
 		const currentTotalTime = await this.storageService.get(
 			AppConstant.storageKeys.totalTime

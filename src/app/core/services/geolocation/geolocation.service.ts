@@ -137,12 +137,12 @@ export class GeolocationService {
 			this.speedCorrection$.next(speedCorrection);
 
 			// Update the speed of the current location.
-			const currentLocation = this.location$.getValue();
-			if (currentLocation && currentLocation.speed != null) {
-				currentLocation.speed +=
-					(currentLocation.speed / 100) * speedCorrection;
-				this.location$.next(currentLocation);
-			}
+			// const currentLocation = this.location$.getValue();
+			// if (currentLocation && currentLocation.speed != null) {
+			// 	currentLocation.speed +=
+			// 		(currentLocation.speed / 100) * speedCorrection;
+			// 	this.location$.next(currentLocation);
+			// }
 		}
 	}
 

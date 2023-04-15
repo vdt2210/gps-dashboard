@@ -6,6 +6,9 @@ import { GeolocationDashboard } from "src/app/core/models/geolocation.model";
 import { GeolocationService } from "src/app/core/services/geolocation/geolocation.service";
 import { AppRoutes } from "src/app/utilities/app-routes";
 import { TimerService } from "src/app/core/services/timer/timer.service";
+import { UnitService } from "src/app/core/services/unit/unit.service";
+import { UnitParams } from "src/app/core/models/unit.model";
+import AppConstant from "src/app/utilities/app-constant";
 
 @Component({
 	selector: "app-dashboard",
@@ -27,15 +30,23 @@ export class DashboardPage implements OnInit {
 		topSpeed: "-",
 		accuracy: "-",
 		altitude: "-.-",
-		odo: "-",
-		trip: "-.-",
+		totalDistance: "-",
+		tripDistance: "-.-",
 		avgSpeed: "-.-",
+	};
+
+	public unitData: UnitParams = {
+		unit: "",
+		speedUnit: "",
+		distanceUnit: "",
+		lengthUnit: "",
 	};
 
 	constructor(
 		private geolocationService: GeolocationService,
 		private calculateService: CalculateService,
-		private timerService: TimerService
+		private timerService: TimerService,
+		private unitService: UnitService
 	) {}
 
 	public async ngOnInit() {
@@ -44,7 +55,7 @@ export class DashboardPage implements OnInit {
 		});
 
 		this.geolocationService.getLocation().subscribe((data) => {
-			console.log(new Date());
+			console.log(JSON.stringify(data));
 
 			this.location = data;
 			this.updateGpsStatusIcon(data.gpsStatus);
@@ -52,6 +63,10 @@ export class DashboardPage implements OnInit {
 
 		this.calculateService.getCalculateData().subscribe((data) => {
 			this.calculatedData = data;
+		});
+
+		this.unitService.getUnit().subscribe((data) => {
+			this.unitData = data;
 		});
 	}
 
@@ -77,6 +92,18 @@ export class DashboardPage implements OnInit {
 			default:
 				gpsStatus?.classList.remove("error-blink");
 				gpsStatus?.classList.add("standby-blink");
+				break;
+		}
+	}
+
+	public switchUnit() {
+		switch (this.unitData.unit) {
+			case AppConstant.unitSystem.metric.unit:
+				this.unitService.setUnit(AppConstant.unitSystem.imperial.unit);
+				break;
+
+			default:
+				this.unitService.setUnit(AppConstant.unitSystem.metric.unit);
 				break;
 		}
 	}

@@ -20,11 +20,8 @@
 	<div class="center">
 		<div class="speed-container">
 			<div>
-				<!-- {{location | json}} -->
 				<div class="speed">{{ calculatedData.speed }}</div>
-				<!-- <div class="unit" (click)="changeUnit()">
-					{{ speedUnit }}
-				  </div> -->
+				<div class="unit" (click)="switchUnit()">{{ unitData.speedUnit }}</div>
 			</div>
 		</div>
 	</div>
@@ -35,7 +32,13 @@
 		<div class="d-flex ion-justify-content-between">
 			<div class="left-side ion-align-items-center d-flex"></div>
 
-			<p class="ion-no-margin">{{ calculatedData.trip }}</p>
+			<p class="ion-no-margin">
+				{{ calculatedData.totalDistance }} {{unitData.distanceUnit}}
+			</p>
+
+			<p class="ion-no-margin">
+				{{ calculatedData.tripDistance }} {{unitData.distanceUnit}}
+			</p>
 
 			<div class="right-side d-flex">
 				<span class="landscape-coordinates">
@@ -58,6 +61,7 @@
 			[avgSpeed]="calculatedData.avgSpeed"
 			[latitude]="location.latitude"
 			[longitude]="location.longitude"
+			[unitData]="unitData"
 		/>
 	</div>
 </ion-footer>
