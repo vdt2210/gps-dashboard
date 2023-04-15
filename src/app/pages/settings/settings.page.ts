@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { App } from "@capacitor/app";
 import { GeolocationService } from "src/app/core/services/geolocation/geolocation.service";
 import { AppRoutes } from "src/app/utilities/app-routes";
@@ -38,6 +38,8 @@ export class SettingsPage implements OnInit {
 
 	public appVersion = "-";
 
+	public isAccountModalOpen = false;
+
 	constructor(private geolocationService: GeolocationService) {}
 
 	async ngOnInit(): Promise<void> {
@@ -50,6 +52,7 @@ export class SettingsPage implements OnInit {
 	onClickCard(action: string) {
 		switch (action) {
 			case "account":
+				this.isAccountModalOpen = true;
 				break;
 			case "language":
 				break;

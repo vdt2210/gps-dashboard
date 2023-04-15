@@ -1,0 +1,18 @@
+<form [formGroup]="formGroup">
+	<div class="w-full d-flex ion-align-items-center">
+		<ion-input
+			[label]="inputLabel | translate"
+			labelPlacement="floating"
+			[formControlName]="controlName"
+			[type]="inputType"
+		></ion-input>
+
+		<ion-icon
+			*ngIf="inputIcon"
+			slot="end"
+			[name]="inputIcon"
+			(click)="onIconClick()"
+		></ion-icon>
+	</div>
+</form>
+

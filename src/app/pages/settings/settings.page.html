@@ -45,3 +45,8 @@
 	</ion-toolbar>
 </ion-footer>
 
+<app-modal
+	[isModalOpen]="isAccountModalOpen"
+	(closeEmit)="isAccountModalOpen = false"
+/>
+
