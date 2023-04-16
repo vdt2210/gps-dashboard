@@ -8,6 +8,8 @@ import { TranslateModule } from "@ngx-translate/core";
 import { InputComponent } from "./components/input/input.component";
 import { ButtonComponent } from "./components/button/button.component";
 import { AvatarComponent } from "./components/avatar/avatar.component";
+import { IconOnlyButtonComponent } from "./components/icon-only-button/icon-only-button.component";
+import { BackButtonComponent } from "./components/back-button/back-button.component";
 
 @NgModule({
 	imports: [
@@ -22,6 +24,8 @@ import { AvatarComponent } from "./components/avatar/avatar.component";
 		ButtonCardComponent,
 		InputComponent,
 		ButtonComponent,
+		IconOnlyButtonComponent,
+		BackButtonComponent,
 		AvatarComponent,
 	],
 	exports: [
@@ -32,6 +36,8 @@ import { AvatarComponent } from "./components/avatar/avatar.component";
 		ButtonCardComponent,
 		InputComponent,
 		ButtonComponent,
+		IconOnlyButtonComponent,
+		BackButtonComponent,
 		AvatarComponent,
 	],
 })

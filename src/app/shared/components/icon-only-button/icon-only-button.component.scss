@@ -1,0 +1,22 @@
+@import "src/styles/mixin.scss";
+
+.button-has-icon-only.ion-activatable {
+	height: fit-content;
+	margin: 0;
+	--padding-end: 0;
+	--padding-start: 0;
+
+	ion-icon {
+		transition: font-size 0.5s;
+		color: var(--ion-text-color);
+		font-size: 28px;
+
+		@include tablet {
+			font-size: 30px;
+		}
+
+		@include desktop {
+			font-size: 40px;
+		}
+	}
+}

@@ -1,0 +1,17 @@
+@import "src/styles/mixin.scss";
+
+ion-back-button {
+	&::part(icon) {
+		transition: font-size 0.5s;
+		color: var(--ion-text-color);
+		font-size: 28px;
+
+		@include tablet {
+			font-size: 30px;
+		}
+
+		@include desktop {
+			font-size: 40px;
+		}
+	}
+}
