@@ -202,37 +202,21 @@
 
 //* Icon
 ion-icon {
+	transition: font-size 0.5s;
 	color: var(--ion-text-color);
 	font-size: 28px;
-	--icon-font-size: 28px;
 
 	@include tablet {
 		font-size: 30px;
-		--icon-font-size: 30px;
 	}
 
 	@include desktop {
 		font-size: 40px;
-		--icon-font-size: 40px;
 	}
 }
 
-//* Back button
-ion-back-button {
-	&::part(icon) {
-		@extend ion-icon;
-	}
-}
-
-//* Button icon only
-.button-has-icon-only.ion-activatable {
-	height: fit-content;
-	margin: 0;
-	--padding-end: 0;
-	--padding-start: 0;
-
-	ion-icon {
-		@extend ion-icon;
-	}
+//* buttons
+ion-buttons {
+	font-size: initial;
 }
 

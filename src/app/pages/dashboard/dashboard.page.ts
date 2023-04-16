@@ -9,6 +9,7 @@ import { TimerService } from "src/app/core/services/timer/timer.service";
 import { UnitService } from "src/app/core/services/unit/unit.service";
 import { UnitParams } from "src/app/core/models/unit.model";
 import AppConstant from "src/app/utilities/app-constant";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "app-dashboard",
@@ -16,8 +17,6 @@ import AppConstant from "src/app/utilities/app-constant";
 	styleUrls: ["dashboard.page.scss"],
 })
 export class DashboardPage implements OnInit {
-	public appRoutes = AppRoutes;
-
 	public totalTime = "00:00:00";
 	public location: GeolocationDashboard = {
 		latitude: "-.-",
@@ -46,7 +45,8 @@ export class DashboardPage implements OnInit {
 		private geolocationService: GeolocationService,
 		private calculateService: CalculateService,
 		private timerService: TimerService,
-		private unitService: UnitService
+		private unitService: UnitService,
+		private router: Router
 	) {}
 
 	public async ngOnInit() {
@@ -106,6 +106,10 @@ export class DashboardPage implements OnInit {
 				this.unitService.setUnit(AppConstant.unitSystem.metric.unit);
 				break;
 		}
+	}
+
+	public goToSetting() {
+		this.router.navigateByUrl(`/${AppRoutes.settings.path}`);
 	}
 }
 

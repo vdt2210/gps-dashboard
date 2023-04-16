@@ -28,15 +28,19 @@
 }
 
 .speed-container {
-	width: 80%;
 	aspect-ratio: 1;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	transition: height 0.5s;
+
+	@include portrait {
+		width: 80%;
+	}
 
 	@include landscape {
-		width: 30%;
+		height: 200px;
 		border-radius: 50%;
 		background: linear-gradient(
 			to top,
@@ -44,13 +48,55 @@
 			var(--ion-color-step-100)
 		);
 		border: 2px solid var(--ion-color-step-150);
+
+		@include tablet {
+			height: 250px;
+		}
+
+		@include desktop {
+			height: 300px;
+		}
 	}
 
 	.speed {
-		font-size: 100px;
+		transition: font-size 0.5s;
+
+		@include portrait {
+			font-size: 100px;
+
+			@include tablet {
+				font-size: 120px;
+			}
+
+			@include desktop {
+				font-size: 140px;
+			}
+		}
 
 		@include landscape {
-			font-size: 70px;
+			font-size: 60px;
+
+			@include tablet {
+				font-size: 80px;
+			}
+
+			@include desktop {
+				font-size: 100px;
+			}
+		}
+	}
+
+	.unit {
+		transition: font-size 0.5s;
+
+		font-size: 20px;
+
+		@include tablet {
+			font-size: 24px;
+		}
+
+		@include desktop {
+			font-size: 30px;
 		}
 	}
 }

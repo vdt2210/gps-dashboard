@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 export class ButtonCardComponent {
 	@Input() icon = "";
 	@Input() cardLabel = "";
-	@Input() value? = 0;
+	@Input() value?: string | number;
 	@Input() action = "";
 
 	@Output() clickEmit = new EventEmitter();

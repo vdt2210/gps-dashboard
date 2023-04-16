@@ -8,9 +8,10 @@
 
 		<div class="right-side d-flex">
 			<ion-buttons>
-				<ion-button [routerLink]="'/' + appRoutes.settings.path">
-					<ion-icon slot="icon-only" name="settings-outline" />
-				</ion-button>
+				<app-icon-only-button
+					icon="settings-outline"
+					(clickEmit)="goToSetting()"
+				/>
 			</ion-buttons>
 		</div>
 	</div>
@@ -29,8 +30,8 @@
 
 <ion-footer>
 	<div class="footer-bar">
-		<div class="d-flex ion-justify-content-between">
-			<div class="left-side ion-align-items-center d-flex"></div>
+		<div class="d-flex ion-justify-content-between ion-align-items-center">
+			<div class="left-side d-flex"></div>
 
 			<p class="ion-no-margin">
 				{{ calculatedData.totalDistance }} {{unitData.distanceUnit}}
