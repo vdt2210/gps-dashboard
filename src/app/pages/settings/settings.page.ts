@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { App } from "@capacitor/app";
 import { GeolocationService } from "src/app/core/services/geolocation/geolocation.service";
 import { AppRoutes } from "src/app/utilities/app-routes";
@@ -38,6 +38,10 @@ export class SettingsPage implements OnInit {
 
 	public appVersion = "-";
 
+	public isLogin = false;
+	public isSignUp = false;
+	public isModalOpen = false;
+
 	constructor(private geolocationService: GeolocationService) {}
 
 	async ngOnInit(): Promise<void> {
@@ -50,6 +54,9 @@ export class SettingsPage implements OnInit {
 	onClickCard(action: string) {
 		switch (action) {
 			case "account":
+				//TODO check if logged in show account detail
+				this.isLogin = true;
+				this.isModalOpen = true;
 				break;
 			case "language":
 				break;
@@ -60,6 +67,26 @@ export class SettingsPage implements OnInit {
 			case "clearData":
 				break;
 			case "checkForUpdate":
+				break;
+		}
+	}
+
+	public onModalDismiss() {
+		this.isModalOpen = false;
+		this.isLogin = false;
+		this.isSignUp = false;
+	}
+
+	modalButtonAction(action: string) {
+		switch (action) {
+			case "signUp":
+				this.isLogin = false;
+				this.isSignUp = true;
+				break;
+
+			case "login":
+				this.isSignUp = false;
+				this.isLogin = true;
 				break;
 		}
 	}

@@ -5,6 +5,8 @@ import { SettingsPage } from "./settings.page";
 import { SettingsRoutingModule } from "./settings-routing.module";
 import { TranslateModule } from "@ngx-translate/core";
 import { SharedModule } from "src/app/shared/shared.module";
+import { LoginFormComponent } from "./components/login-modal/login-form.component";
+import { SignUpFormComponent } from "./components/sign-up-form/sign-up-form.component";
 
 @NgModule({
 	imports: [
@@ -14,7 +16,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 		TranslateModule,
 		SharedModule,
 	],
-	declarations: [SettingsPage],
+	declarations: [SettingsPage, LoginFormComponent, SignUpFormComponent],
 })
 export class SettingsPageModule {}
 

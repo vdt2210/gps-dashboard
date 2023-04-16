@@ -12,5 +12,11 @@
 	"speedCorrection": "Hiệu chỉnh tốc độ",
 	"topSpeed": "Tốc độ cao nhất",
 	"unit": "Đơn vị",
-	"version": "Phiên bản {{value}}"
+	"version": "Phiên bản {{value}}",
+	"login": "Đăng nhập",
+	"signUp": "Đăng ký",
+	"email": "Email",
+	"password": "Mật khẩu",
+	"confirmPassword": "Xác nhận mật khẩu",
+	"fullName": "Họ & tên"
 }
