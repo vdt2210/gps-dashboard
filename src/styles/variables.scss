@@ -215,8 +215,37 @@ ion-icon {
 	}
 }
 
-//* buttons
+//* Buttons
 ion-buttons {
 	font-size: initial;
+}
+
+//* List
+ion-list {
+	&.no-margin-list.list-inset {
+		margin: unset !important;
+	}
+}
+
+//* Item
+ion-item {
+	&:first-child {
+		border-radius: 10px 10px 0 0;
+		--border-color: var(--ion-border-color);
+	}
+
+	&:last-child {
+		border-radius: 0 0 10px 10px;
+		--border-style: unset;
+	}
+}
+
+//* Form
+form {
+	width: 100%;
+
+	.form-input-container {
+		margin-bottom: 30px;
+	}
 }
 

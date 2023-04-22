@@ -36,8 +36,8 @@ const AppConstant = Object.freeze({
 	},
 
 	languages: {
-		vi: "vi",
-		en: "en",
+		en: { name: "English", value: "en" },
+		vi: { name: "Tiếng Việt", value: "vi" },
 	},
 
 	inputType: {
