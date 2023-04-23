@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { IonicModule } from "@ionic/angular";
 
-import { LanguageSelectListComponent } from "./language-select-list.component";
+import { UnitListComponent } from "./unit-list.component";
 
 describe("LoginModalComponent", () => {
-	let component: LanguageSelectListComponent;
-	let fixture: ComponentFixture<LanguageSelectListComponent>;
+	let component: UnitListComponent;
+	let fixture: ComponentFixture<UnitListComponent>;
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [LanguageSelectListComponent],
+			declarations: [UnitListComponent],
 			imports: [IonicModule.forRoot()],
 		}).compileComponents();
 
-		fixture = TestBed.createComponent(LanguageSelectListComponent);
+		fixture = TestBed.createComponent(UnitListComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	}));

@@ -12,7 +12,7 @@ export class UnitService {
 
 	constructor(private storageService: StorageService) {
 		this.unitParams$ = new BehaviorSubject<UnitParams>({
-			unit: "",
+			value: "",
 			lengthUnit: "",
 			speedUnit: "",
 			distanceUnit: "",
@@ -24,7 +24,7 @@ export class UnitService {
 	public async setInitialUnit() {
 		const unit =
 			(await this.storageService.get(AppConstant.storageKeys.unit)) ??
-			AppConstant.unitSystem.metric.unit;
+			AppConstant.unit.metric.value;
 		this.setUnit(unit);
 	}
 
@@ -33,18 +33,16 @@ export class UnitService {
 	}
 
 	public async setUnit(unit: string) {
-		const unitSystem = this.getUnitSystem(unit);
-
 		await this.storageService.set(AppConstant.storageKeys.unit, unit);
-		this.unitParams$.next(unitSystem);
+		this.unitParams$.next(this.getUnitSystem(unit));
 	}
 
-	public getUnitSystem(unit: string) {
+	private getUnitSystem(unit: string) {
 		switch (unit) {
-			case AppConstant.unitSystem.imperial.unit:
-				return AppConstant.unitSystem.imperial;
+			case AppConstant.unit.imperial.value:
+				return AppConstant.unit.imperial;
 			default:
-				return AppConstant.unitSystem.metric;
+				return AppConstant.unit.metric;
 		}
 	}
 }

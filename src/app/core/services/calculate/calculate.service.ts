@@ -116,12 +116,12 @@ export class CalculateService {
 	}
 
 	private convert() {
-		switch (this.unitService.getUnit().getValue().unit) {
-			case AppConstant.unitSystem.imperial.unit:
+		switch (this.unitService.getUnit().getValue().value) {
+			case AppConstant.unit.imperial.value:
 				this.imperialUnit();
 				break;
 
-			case AppConstant.unitSystem.metric.unit:
+			case AppConstant.unit.metric.value:
 			default:
 				this.metricUnit();
 				break;
@@ -130,12 +130,12 @@ export class CalculateService {
 
 	private updateUnitSystem() {
 		this.unitService.getUnit().subscribe((data) => {
-			switch (data.unit) {
-				case AppConstant.unitSystem.imperial.unit:
+			switch (data.value) {
+				case AppConstant.unit.imperial.value:
 					this.imperialUnit();
 					break;
 
-				case AppConstant.unitSystem.metric.unit:
+				case AppConstant.unit.metric.value:
 				default:
 					this.metricUnit();
 					break;

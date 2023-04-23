@@ -21,10 +21,10 @@ export class InformationCardComponent implements OnChanges {
 	@Input() latitude: number | string = "-.-";
 	@Input() longitude: number | string = "-.-";
 	@Input() unitData: UnitParams = {
-		unit: AppConstant.unitSystem.metric.unit,
-		speedUnit: AppConstant.unitSystem.metric.speedUnit,
-		distanceUnit: AppConstant.unitSystem.metric.distanceUnit,
-		lengthUnit: AppConstant.unitSystem.metric.lengthUnit,
+		value: AppConstant.unit.metric.value,
+		speedUnit: AppConstant.unit.metric.speedUnit,
+		distanceUnit: AppConstant.unit.metric.distanceUnit,
+		lengthUnit: AppConstant.unit.metric.lengthUnit,
 	};
 
 	public dataList: data[] = [];

@@ -20,15 +20,15 @@ const AppConstant = Object.freeze({
 		"topSpeed",
 	],
 
-	unitSystem: {
+	unit: {
 		metric: {
-			unit: "metric",
+			value: "metric",
 			speedUnit: "km/h",
 			distanceUnit: "km",
 			lengthUnit: "m",
 		},
 		imperial: {
-			unit: "imperial",
+			value: "imperial",
 			speedUnit: "mph",
 			distanceUnit: "mi",
 			lengthUnit: "ft",

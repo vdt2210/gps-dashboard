@@ -25,7 +25,7 @@ export class SettingsPage implements OnInit {
 		{
 			label: "speedCorrection",
 			icon: "speedometer-outline",
-			value: 0,
+			value: this.geolocationService.getSpeedCorrection().getValue(),
 			action: "speedCorrection",
 		},
 		{ label: "clearData", icon: "trash-outline", action: "clearData" },
@@ -38,18 +38,16 @@ export class SettingsPage implements OnInit {
 
 	public appVersion = "-";
 
+	public isModalOpen = false;
 	public isLogin = false;
 	public isSignUp = false;
 	public isLanguage = false;
-	public isModalOpen = false;
+	public isUnit = false;
 
 	constructor(private geolocationService: GeolocationService) {}
 
 	async ngOnInit(): Promise<void> {
 		this.appVersion = (await App.getInfo()).version;
-		this.geolocationService
-			.getSpeedCorrection()
-			.subscribe((value) => (this.settingsList[3].value = value));
 	}
 
 	onClickCard(action: string) {
@@ -64,6 +62,8 @@ export class SettingsPage implements OnInit {
 				this.isModalOpen = true;
 				break;
 			case "unit":
+				this.isUnit = true;
+				this.isModalOpen = true;
 				break;
 			case "speedCorrection":
 				break;
@@ -79,6 +79,7 @@ export class SettingsPage implements OnInit {
 		this.isLogin = false;
 		this.isSignUp = false;
 		this.isLanguage = false;
+		this.isUnit = false;
 	}
 
 	modalButtonAction(action: string) {

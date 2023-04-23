@@ -20,5 +20,7 @@
 	"confirmPassword": "Confirm password",
 	"fullName": "Full name",
 	"cancel": "Cancel",
-	"confirm": "Confirm"
+	"confirm": "Confirm",
+	"metric": "Metric",
+	"imperial": "Imperial"
 }

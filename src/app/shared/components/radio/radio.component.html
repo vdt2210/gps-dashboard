@@ -2,7 +2,7 @@
 	<ion-list [inset]="true" lines="full" class="no-margin-list">
 		<ion-item class="radio-item" *ngFor="let item of listItems">
 			<ion-radio [value]="item.value" aria-label="">
-				{{ item.name }}
+				{{ item.name | translate }}
 			</ion-radio>
 		</ion-item>
 	</ion-list>

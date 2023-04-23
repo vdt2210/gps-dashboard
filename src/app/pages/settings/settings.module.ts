@@ -7,7 +7,8 @@ import { TranslateModule } from "@ngx-translate/core";
 import { SharedModule } from "src/app/shared/shared.module";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { SignUpFormComponent } from "./components/sign-up-form/sign-up-form.component";
-import { LanguageSelectListComponent } from "./components/language-select-list/language-select-list.component";
+import { LanguageSelectListComponent } from "./components/language-list/language-list.component";
+import { UnitListComponent } from "./components/unit-list/unit-list.component";
 
 @NgModule({
 	imports: [
@@ -22,6 +23,7 @@ import { LanguageSelectListComponent } from "./components/language-select-list/l
 		LoginFormComponent,
 		SignUpFormComponent,
 		LanguageSelectListComponent,
+		UnitListComponent,
 	],
 })
 export class SettingsPageModule {}

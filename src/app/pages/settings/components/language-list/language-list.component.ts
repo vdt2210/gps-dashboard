@@ -8,9 +8,9 @@ interface Language {
 }
 
 @Component({
-	selector: "app-language-select-list",
-	templateUrl: "./language-select-list.component.html",
-	styleUrls: ["./language-select-list.component.scss"],
+	selector: "app-language-list",
+	templateUrl: "./language-list.component.html",
+	styleUrls: ["./language-list.component.scss"],
 })
 export class LanguageSelectListComponent {
 	@Output() buttonEmit = new EventEmitter();
@@ -21,7 +21,7 @@ export class LanguageSelectListComponent {
 
 	constructor(private languageService: LanguageService) {}
 
-	onSelectLanguage(lang: string) {
+	onChangeLanguage(lang: string) {
 		this.selectedLanguage = lang;
 	}
 
