@@ -29,10 +29,8 @@ export class UnitListComponent {
 	}
 
 	onConfirm() {
-		if (this.selectedUnit) {
-			this.unitService.setUnit(this.selectedUnit);
-			this.buttonEmit.emit();
-		}
+		this.unitService.setUnit(this.selectedUnit);
+		this.buttonEmit.emit();
 	}
 }
 

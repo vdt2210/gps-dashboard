@@ -26,10 +26,8 @@ export class LanguageSelectListComponent {
 	}
 
 	onConfirm() {
-		if (this.selectedLanguage) {
-			this.languageService.setLanguage(this.selectedLanguage);
-			this.buttonEmit.emit();
-		}
+		this.languageService.setLanguage(this.selectedLanguage);
+		this.buttonEmit.emit();
 	}
 }
 

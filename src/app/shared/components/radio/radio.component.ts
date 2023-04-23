@@ -17,7 +17,7 @@ export class RadioComponent {
 
 	@Output() changeEmit = new EventEmitter();
 
-	onChangeValue(ev: any) {
+	public onChangeValue(ev: any) {
 		this.changeEmit.emit(ev.detail.value);
 	}
 }

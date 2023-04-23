@@ -229,14 +229,19 @@ ion-list {
 
 //* Item
 ion-item {
+	--border-color: var(--ion-border-color);
+
 	&:first-child {
 		border-radius: 10px 10px 0 0;
-		--border-color: var(--ion-border-color);
 	}
 
 	&:last-child {
 		border-radius: 0 0 10px 10px;
 		--border-style: unset;
+	}
+
+	&:only-child {
+		border-radius: 10px;
 	}
 }
 

@@ -1,0 +1,19 @@
+<ion-item>
+	<ion-range
+		aria-label="range"
+		[ticks]="isHaveTicks"
+		[pin]="isHavePin"
+		[snaps]="true"
+		[min]="minValue"
+		[max]="maxValue"
+		[value]="currentValue"
+		(ionKnobMoveEnd)="onChangeValue($event)"
+	>
+		<div *ngIf="startLabel" slot="start" [translate]="startLabel"></div>
+		<div *ngIf="endLabel" slot="end" [translate]="endLabel"></div>
+
+		<ion-icon *ngIf="startIcon" slot="start" [name]="startIcon"></ion-icon>
+		<ion-icon *ngIf="endIcon" slot="end" [name]="endIcon"></ion-icon>
+	</ion-range>
+</ion-item>
+
