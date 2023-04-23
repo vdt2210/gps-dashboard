@@ -25,7 +25,7 @@ export class SettingsPage implements OnInit {
 		{
 			label: "speedCorrection",
 			icon: "speedometer-outline",
-			value: this.geolocationService.getSpeedCorrection().getValue(),
+			value: 0,
 			action: "speedCorrection",
 		},
 		{ label: "clearData", icon: "trash-outline", action: "clearData" },
@@ -43,14 +43,19 @@ export class SettingsPage implements OnInit {
 	public isSignUp = false;
 	public isLanguage = false;
 	public isUnit = false;
+	public isSpeedCorrection = false;
 
-	constructor(private geolocationService: GeolocationService) {}
+	constructor(private geolocationService: GeolocationService) {
+		this.geolocationService
+			.getSpeedCorrection()
+			.subscribe((val) => (this.settingsList[3].value = val));
+	}
 
 	async ngOnInit(): Promise<void> {
 		this.appVersion = (await App.getInfo()).version;
 	}
 
-	onClickCard(action: string) {
+	public onClickCard(action: string) {
 		switch (action) {
 			case "account":
 				//TODO check if logged in show account detail
@@ -66,6 +71,8 @@ export class SettingsPage implements OnInit {
 				this.isModalOpen = true;
 				break;
 			case "speedCorrection":
+				this.isSpeedCorrection = true;
+				this.isModalOpen = true;
 				break;
 			case "clearData":
 				break;
@@ -80,9 +87,10 @@ export class SettingsPage implements OnInit {
 		this.isSignUp = false;
 		this.isLanguage = false;
 		this.isUnit = false;
+		this.isSpeedCorrection = false;
 	}
 
-	modalButtonAction(action: string) {
+	public modalButtonAction(action: string) {
 		switch (action) {
 			case "signUp":
 				this.isLogin = false;
@@ -93,6 +101,9 @@ export class SettingsPage implements OnInit {
 				this.isSignUp = false;
 				this.isLogin = true;
 				break;
+
+			default:
+				this.onModalDismiss();
 		}
 	}
 }

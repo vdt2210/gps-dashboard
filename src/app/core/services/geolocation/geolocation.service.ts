@@ -125,25 +125,20 @@ export class GeolocationService {
 	public async setSpeedCorrection(speedCorrection: number): Promise<void> {
 		if (speedCorrection == null) return;
 
-		const currentSpeedCorrection = await this.storageService.get(
-			AppConstant.storageKeys.speedCorrection
+		this.storageService.set(
+			AppConstant.storageKeys.speedCorrection,
+			speedCorrection
 		);
 
-		if (speedCorrection > currentSpeedCorrection) {
-			this.storageService.set(
-				AppConstant.storageKeys.speedCorrection,
-				speedCorrection
-			);
-			this.speedCorrection$.next(speedCorrection);
+		this.speedCorrection$.next(speedCorrection);
 
-			// Update the speed of the current location.
-			// const currentLocation = this.location$.getValue();
-			// if (currentLocation && currentLocation.speed != null) {
-			// 	currentLocation.speed +=
-			// 		(currentLocation.speed / 100) * speedCorrection;
-			// 	this.location$.next(currentLocation);
-			// }
-		}
+		// Update the speed of the current location.
+		// const currentLocation = this.location$.getValue();
+		// if (currentLocation && currentLocation.speed != null) {
+		// 	currentLocation.speed +=
+		// 		(currentLocation.speed / 100) * speedCorrection;
+		// 	this.location$.next(currentLocation);
+		// }
 	}
 
 	private setTime(time: number, speed: number) {

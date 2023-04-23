@@ -9,6 +9,7 @@ import { LoginFormComponent } from "./components/login-form/login-form.component
 import { SignUpFormComponent } from "./components/sign-up-form/sign-up-form.component";
 import { LanguageSelectListComponent } from "./components/language-list/language-list.component";
 import { UnitListComponent } from "./components/unit-list/unit-list.component";
+import { SpeedCorrectionComponent } from "./components/speed-correction/speed-correction.component";
 
 @NgModule({
 	imports: [
@@ -24,6 +25,7 @@ import { UnitListComponent } from "./components/unit-list/unit-list.component";
 		SignUpFormComponent,
 		LanguageSelectListComponent,
 		UnitListComponent,
+		SpeedCorrectionComponent,
 	],
 })
 export class SettingsPageModule {}

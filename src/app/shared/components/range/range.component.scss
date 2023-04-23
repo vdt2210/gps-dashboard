@@ -1,0 +1,29 @@
+ion-range {
+	&::part(tick),
+	&::part(tick-active) {
+		background: var(--ion-color-step-400);
+	}
+
+	&::part(pin) {
+		color: var(--ion-text-color);
+		transform: unset;
+		min-width: unset;
+		font-weight: bold;
+		padding: 0;
+		font-size: 18px;
+		top: -12px;
+	}
+
+	&::part(pin)::before {
+		content: none;
+	}
+
+	&::part(knob) {
+		background: var(--ion-background-color-white);
+	}
+
+	&::part(bar),
+	&::part(bar-active) {
+		background: var(--ion-color-step-400);
+	}
+}
