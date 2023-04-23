@@ -18,5 +18,7 @@
 	"email": "Email",
 	"password": "Password",
 	"confirmPassword": "Confirm password",
-	"fullName": "Full name"
+	"fullName": "Full name",
+	"cancel": "Cancel",
+	"confirm": "Confirm"
 }

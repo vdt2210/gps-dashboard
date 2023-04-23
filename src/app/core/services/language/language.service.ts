@@ -21,10 +21,16 @@ export class LanguageService {
 					this.translateService.use(val);
 					document.documentElement.lang = val;
 				} else {
-					this.setLanguage((await Device.getLanguageCode()).value);
+					this.setLanguage(
+						this.getSupportedLanguage((await Device.getLanguageCode()).value)
+					);
 				}
 			})
 			.catch(() => {});
+	}
+
+	public getCurrentLanguage() {
+		return this.translateService.currentLang;
 	}
 
 	public async setLanguage(lang: string) {
@@ -35,5 +41,11 @@ export class LanguageService {
 
 	public translate(key: string, params?: any) {
 		return this.translateService.instant(key, params);
+	}
+
+	private getSupportedLanguage(lang: string) {
+		return lang in AppConstant.languages
+			? lang
+			: AppConstant.languages.en.value;
 	}
 }

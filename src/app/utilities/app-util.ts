@@ -16,38 +16,6 @@ const AppUtil = {
 		return b > 0 ? a + "0".repeat(b) : a;
 	},
 
-	getUnitSystem(appConstant: any): JsonValue[] {
-		let results: JsonValue[] = [];
-
-		results = [
-			{
-				label: "unit.metric",
-				value: appConstant.unitSystem.metric.unit,
-			},
-			{
-				label: "unit.imperial",
-				value: appConstant.unitSystem.imperial.unit,
-			},
-		];
-		return results;
-	},
-
-	getLanguages(appConstant: any): JsonValue[] {
-		let results: JsonValue[] = [];
-
-		results = [
-			{
-				label: "lang.vi",
-				value: appConstant.languages.vi,
-			},
-			{
-				label: "lang.en",
-				value: appConstant.languages.en,
-			},
-		];
-		return results;
-	},
-
 	decodeJWT(token: string) {
 		const base64Url = token.split(".")[1];
 		const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");

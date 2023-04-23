@@ -18,5 +18,7 @@
 	"email": "Email",
 	"password": "Mật khẩu",
 	"confirmPassword": "Xác nhận mật khẩu",
-	"fullName": "Họ & tên"
+	"fullName": "Họ & tên",
+	"cancel": "Hủy",
+	"confirm": "Xác nhận"
 }

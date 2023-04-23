@@ -40,6 +40,7 @@ export class SettingsPage implements OnInit {
 
 	public isLogin = false;
 	public isSignUp = false;
+	public isLanguage = false;
 	public isModalOpen = false;
 
 	constructor(private geolocationService: GeolocationService) {}
@@ -59,6 +60,8 @@ export class SettingsPage implements OnInit {
 				this.isModalOpen = true;
 				break;
 			case "language":
+				this.isLanguage = true;
+				this.isModalOpen = true;
 				break;
 			case "unit":
 				break;
@@ -75,6 +78,7 @@ export class SettingsPage implements OnInit {
 		this.isModalOpen = false;
 		this.isLogin = false;
 		this.isSignUp = false;
+		this.isLanguage = false;
 	}
 
 	modalButtonAction(action: string) {

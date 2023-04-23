@@ -58,6 +58,11 @@
 				*ngIf="isSignUp"
 				(buttonEmit)="modalButtonAction($event)"
 			/>
+
+			<app-language-select-list
+				*ngIf="isLanguage"
+				(buttonEmit)="onModalDismiss()"
+			/>
 		</div>
 	</ng-template>
 </ion-modal>

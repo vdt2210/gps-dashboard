@@ -10,6 +10,7 @@ import { ButtonComponent } from "./components/button/button.component";
 import { AvatarComponent } from "./components/avatar/avatar.component";
 import { IconOnlyButtonComponent } from "./components/icon-only-button/icon-only-button.component";
 import { BackButtonComponent } from "./components/back-button/back-button.component";
+import { RadioComponent } from "./components/radio/radio.component";
 
 @NgModule({
 	imports: [
@@ -27,6 +28,7 @@ import { BackButtonComponent } from "./components/back-button/back-button.compon
 		IconOnlyButtonComponent,
 		BackButtonComponent,
 		AvatarComponent,
+		RadioComponent,
 	],
 	exports: [
 		CommonModule,
@@ -39,6 +41,7 @@ import { BackButtonComponent } from "./components/back-button/back-button.compon
 		IconOnlyButtonComponent,
 		BackButtonComponent,
 		AvatarComponent,
+		RadioComponent,
 	],
 })
 export class SharedModule {}

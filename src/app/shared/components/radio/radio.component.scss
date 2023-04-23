@@ -1,0 +1,10 @@
+ion-radio {
+	&::part(mark) {
+		width: 60%;
+		height: 100%;
+	}
+}
+
+.radio-item {
+	--min-height: 56px;
+}
