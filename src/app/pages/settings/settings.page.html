@@ -59,10 +59,9 @@
 				(buttonEmit)="modalButtonAction($event)"
 			/>
 
-			<app-language-select-list
-				*ngIf="isLanguage"
-				(buttonEmit)="onModalDismiss()"
-			/>
+			<app-language-list *ngIf="isLanguage" (buttonEmit)="onModalDismiss()" />
+
+			<app-unit-list *ngIf="isUnit" (buttonEmit)="onModalDismiss()" />
 		</div>
 	</ng-template>
 </ion-modal>

@@ -35,7 +35,7 @@ export class DashboardPage implements OnInit {
 	};
 
 	public unitData: UnitParams = {
-		unit: "",
+		value: "",
 		speedUnit: "",
 		distanceUnit: "",
 		lengthUnit: "",
@@ -97,13 +97,13 @@ export class DashboardPage implements OnInit {
 	}
 
 	public switchUnit() {
-		switch (this.unitData.unit) {
-			case AppConstant.unitSystem.metric.unit:
-				this.unitService.setUnit(AppConstant.unitSystem.imperial.unit);
+		switch (this.unitData.value) {
+			case AppConstant.unit.metric.value:
+				this.unitService.setUnit(AppConstant.unit.imperial.value);
 				break;
 
 			default:
-				this.unitService.setUnit(AppConstant.unitSystem.metric.unit);
+				this.unitService.setUnit(AppConstant.unit.metric.value);
 				break;
 		}
 	}

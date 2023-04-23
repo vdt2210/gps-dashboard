@@ -20,5 +20,7 @@
 	"confirmPassword": "Xác nhận mật khẩu",
 	"fullName": "Họ & tên",
 	"cancel": "Hủy",
-	"confirm": "Xác nhận"
+	"confirm": "Xác nhận",
+	"metric": "Hệ mét",
+	"imperial": "Hệ đo lường Anh"
 }

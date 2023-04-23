@@ -1,0 +1,24 @@
+<h1 class="ion-text-center" translate="unit"></h1>
+
+<app-radio
+	[selectedValue]="selectedUnit"
+	(changeEmit)="onChangeUnit($event)"
+	[listItems]="unitsList"
+>
+</app-radio>
+
+<div class="d-flex ion-align-items-center ion-justify-content-center">
+	<app-button
+		buttonLabel="cancel"
+		[fill]="appConstant.fill.clear"
+		[color]="appConstant.color.medium"
+		(clickEmit)="buttonEmit.emit()"
+	></app-button>
+
+	<app-button
+		buttonLabel="confirm"
+		[fill]="appConstant.fill.clear"
+		(clickEmit)="onConfirm()"
+	></app-button>
+</div>
+
