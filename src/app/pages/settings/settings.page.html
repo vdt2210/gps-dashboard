@@ -67,6 +67,8 @@
 				*ngIf="isSpeedCorrection"
 				(buttonEmit)="onModalDismiss()"
 			/>
+
+			<app-clear-data *ngIf="isClearData" (buttonEmit)="onModalDismiss()" />
 		</div>
 	</ng-template>
 </ion-modal>

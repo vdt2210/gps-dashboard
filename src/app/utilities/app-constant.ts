@@ -1,24 +1,24 @@
 const AppConstant = Object.freeze({
 	storageKeys: {
-		unit: "unit",
-		totalDistance: "totalDistance",
-		tripDistance: "tripDistance",
 		avgSpeedTotalDistance: "avgSpeedTotalDistance",
-		language: "language",
-		totalTime: "totalTime",
 		avgSpeedTotalTime: "avgSpeedTotalTime",
-		topSpeed: "topSpeed",
+		language: "language",
 		speedCorrection: "speedCorrection",
+		topSpeed: "topSpeed",
+		totalDistance: "totalDistance",
+		totalTime: "totalTime",
+		tripDistance: "tripDistance",
+		unit: "unit",
 	},
 
-	backUpKeys: [
-		"totalDistance",
-		"tripDistance",
-		"avgSpeedTotalDistance",
-		"totalTime",
-		"avgSpeedTotalTime",
-		"topSpeed",
-	],
+	// backUpKeys: [
+	// 	"totalDistance",
+	// 	"tripDistance",
+	// 	"avgSpeedTotalDistance",
+	// 	"totalTime",
+	// 	"avgSpeedTotalTime",
+	// 	"topSpeed",
+	// ],
 
 	unit: {
 		metric: {

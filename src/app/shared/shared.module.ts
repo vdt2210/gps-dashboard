@@ -12,6 +12,7 @@ import { IconOnlyButtonComponent } from "./components/icon-only-button/icon-only
 import { BackButtonComponent } from "./components/back-button/back-button.component";
 import { RadioComponent } from "./components/radio/radio.component";
 import { RangeComponent } from "./components/range/range.component";
+import { CheckboxComponent } from "./components/checkbox/checkbox.component";
 
 @NgModule({
 	imports: [
@@ -31,6 +32,7 @@ import { RangeComponent } from "./components/range/range.component";
 		AvatarComponent,
 		RadioComponent,
 		RangeComponent,
+		CheckboxComponent,
 	],
 	exports: [
 		CommonModule,
@@ -45,6 +47,7 @@ import { RangeComponent } from "./components/range/range.component";
 		AvatarComponent,
 		RadioComponent,
 		RangeComponent,
+		CheckboxComponent,
 	],
 })
 export class SharedModule {}

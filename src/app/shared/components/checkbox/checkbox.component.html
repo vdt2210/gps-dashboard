@@ -1,0 +1,10 @@
+<ion-list [inset]="true" lines="full" class="no-margin-list">
+	<ion-item class="checkbox-item" *ngFor="let item of listItems">
+		<ion-checkbox
+			[value]="item.name"
+			[translate]="item.name"
+			(ionChange)="onSelect($event)"
+		></ion-checkbox>
+	</ion-item>
+</ion-list>
+
