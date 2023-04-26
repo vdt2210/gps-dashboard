@@ -1,11 +1,10 @@
-import { CapacitorConfig } from "@capacitor/cli";
+import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-	appId: "io.ionic.starter",
-	appName: "GPS Dashboard",
-	webDir: "www",
+	appId: 'io.ionic.starter',
+	appName: 'GPS Dashboard',
+	webDir: 'www',
 	bundledWebRuntime: false,
 };
 
 export default config;
-

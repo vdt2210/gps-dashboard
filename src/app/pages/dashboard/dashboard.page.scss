@@ -1,4 +1,4 @@
-@import "src/styles/mixin.scss";
+@import 'src/styles/mixin.scss';
 
 .header-bar,
 .footer-bar {
@@ -42,11 +42,7 @@
 	@include landscape {
 		height: 200px;
 		border-radius: 50%;
-		background: linear-gradient(
-			to top,
-			var(--ion-color-step-50),
-			var(--ion-color-step-100)
-		);
+		background: linear-gradient(to top, var(--ion-color-step-50), var(--ion-color-step-100));
 		border: 2px solid var(--ion-color-step-150);
 
 		@include tablet {

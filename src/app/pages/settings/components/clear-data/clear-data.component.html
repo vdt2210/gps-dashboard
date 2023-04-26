@@ -1,6 +1,12 @@
-<h1 class="ion-text-center" translate="clearData"></h1>
+<h1
+	class="ion-text-center"
+	translate="clearData"
+></h1>
 
-<app-checkbox [listItems]="clearableKeys" (selectEmit)="onSelect($event)" />
+<app-checkbox
+	[listItems]="clearableKeys"
+	(selectEmit)="onSelect($event)"
+/>
 
 <div class="d-flex ion-align-items-center ion-justify-content-center">
 	<app-button
@@ -17,4 +23,3 @@
 		(clickEmit)="onConfirm()"
 	></app-button>
 </div>
-

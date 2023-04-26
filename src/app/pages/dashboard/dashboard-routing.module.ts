@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { DashboardPage } from "./dashboard.page";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardPage } from './dashboard.page';
 
 const routes: Routes = [
 	{
-		path: "",
+		path: '',
 		component: DashboardPage,
 	},
 ];
@@ -13,4 +13,3 @@ const routes: Routes = [
 	exports: [RouterModule],
 })
 export class DashboardRoutingModule {}
-

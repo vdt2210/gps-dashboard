@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-	selector: "app-range",
-	templateUrl: "./range.component.html",
-	styleUrls: ["./range.component.scss"],
+	selector: 'app-range',
+	templateUrl: './range.component.html',
+	styleUrls: ['./range.component.scss'],
 })
 export class RangeComponent {
-	@Input() minValue: number = 0;
-	@Input() maxValue: number = 10;
-	@Input() currentValue: number = 0;
-	@Input() isHaveTicks: boolean = true;
-	@Input() isHavePin: boolean = true;
+	@Input() minValue = 0;
+	@Input() maxValue = 10;
+	@Input() currentValue = 0;
+	@Input() isHaveTicks = true;
+	@Input() isHavePin = true;
 	@Input() startLabel?: string;
 	@Input() endLabel?: string;
 	@Input() startIcon?: string;
@@ -22,4 +22,3 @@ export class RangeComponent {
 		this.changeEmit.emit(ev.detail.value);
 	}
 }
-

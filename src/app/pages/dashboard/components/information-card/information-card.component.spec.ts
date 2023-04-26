@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { IonicModule } from "@ionic/angular";
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import { InformationCardComponent } from "./information-card.component";
+import { InformationCardComponent } from './information-card.component';
 
-describe("InformationCardComponent", () => {
+describe('InformationCardComponent', () => {
 	let component: InformationCardComponent;
 	let fixture: ComponentFixture<InformationCardComponent>;
 
@@ -18,8 +18,7 @@ describe("InformationCardComponent", () => {
 		fixture.detectChanges();
 	}));
 
-	it("should create", () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 });
-

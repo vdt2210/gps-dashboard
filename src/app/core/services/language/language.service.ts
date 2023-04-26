@@ -1,32 +1,29 @@
-import { Injectable } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { Device } from "@capacitor/device";
-import AppConstant from "src/app/utilities/app-constant";
-import { StorageService } from "../storage/storage.service";
+import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Device } from '@capacitor/device';
+import AppConstant from 'src/app/utilities/app-constant';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
-	providedIn: "root",
+	providedIn: 'root',
 })
 export class LanguageService {
-	constructor(
-		private translateService: TranslateService,
-		private storageService: StorageService
-	) {}
+	constructor(private translateService: TranslateService, private storageService: StorageService) {}
 
 	public async setInitialAppLanguage() {
 		await this.storageService
 			.get(AppConstant.storageKeys.language)
-			.then(async (val) => {
+			.then(async val => {
 				if (val) {
 					this.translateService.use(val);
 					document.documentElement.lang = val;
 				} else {
-					this.setLanguage(
-						this.getSupportedLanguage((await Device.getLanguageCode()).value)
-					);
+					this.setLanguage(this.getSupportedLanguage((await Device.getLanguageCode()).value));
 				}
 			})
-			.catch(() => {});
+			.catch(err => {
+				console.error(err);
+			});
 	}
 
 	public getCurrentLanguage() {
@@ -44,8 +41,6 @@ export class LanguageService {
 	}
 
 	private getSupportedLanguage(lang: string) {
-		return lang in AppConstant.languages
-			? lang
-			: AppConstant.languages.en.value;
+		return lang in AppConstant.languages ? lang : AppConstant.languages.en.value;
 	}
 }

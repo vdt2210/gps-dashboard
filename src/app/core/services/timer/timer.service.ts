@@ -1,17 +1,17 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import AppConstant from "src/app/utilities/app-constant";
-import { StorageService } from "../storage/storage.service";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import AppConstant from 'src/app/utilities/app-constant';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
-	providedIn: "root",
+	providedIn: 'root',
 })
 export class TimerService {
 	private totalTime$: BehaviorSubject<string>;
 	private avgSpeedTotalTime$: BehaviorSubject<number>;
 
 	constructor(private storageService: StorageService) {
-		this.totalTime$ = new BehaviorSubject<string>("00:00:00");
+		this.totalTime$ = new BehaviorSubject<string>('00:00:00');
 		this.avgSpeedTotalTime$ = new BehaviorSubject<number>(0);
 
 		this.setInitialTotalTime();
@@ -20,21 +20,25 @@ export class TimerService {
 	public async setInitialTotalTime() {
 		await this.storageService
 			.get(AppConstant.storageKeys.totalTime)
-			.then((val) => {
+			.then(val => {
 				if (val) {
 					this.formatTime(val);
 				} else {
 					this.saveTotalTime(0);
 				}
 			})
-			.catch(() => {});
+			.catch(err => {
+				console.error(err);
+			});
 
 		await this.storageService
 			.get(AppConstant.storageKeys.avgSpeedTotalTime)
-			.then((val) => {
+			.then(val => {
 				this.avgSpeedTotalTime$.next(val || 0);
 			})
-			.catch(() => {});
+			.catch(err => {
+				console.error(err);
+			});
 	}
 
 	public getTotalTime() {
@@ -48,9 +52,7 @@ export class TimerService {
 	public async saveTotalTime(time: number) {
 		if (time < 0) return;
 
-		const currentTotalTime = await this.storageService.get(
-			AppConstant.storageKeys.totalTime
-		);
+		const currentTotalTime = await this.storageService.get(AppConstant.storageKeys.totalTime);
 
 		const currentAvgSpeedTotalTime = await this.storageService.get(
 			AppConstant.storageKeys.avgSpeedTotalTime
@@ -82,13 +84,11 @@ export class TimerService {
 	}
 
 	private formatTime(totalTime: number) {
-		let hours = Math.floor(totalTime / 3600);
-		let minutes = Math.floor(totalTime / 60) % 60;
-		let seconds = totalTime % 60;
+		const hours = Math.floor(totalTime / 3600);
+		const minutes = Math.floor(totalTime / 60) % 60;
+		const seconds = totalTime % 60;
 		this.totalTime$.next(
-			[hours, minutes, seconds]
-				.map((n) => n.toString().padStart(2, "0"))
-				.join(":")
+			[hours, minutes, seconds].map(n => n.toString().padStart(2, '0')).join(':')
 		);
 	}
 }

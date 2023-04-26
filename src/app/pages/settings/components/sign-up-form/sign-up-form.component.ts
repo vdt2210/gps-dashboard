@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Output } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import AppConstant from "src/app/utilities/app-constant";
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import AppConstant from 'src/app/utilities/app-constant';
 
 const ICONS = {
-	eyeOff: "eye-off",
-	eye: "eye",
+	eyeOff: 'eye-off',
+	eye: 'eye',
 };
 
 @Component({
-	selector: "app-sign-up-form",
-	templateUrl: "./sign-up-form.component.html",
-	styleUrls: ["./sign-up-form.component.scss"],
+	selector: 'app-sign-up-form',
+	templateUrl: './sign-up-form.component.html',
+	styleUrls: ['./sign-up-form.component.scss'],
 })
 export class SignUpFormComponent {
 	@Output() buttonEmit = new EventEmitter();
@@ -23,11 +23,11 @@ export class SignUpFormComponent {
 
 	constructor(private formBuilder: FormBuilder) {
 		this.signUpForm = this.formBuilder.group({
-			avatarUrl: [""],
-			fullName: ["", Validators.required],
-			email: ["", [Validators.required, Validators.email]],
-			password: ["", [Validators.required, Validators.minLength(8)]],
-			confirmPassword: ["", Validators.required],
+			avatarUrl: [''],
+			fullName: ['', Validators.required],
+			email: ['', [Validators.required, Validators.email]],
+			password: ['', [Validators.required, Validators.minLength(8)]],
+			confirmPassword: ['', Validators.required],
 		});
 	}
 
@@ -47,4 +47,3 @@ export class SignUpFormComponent {
 		this.buttonEmit.emit(action);
 	}
 }
-

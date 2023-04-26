@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import AppConstant from "src/app/utilities/app-constant";
-import { StorageService } from "../storage/storage.service";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import AppConstant from 'src/app/utilities/app-constant';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
-	providedIn: "root",
+	providedIn: 'root',
 })
 export class TopSpeedService {
 	private topSpeed$: BehaviorSubject<number | null>;
@@ -17,10 +17,12 @@ export class TopSpeedService {
 	private async setInitialTopSpeed(): Promise<void> {
 		await this.storageService
 			.get(AppConstant.storageKeys.topSpeed)
-			.then((val) => {
+			.then(val => {
 				this.topSpeed$.next(val);
 			})
-			.catch(() => {});
+			.catch(err => {
+				console.error(err);
+			});
 	}
 
 	public getTopSpeed() {
@@ -30,9 +32,7 @@ export class TopSpeedService {
 	public async setTopSpeed(speed: number): Promise<void> {
 		if (speed == null) return;
 
-		const currentTopSpeed = await this.storageService.get(
-			AppConstant.storageKeys.topSpeed
-		);
+		const currentTopSpeed = await this.storageService.get(AppConstant.storageKeys.topSpeed);
 
 		if (speed <= currentTopSpeed) {
 			return;

@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { App } from "@capacitor/app";
-import { GeolocationService } from "src/app/core/services/geolocation/geolocation.service";
-import { AppRoutes } from "src/app/utilities/app-routes";
+import { Component, OnInit } from '@angular/core';
+import { App } from '@capacitor/app';
+import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
+import { AppRoutes } from 'src/app/utilities/app-routes';
 
 interface SettingModel {
 	label: string;
@@ -11,32 +11,32 @@ interface SettingModel {
 }
 
 @Component({
-	selector: "app-settings",
-	templateUrl: "settings.page.html",
-	styleUrls: ["settings.page.scss"],
+	selector: 'app-settings',
+	templateUrl: 'settings.page.html',
+	styleUrls: ['settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
 	public appRoutes = AppRoutes;
 
 	public settingsList: SettingModel[] = [
-		{ label: "account", icon: "person-outline", action: "account" },
-		{ label: "language", icon: "language-outline", action: "language" },
-		{ label: "unit", icon: "speedometer-outline", action: "unit" },
+		{ label: 'account', icon: 'person-outline', action: 'account' },
+		{ label: 'language', icon: 'language-outline', action: 'language' },
+		{ label: 'unit', icon: 'speedometer-outline', action: 'unit' },
 		{
-			label: "speedCorrection",
-			icon: "speedometer-outline",
+			label: 'speedCorrection',
+			icon: 'speedometer-outline',
 			value: 0,
-			action: "speedCorrection",
+			action: 'speedCorrection',
 		},
-		{ label: "clearData", icon: "trash-outline", action: "clearData" },
+		{ label: 'clearData', icon: 'trash-outline', action: 'clearData' },
 		{
-			label: "checkForUpdate",
-			icon: "download-outline",
-			action: "checkForUpdate",
+			label: 'checkForUpdate',
+			icon: 'download-outline',
+			action: 'checkForUpdate',
 		},
 	];
 
-	public appVersion = "-";
+	public appVersion = '-';
 
 	public isModalOpen = false;
 	public isLogin = false;
@@ -49,7 +49,7 @@ export class SettingsPage implements OnInit {
 	constructor(private geolocationService: GeolocationService) {
 		this.geolocationService
 			.getSpeedCorrection()
-			.subscribe((val) => (this.settingsList[3].value = val));
+			.subscribe(val => (this.settingsList[3].value = val));
 	}
 
 	async ngOnInit(): Promise<void> {
@@ -58,28 +58,28 @@ export class SettingsPage implements OnInit {
 
 	public onClickCard(action: string) {
 		switch (action) {
-			case "account":
+			case 'account':
 				//TODO check if logged in show account detail
 				this.isLogin = true;
 				this.isModalOpen = true;
 				break;
-			case "language":
+			case 'language':
 				this.isLanguage = true;
 				this.isModalOpen = true;
 				break;
-			case "unit":
+			case 'unit':
 				this.isUnit = true;
 				this.isModalOpen = true;
 				break;
-			case "speedCorrection":
+			case 'speedCorrection':
 				this.isSpeedCorrection = true;
 				this.isModalOpen = true;
 				break;
-			case "clearData":
+			case 'clearData':
 				this.isClearData = true;
 				this.isModalOpen = true;
 				break;
-			case "checkForUpdate":
+			case 'checkForUpdate':
 				break;
 		}
 	}
@@ -96,12 +96,12 @@ export class SettingsPage implements OnInit {
 
 	public modalButtonAction(action: string) {
 		switch (action) {
-			case "signUp":
+			case 'signUp':
 				this.isLogin = false;
 				this.isSignUp = true;
 				break;
 
-			case "login":
+			case 'login':
 				this.isSignUp = false;
 				this.isLogin = true;
 				break;
@@ -111,4 +111,3 @@ export class SettingsPage implements OnInit {
 		}
 	}
 }
-

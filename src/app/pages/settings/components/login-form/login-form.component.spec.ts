@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { IonicModule } from "@ionic/angular";
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import { LoginFormComponent } from "./login-form.component";
+import { LoginFormComponent } from './login-form.component';
 
-describe("LoginModalComponent", () => {
+describe('LoginModalComponent', () => {
 	let component: LoginFormComponent;
 	let fixture: ComponentFixture<LoginFormComponent>;
 
@@ -18,8 +18,7 @@ describe("LoginModalComponent", () => {
 		fixture.detectChanges();
 	}));
 
-	it("should create", () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 });
-

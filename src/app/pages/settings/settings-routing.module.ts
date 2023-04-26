@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { SettingsPage } from "./settings.page";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { SettingsPage } from './settings.page';
 
 const routes: Routes = [
 	{
-		path: "",
+		path: '',
 		component: SettingsPage,
 	},
 ];
@@ -13,4 +13,3 @@ const routes: Routes = [
 	exports: [RouterModule],
 })
 export class SettingsRoutingModule {}
-
