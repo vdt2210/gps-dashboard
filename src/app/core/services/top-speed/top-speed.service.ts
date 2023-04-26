@@ -7,10 +7,10 @@ import { StorageService } from "../storage/storage.service";
 	providedIn: "root",
 })
 export class TopSpeedService {
-	private topSpeed$: BehaviorSubject<number>;
+	private topSpeed$: BehaviorSubject<number | null>;
 
 	constructor(private storageService: StorageService) {
-		this.topSpeed$ = new BehaviorSubject<number>(0);
+		this.topSpeed$ = new BehaviorSubject<number | null>(null);
 		this.setInitialTopSpeed();
 	}
 
@@ -45,6 +45,6 @@ export class TopSpeedService {
 	public async clearTopSpeed(): Promise<void> {
 		await this.storageService
 			.remove(AppConstant.storageKeys.topSpeed)
-			.then(() => this.topSpeed$.next(0));
+			.then(() => this.topSpeed$.next(null));
 	}
 }

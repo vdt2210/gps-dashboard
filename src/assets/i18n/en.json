@@ -22,5 +22,7 @@
 	"cancel": "Cancel",
 	"confirm": "Confirm",
 	"metric": "Metric",
-	"imperial": "Imperial"
+	"imperial": "Imperial",
+	"totalTime": "Total time",
+	"tripDistance": "Trip distance"
 }

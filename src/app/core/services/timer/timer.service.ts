@@ -72,13 +72,13 @@ export class TimerService {
 	public async resetTotalTime() {
 		await this.storageService
 			.remove(AppConstant.storageKeys.totalTime)
-			.then(() => this.totalTime$.next("00:00:00"));
+			.then(() => this.setInitialTotalTime());
 	}
 
 	public async resetAvgSpeedTotalTime() {
 		await this.storageService
 			.remove(AppConstant.storageKeys.avgSpeedTotalTime)
-			.then(() => this.avgSpeedTotalTime$.next(0));
+			.then(() => this.setInitialTotalTime());
 	}
 
 	private formatTime(totalTime: number) {

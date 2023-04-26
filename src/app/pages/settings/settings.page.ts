@@ -44,6 +44,7 @@ export class SettingsPage implements OnInit {
 	public isLanguage = false;
 	public isUnit = false;
 	public isSpeedCorrection = false;
+	public isClearData = false;
 
 	constructor(private geolocationService: GeolocationService) {
 		this.geolocationService
@@ -75,6 +76,8 @@ export class SettingsPage implements OnInit {
 				this.isModalOpen = true;
 				break;
 			case "clearData":
+				this.isClearData = true;
+				this.isModalOpen = true;
 				break;
 			case "checkForUpdate":
 				break;
@@ -88,6 +91,7 @@ export class SettingsPage implements OnInit {
 		this.isLanguage = false;
 		this.isUnit = false;
 		this.isSpeedCorrection = false;
+		this.isClearData = false;
 	}
 
 	public modalButtonAction(action: string) {

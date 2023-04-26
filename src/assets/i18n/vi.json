@@ -22,5 +22,7 @@
 	"cancel": "Hủy",
 	"confirm": "Xác nhận",
 	"metric": "Hệ mét",
-	"imperial": "Hệ đo lường Anh"
+	"imperial": "Hệ đo lường Anh",
+	"totalTime": "Thời gian tổng",
+	"tripDistance": "Quãng đường hành trình"
 }

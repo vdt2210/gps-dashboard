@@ -12,7 +12,6 @@ interface Item {
 })
 export class RadioComponent {
 	@Input() selectedValue = "";
-	@Input() isObjectList = false;
 	@Input() listItems: Item[] = [];
 
 	@Output() changeEmit = new EventEmitter();

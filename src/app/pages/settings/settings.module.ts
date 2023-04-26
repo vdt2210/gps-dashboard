@@ -10,6 +10,7 @@ import { SignUpFormComponent } from "./components/sign-up-form/sign-up-form.comp
 import { LanguageSelectListComponent } from "./components/language-list/language-list.component";
 import { UnitListComponent } from "./components/unit-list/unit-list.component";
 import { SpeedCorrectionComponent } from "./components/speed-correction/speed-correction.component";
+import { ClearDataComponent } from "./components/clear-data/clear-data.component";
 
 @NgModule({
 	imports: [
@@ -26,6 +27,7 @@ import { SpeedCorrectionComponent } from "./components/speed-correction/speed-co
 		LanguageSelectListComponent,
 		UnitListComponent,
 		SpeedCorrectionComponent,
+		ClearDataComponent,
 	],
 })
 export class SettingsPageModule {}
