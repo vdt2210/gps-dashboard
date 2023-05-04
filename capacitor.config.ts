@@ -5,6 +5,9 @@ const config: CapacitorConfig = {
 	appName: 'GPS Dashboard',
 	webDir: 'www',
 	bundledWebRuntime: false,
+	android: {
+		useLegacyBridge: true,
+	},
 };
 
 export default config;
