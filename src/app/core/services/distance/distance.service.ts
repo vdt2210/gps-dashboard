@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import AppConstant from "src/app/utilities/app-constant";
-import { DistanceParams } from "../../models/distance.model";
-import { StorageService } from "../storage/storage.service";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import AppConstant from 'src/app/utilities/app-constant';
+import { DistanceParams } from '../../models/distance.model';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
-	providedIn: "root",
+	providedIn: 'root',
 })
 export class DistanceService {
 	private distanceParams$: BehaviorSubject<DistanceParams>;
@@ -23,20 +23,14 @@ export class DistanceService {
 		if (
 			!(await this.storageService.get(AppConstant.storageKeys.totalDistance)) ||
 			!(await this.storageService.get(AppConstant.storageKeys.tripDistance)) ||
-			!(await this.storageService.get(
-				AppConstant.storageKeys.avgSpeedTotalDistance
-			))
+			!(await this.storageService.get(AppConstant.storageKeys.avgSpeedTotalDistance))
 		) {
 			this.setDistance(0);
 		}
 
 		this.distanceParams$.next({
-			totalDistance: await this.storageService.get(
-				AppConstant.storageKeys.totalDistance
-			),
-			tripDistance: await this.storageService.get(
-				AppConstant.storageKeys.tripDistance
-			),
+			totalDistance: await this.storageService.get(AppConstant.storageKeys.totalDistance),
+			tripDistance: await this.storageService.get(AppConstant.storageKeys.tripDistance),
 			avgSpeedTotalDistance: await this.storageService.get(
 				AppConstant.storageKeys.avgSpeedTotalDistance
 			),
@@ -54,21 +48,13 @@ export class DistanceService {
 
 		const newTotalDistance = currentTotalDistance + distance;
 
-		await this.storageService.set(
-			AppConstant.storageKeys.totalDistance,
-			newTotalDistance
-		);
+		await this.storageService.set(AppConstant.storageKeys.totalDistance, newTotalDistance);
 
-		const currentTripDistance = await this.storageService.get(
-			AppConstant.storageKeys.tripDistance
-		);
+		const currentTripDistance = await this.storageService.get(AppConstant.storageKeys.tripDistance);
 
 		const newTripDistance = currentTripDistance + distance;
 
-		await this.storageService.set(
-			AppConstant.storageKeys.tripDistance,
-			newTripDistance
-		);
+		await this.storageService.set(AppConstant.storageKeys.tripDistance, newTripDistance);
 
 		const currentAvgSpeedTotalDistance = await this.storageService.get(
 			AppConstant.storageKeys.avgSpeedTotalDistance

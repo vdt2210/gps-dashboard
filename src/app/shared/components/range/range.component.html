@@ -9,11 +9,26 @@
 		[value]="currentValue"
 		(ionKnobMoveEnd)="onChangeValue($event)"
 	>
-		<div *ngIf="startLabel" slot="start" [translate]="startLabel"></div>
-		<div *ngIf="endLabel" slot="end" [translate]="endLabel"></div>
+		<div
+			*ngIf="startLabel"
+			slot="start"
+			[translate]="startLabel"
+		></div>
+		<div
+			*ngIf="endLabel"
+			slot="end"
+			[translate]="endLabel"
+		></div>
 
-		<ion-icon *ngIf="startIcon" slot="start" [name]="startIcon"></ion-icon>
-		<ion-icon *ngIf="endIcon" slot="end" [name]="endIcon"></ion-icon>
+		<ion-icon
+			*ngIf="startIcon"
+			slot="start"
+			[name]="startIcon"
+		></ion-icon>
+		<ion-icon
+			*ngIf="endIcon"
+			slot="end"
+			[name]="endIcon"
+		></ion-icon>
 	</ion-range>
 </ion-item>
-

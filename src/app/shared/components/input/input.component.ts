@@ -1,18 +1,18 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import AppConstant from "src/app/utilities/app-constant";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import AppConstant from 'src/app/utilities/app-constant';
 
 @Component({
-	selector: "app-input",
-	templateUrl: "./input.component.html",
-	styleUrls: ["./input.component.scss"],
+	selector: 'app-input',
+	templateUrl: './input.component.html',
+	styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
 	@Input() formGroup!: FormGroup;
-	@Input() inputLabel = "";
+	@Input() inputLabel = '';
 	@Input() inputType = AppConstant.inputType.text;
-	@Input() controlName = "";
-	@Input() inputIcon = "";
+	@Input() controlName = '';
+	@Input() inputIcon = '';
 
 	@Output() iconClickEmit = new EventEmitter();
 
@@ -20,4 +20,3 @@ export class InputComponent {
 		this.iconClickEmit.emit();
 	}
 }
-

@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { IonicModule } from "@ionic/angular";
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import { CheckboxComponent } from "./checkbox.component";
+import { CheckboxComponent } from './checkbox.component';
 
-describe("CheckBoxComponent", () => {
+describe('CheckBoxComponent', () => {
 	let component: CheckboxComponent;
 	let fixture: ComponentFixture<CheckboxComponent>;
 
@@ -18,8 +18,7 @@ describe("CheckBoxComponent", () => {
 		fixture.detectChanges();
 	}));
 
-	it("should create", () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 });
-

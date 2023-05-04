@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from "@angular/core";
-import { LanguageService } from "src/app/core/services/language/language.service";
-import AppConstant from "src/app/utilities/app-constant";
+import { Component, EventEmitter, Output } from '@angular/core';
+import { LanguageService } from 'src/app/core/services/language/language.service';
+import AppConstant from 'src/app/utilities/app-constant';
 
 interface Language {
 	name: string;
@@ -8,9 +8,9 @@ interface Language {
 }
 
 @Component({
-	selector: "app-language-list",
-	templateUrl: "./language-list.component.html",
-	styleUrls: ["./language-list.component.scss"],
+	selector: 'app-language-list',
+	templateUrl: './language-list.component.html',
+	styleUrls: ['./language-list.component.scss'],
 })
 export class LanguageSelectListComponent {
 	@Output() buttonEmit = new EventEmitter();
@@ -30,4 +30,3 @@ export class LanguageSelectListComponent {
 		this.buttonEmit.emit();
 	}
 }
-

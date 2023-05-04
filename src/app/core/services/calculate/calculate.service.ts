@@ -1,15 +1,15 @@
-import { Injectable } from "@angular/core";
-import { GeolocationService } from "../../services/geolocation/geolocation.service";
-import AppUtil from "src/app/utilities/app-util";
-import { BehaviorSubject } from "rxjs";
-import AppConstant from "src/app/utilities/app-constant";
-import { CalculatedData } from "../../models/calculate.model";
-import { TimerService } from "../timer/timer.service";
-import { TopSpeedService } from "../top-speed/top-speed.service";
-import { Geolocation } from "../../models/geolocation.model";
-import { DistanceService } from "../distance/distance.service";
-import { DistanceParams } from "../../models/distance.model";
-import { UnitService } from "../unit/unit.service";
+import { Injectable } from '@angular/core';
+import { GeolocationService } from '../../services/geolocation/geolocation.service';
+import AppUtil from 'src/app/utilities/app-util';
+import { BehaviorSubject } from 'rxjs';
+import AppConstant from 'src/app/utilities/app-constant';
+import { CalculatedData } from '../../models/calculate.model';
+import { TimerService } from '../timer/timer.service';
+import { TopSpeedService } from '../top-speed/top-speed.service';
+import { Geolocation } from '../../models/geolocation.model';
+import { DistanceService } from '../distance/distance.service';
+import { DistanceParams } from '../../models/distance.model';
+import { UnitService } from '../unit/unit.service';
 
 interface speedTime {
 	speed: number;
@@ -19,17 +19,17 @@ interface speedTime {
 const VALUE: speedTime[] = [];
 
 @Injectable({
-	providedIn: "root",
+	providedIn: 'root',
 })
 export class CalculateService {
 	calculateData$ = new BehaviorSubject<CalculatedData>({
 		speed: 0,
 		topSpeed: 0,
 		accuracy: 0,
-		altitude: "-.-",
+		altitude: '-.-',
 		totalDistance: 0,
-		tripDistance: "-.-",
-		avgSpeed: "-.-",
+		tripDistance: '-.-',
+		avgSpeed: '-.-',
 	});
 
 	public speed!: number | string;
@@ -148,52 +148,46 @@ export class CalculateService {
 		if (this.rawSpeed != null) {
 			this.speed = Math.round(this.rawSpeed * 3.6);
 		} else {
-			this.speed = "-";
+			this.speed = '-';
 		}
 
 		if (this.rawTopSpeed != null) {
 			this.topSpeed = Math.round(this.rawTopSpeed * 3.6);
 		} else {
-			this.topSpeed = "-";
+			this.topSpeed = '-';
 		}
 
 		if (this.rawAccuracy != null) {
 			this.accuracy = Math.round(this.rawAccuracy);
 		} else {
-			this.accuracy = "-";
+			this.accuracy = '-';
 		}
 
 		if (this.rawAltitude != null) {
 			this.altitude = AppUtil.toFixedNoRounding(this.rawAltitude, 1);
 		} else {
-			this.altitude = "-.-";
+			this.altitude = '-.-';
 		}
 
 		if (this.distances.totalDistance >= 0) {
 			this.totalDistance = Math.trunc(this.distances.totalDistance / 1000);
 		} else {
-			this.totalDistance = "-.-";
+			this.totalDistance = '-.-';
 		}
 
 		if (this.distances.tripDistance >= 0) {
-			this.tripDistance = AppUtil.toFixedNoRounding(
-				this.distances.tripDistance / 1000,
-				1
-			);
+			this.tripDistance = AppUtil.toFixedNoRounding(this.distances.tripDistance / 1000, 1);
 		} else {
-			this.tripDistance = "-.-";
+			this.tripDistance = '-.-';
 		}
 
-		if (
-			this.distances.avgSpeedTotalDistance >= 0 &&
-			this.avgSpeedTotalTime > 0
-		) {
+		if (this.distances.avgSpeedTotalDistance >= 0 && this.avgSpeedTotalTime > 0) {
 			this.avgSpeed = AppUtil.toFixedNoRounding(
 				(this.distances.avgSpeedTotalDistance / this.avgSpeedTotalTime) * 3.6,
 				1
 			);
 		} else {
-			this.avgSpeed = "-.-";
+			this.avgSpeed = '-.-';
 		}
 
 		this.calculateData$.next({
@@ -212,36 +206,31 @@ export class CalculateService {
 		if (this.rawSpeed != null) {
 			this.speed = Math.round(this.rawSpeed * 2.23693629);
 		} else {
-			this.speed = "-";
+			this.speed = '-';
 		}
 
 		if (this.rawTopSpeed != null) {
 			this.topSpeed = Math.round(this.rawTopSpeed * 2.23693629);
 		} else {
-			this.topSpeed = "-";
+			this.topSpeed = '-';
 		}
 
 		if (this.rawAccuracy != null) {
 			this.accuracy = Math.round(this.rawAccuracy * 3.2808399);
 		} else {
-			this.accuracy = "-";
+			this.accuracy = '-';
 		}
 
 		if (this.rawAltitude != null) {
-			this.altitude = AppUtil.toFixedNoRounding(
-				this.rawAltitude * 3.2808399,
-				1
-			);
+			this.altitude = AppUtil.toFixedNoRounding(this.rawAltitude * 3.2808399, 1);
 		} else {
-			this.altitude = "-.-";
+			this.altitude = '-.-';
 		}
 
 		if (this.distances.totalDistance >= 0) {
-			this.totalDistance = Math.trunc(
-				this.distances.totalDistance * 0.000621371192
-			);
+			this.totalDistance = Math.trunc(this.distances.totalDistance * 0.000621371192);
 		} else {
-			this.totalDistance = "-.-";
+			this.totalDistance = '-.-';
 		}
 
 		if (this.distances.tripDistance >= 0) {
@@ -250,20 +239,16 @@ export class CalculateService {
 				1
 			);
 		} else {
-			this.tripDistance = "-.-";
+			this.tripDistance = '-.-';
 		}
 
-		if (
-			this.distances.avgSpeedTotalDistance >= 0 &&
-			this.avgSpeedTotalTime > 0
-		) {
+		if (this.distances.avgSpeedTotalDistance >= 0 && this.avgSpeedTotalTime > 0) {
 			this.avgSpeed = AppUtil.toFixedNoRounding(
-				(this.distances.avgSpeedTotalDistance / this.avgSpeedTotalTime) *
-					2.23693629,
+				(this.distances.avgSpeedTotalDistance / this.avgSpeedTotalTime) * 2.23693629,
 				1
 			);
 		} else {
-			this.avgSpeed = "-.-";
+			this.avgSpeed = '-.-';
 		}
 
 		this.calculateData$.next({

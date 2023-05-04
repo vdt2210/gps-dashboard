@@ -1,5 +1,12 @@
-<ion-list [inset]="true" lines="full" class="no-margin-list">
-	<ion-item class="checkbox-item" *ngFor="let item of listItems">
+<ion-list
+	[inset]="true"
+	lines="full"
+	class="no-margin-list"
+>
+	<ion-item
+		class="checkbox-item"
+		*ngFor="let item of listItems"
+	>
 		<ion-checkbox
 			[value]="item.name"
 			[translate]="item.name"
@@ -7,4 +14,3 @@
 		></ion-checkbox>
 	</ion-item>
 </ion-list>
-

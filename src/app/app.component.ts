@@ -1,25 +1,20 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import {
-	AlertController,
-	ModalController,
-	PopoverController,
-} from "@ionic/angular";
-import { App } from "@capacitor/app";
-import { GeolocationService } from "./core/services/geolocation/geolocation.service";
-import { LanguageService } from "./core/services/language/language.service";
-import { SplashScreen } from "@capacitor/splash-screen";
-import { Router } from "@angular/router";
-import { AppRoutes } from "./utilities/app-routes";
-import { Location } from "@angular/common";
-import { CalculateService } from "./core/services/calculate/calculate.service";
-import { TimerService } from "./core/services/timer/timer.service";
-import { KeepAwake } from "@capacitor-community/keep-awake";
-import { BackgroundTask } from "@capawesome/capacitor-background-task";
+import { Component, OnInit } from '@angular/core';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { App } from '@capacitor/app';
+import { GeolocationService } from './core/services/geolocation/geolocation.service';
+import { LanguageService } from './core/services/language/language.service';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { Router } from '@angular/router';
+import { AppRoutes } from './utilities/app-routes';
+import { Location } from '@angular/common';
+import { CalculateService } from './core/services/calculate/calculate.service';
+import { TimerService } from './core/services/timer/timer.service';
+import { KeepAwake } from '@capacitor-community/keep-awake';
 
 @Component({
-	selector: "app-root",
-	templateUrl: "app.component.html",
-	styleUrls: ["app.component.scss"],
+	selector: 'app-root',
+	templateUrl: 'app.component.html',
+	styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
 	constructor(
@@ -40,23 +35,13 @@ export class AppComponent implements OnInit {
 
 	async ngOnInit(): Promise<void> {
 		this.keepScreenOn();
-		// let taskId: string;
-		App.addListener("appStateChange", async ({ isActive }) => {
+		App.addListener('appStateChange', async ({ isActive }) => {
 			if (isActive) {
 				this.keepScreenOn();
-				// if (taskId) {
-				// 	BackgroundTask.finish({ taskId });
-				// }
+
 				return;
 			}
 			KeepAwake.allowSleep();
-
-			// taskId = await BackgroundTask.beforeExit(async () => {
-			// 	let i = 0;
-			// 	setInterval(() => {
-			// 		console.log(i++);
-			// 	}, 1000);
-			// });
 		});
 	}
 
@@ -75,7 +60,7 @@ export class AppComponent implements OnInit {
 	}
 
 	private hardwareBackButton() {
-		App.addListener("backButton", async () => {
+		App.addListener('backButton', async () => {
 			const overlay =
 				(await this.modalCtrl.getTop()) ||
 				(await this.alertCtrl.getTop()) ||
@@ -91,4 +76,3 @@ export class AppComponent implements OnInit {
 		});
 	}
 }
-

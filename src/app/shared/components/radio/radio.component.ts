@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 interface Item {
 	name: string;
@@ -6,12 +6,12 @@ interface Item {
 }
 
 @Component({
-	selector: "app-radio",
-	templateUrl: "./radio.component.html",
-	styleUrls: ["./radio.component.scss"],
+	selector: 'app-radio',
+	templateUrl: './radio.component.html',
+	styleUrls: ['./radio.component.scss'],
 })
 export class RadioComponent {
-	@Input() selectedValue = "";
+	@Input() selectedValue = '';
 	@Input() listItems: Item[] = [];
 
 	@Output() changeEmit = new EventEmitter();
@@ -20,4 +20,3 @@ export class RadioComponent {
 		this.changeEmit.emit(ev.detail.value);
 	}
 }
-

@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { IonicModule } from "@ionic/angular";
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import { LanguageSelectListComponent } from "./language-list.component";
+import { LanguageSelectListComponent } from './language-list.component';
 
-describe("LoginModalComponent", () => {
+describe('LoginModalComponent', () => {
 	let component: LanguageSelectListComponent;
 	let fixture: ComponentFixture<LanguageSelectListComponent>;
 
@@ -18,8 +18,7 @@ describe("LoginModalComponent", () => {
 		fixture.detectChanges();
 	}));
 
-	it("should create", () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 });
-

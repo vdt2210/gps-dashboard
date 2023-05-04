@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { IonicModule } from "@ionic/angular";
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import { IconOnlyButtonComponent } from "./icon-only-button.component";
+import { IconOnlyButtonComponent } from './icon-only-button.component';
 
-describe("IconOnlyButtonComponent", () => {
+describe('IconOnlyButtonComponent', () => {
 	let component: IconOnlyButtonComponent;
 	let fixture: ComponentFixture<IconOnlyButtonComponent>;
 
@@ -18,8 +18,7 @@ describe("IconOnlyButtonComponent", () => {
 		fixture.detectChanges();
 	}));
 
-	it("should create", () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 });
-

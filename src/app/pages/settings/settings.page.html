@@ -28,7 +28,10 @@
 	</ion-row>
 </ion-content>
 
-<ion-footer [translucent]="true" class="ion-no-border ion-text-center">
+<ion-footer
+	[translucent]="true"
+	class="ion-no-border ion-text-center"
+>
 	<ion-toolbar>
 		<div class="version-text">
 			<ion-text
@@ -59,17 +62,25 @@
 				(buttonEmit)="modalButtonAction($event)"
 			/>
 
-			<app-language-list *ngIf="isLanguage" (buttonEmit)="onModalDismiss()" />
+			<app-language-list
+				*ngIf="isLanguage"
+				(buttonEmit)="onModalDismiss()"
+			/>
 
-			<app-unit-list *ngIf="isUnit" (buttonEmit)="onModalDismiss()" />
+			<app-unit-list
+				*ngIf="isUnit"
+				(buttonEmit)="onModalDismiss()"
+			/>
 
 			<app-speed-correction
 				*ngIf="isSpeedCorrection"
 				(buttonEmit)="onModalDismiss()"
 			/>
 
-			<app-clear-data *ngIf="isClearData" (buttonEmit)="onModalDismiss()" />
+			<app-clear-data
+				*ngIf="isClearData"
+				(buttonEmit)="onModalDismiss()"
+			/>
 		</div>
 	</ng-template>
 </ion-modal>
-
