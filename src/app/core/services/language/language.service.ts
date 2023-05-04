@@ -13,7 +13,7 @@ export class LanguageService {
 	public async setInitialAppLanguage() {
 		await this.storageService
 			.get(AppConstant.storageKeys.language)
-			.then(async val => {
+			.then(async (val) => {
 				if (val) {
 					this.translateService.use(val);
 					document.documentElement.lang = val;
@@ -21,7 +21,7 @@ export class LanguageService {
 					this.setLanguage(this.getSupportedLanguage((await Device.getLanguageCode()).value));
 				}
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.error(err);
 			});
 	}

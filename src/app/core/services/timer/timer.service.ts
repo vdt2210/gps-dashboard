@@ -20,23 +20,23 @@ export class TimerService {
 	public async setInitialTotalTime() {
 		await this.storageService
 			.get(AppConstant.storageKeys.totalTime)
-			.then(val => {
+			.then((val) => {
 				if (val) {
 					this.formatTime(val);
 				} else {
 					this.saveTotalTime(0);
 				}
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.error(err);
 			});
 
 		await this.storageService
 			.get(AppConstant.storageKeys.avgSpeedTotalTime)
-			.then(val => {
+			.then((val) => {
 				this.avgSpeedTotalTime$.next(val || 0);
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.error(err);
 			});
 	}
@@ -88,7 +88,7 @@ export class TimerService {
 		const minutes = Math.floor(totalTime / 60) % 60;
 		const seconds = totalTime % 60;
 		this.totalTime$.next(
-			[hours, minutes, seconds].map(n => n.toString().padStart(2, '0')).join(':')
+			[hours, minutes, seconds].map((n) => n.toString().padStart(2, '0')).join(':')
 		);
 	}
 }

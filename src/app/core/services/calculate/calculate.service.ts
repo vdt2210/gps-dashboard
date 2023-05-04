@@ -129,7 +129,7 @@ export class CalculateService {
 	}
 
 	private updateUnitSystem() {
-		this.unitService.getUnit().subscribe(data => {
+		this.unitService.getUnit().subscribe((data) => {
 			switch (data.value) {
 				case AppConstant.unit.imperial.value:
 					this.imperialUnit();

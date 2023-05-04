@@ -8,12 +8,13 @@
 				"project": ["tsconfig.json"],
 				"createDefaultProgram": true
 			},
-			"plugins": ["@typescript-eslint"],
+			"plugins": ["@typescript-eslint", "prettier"],
 			"extends": [
 				"plugin:@angular-eslint/recommended",
 				"plugin:@angular-eslint/template/process-inline-templates",
 				"eslint:recommended",
-				"plugin:@typescript-eslint/recommended"
+				"plugin:@typescript-eslint/recommended",
+				"plugin:prettier/recommended"
 			],
 			"rules": {
 				"@angular-eslint/component-class-suffix": [
@@ -39,7 +40,13 @@
 					}
 				],
 				"@typescript-eslint/no-explicit-any": "off",
-				"no-mixed-spaces-and-tabs": ["error", "smart-tabs"]
+				"no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+				"prettier/prettier": [
+					"error",
+					{
+						"arrowParens": "always"
+					}
+				]
 			}
 		},
 		{

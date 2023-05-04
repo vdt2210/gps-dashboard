@@ -6,11 +6,12 @@ const routes: Routes = [
 	{
 		path: AppRoutes.dashboard.path,
 		loadChildren: () =>
-			import('./pages/dashboard/dashboard.module').then(m => m.DashboardPageModule),
+			import('./pages/dashboard/dashboard.module').then((m) => m.DashboardPageModule),
 	},
 	{
 		path: AppRoutes.settings.path,
-		loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule),
+		loadChildren: () =>
+			import('./pages/settings/settings.module').then((m) => m.SettingsPageModule),
 	},
 	{
 		path: '',

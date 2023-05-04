@@ -17,10 +17,10 @@ export class TopSpeedService {
 	private async setInitialTopSpeed(): Promise<void> {
 		await this.storageService
 			.get(AppConstant.storageKeys.topSpeed)
-			.then(val => {
+			.then((val) => {
 				this.topSpeed$.next(val);
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.error(err);
 			});
 	}

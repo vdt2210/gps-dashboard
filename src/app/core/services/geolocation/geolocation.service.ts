@@ -50,7 +50,7 @@ export class GeolocationService {
 		this.setInitialSpeedCorrection();
 
 		BackgroundGeolocation.addWatcher(this.options, this.handleWatcher.bind(this)).then(
-			watcherId => (this.watcherId = watcherId)
+			(watcherId) => (this.watcherId = watcherId)
 		);
 	}
 
@@ -98,7 +98,7 @@ export class GeolocationService {
 	}
 
 	public async setInitialSpeedCorrection(): Promise<void> {
-		await this.storageService.get(AppConstant.storageKeys.speedCorrection).then(val => {
+		await this.storageService.get(AppConstant.storageKeys.speedCorrection).then((val) => {
 			if (val) {
 				this.speedCorrection$.next(val);
 			} else {

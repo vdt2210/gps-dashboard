@@ -50,22 +50,22 @@ export class DashboardPage implements OnInit {
 	) {}
 
 	public async ngOnInit() {
-		this.timerService.getTotalTime().subscribe(data => {
+		this.timerService.getTotalTime().subscribe((data) => {
 			this.totalTime = data;
 		});
 
-		this.geolocationService.getLocation().subscribe(data => {
+		this.geolocationService.getLocation().subscribe((data) => {
 			console.log(JSON.stringify(data));
 
 			this.location = data;
 			this.updateGpsStatusIcon(data.gpsStatus);
 		});
 
-		this.calculateService.getCalculateData().subscribe(data => {
+		this.calculateService.getCalculateData().subscribe((data) => {
 			this.calculatedData = data;
 		});
 
-		this.unitService.getUnit().subscribe(data => {
+		this.unitService.getUnit().subscribe((data) => {
 			this.unitData = data;
 		});
 	}

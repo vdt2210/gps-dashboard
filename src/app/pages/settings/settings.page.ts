@@ -49,7 +49,7 @@ export class SettingsPage implements OnInit {
 	constructor(private geolocationService: GeolocationService) {
 		this.geolocationService
 			.getSpeedCorrection()
-			.subscribe(val => (this.settingsList[3].value = val));
+			.subscribe((val) => (this.settingsList[3].value = val));
 	}
 
 	async ngOnInit(): Promise<void> {

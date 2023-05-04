@@ -28,15 +28,15 @@ export class ClearDataComponent {
 
 	public onSelect(ev: { value: string; checked: boolean }) {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		this.clearableKeys.find(val => val.name === ev.value)!.isChecked = ev.checked;
+		this.clearableKeys.find((val) => val.name === ev.value)!.isChecked = ev.checked;
 	}
 
 	public isHaveChecked() {
-		return this.clearableKeys.filter(val => val.isChecked).length > 0;
+		return this.clearableKeys.filter((val) => val.isChecked).length > 0;
 	}
 
 	public onConfirm() {
-		this.clearableKeys.forEach(val => {
+		this.clearableKeys.forEach((val) => {
 			if (val.isChecked) {
 				switch (val.name) {
 					case 'averageSpeed':

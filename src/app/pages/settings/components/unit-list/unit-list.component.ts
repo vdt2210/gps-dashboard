@@ -17,7 +17,7 @@ export class UnitListComponent {
 
 	public appConstant = AppConstant;
 	public selectedUnit: string = this.unitService.getUnit().getValue().value;
-	public unitsList: Unit[] = Object.values(AppConstant.unit).map(el => ({
+	public unitsList: Unit[] = Object.values(AppConstant.unit).map((el) => ({
 		name: el.value,
 		value: el.value,
 	}));
