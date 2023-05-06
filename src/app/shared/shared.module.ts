@@ -16,14 +16,6 @@ import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
 
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    TranslateModule,
-  ],
   declarations: [
     ButtonCardComponent,
     InputComponent,
@@ -49,6 +41,14 @@ import { RangeComponent } from './components/range/range.component';
     RadioComponent,
     RangeComponent,
     CheckboxComponent,
+  ],
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    TranslateModule,
   ],
 })
 export class SharedModule {}

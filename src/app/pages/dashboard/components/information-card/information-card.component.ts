@@ -10,8 +10,8 @@ interface data {
 
 @Component({
   selector: 'app-information-card',
-  templateUrl: './information-card.component.html',
   styleUrls: ['./information-card.component.scss'],
+  templateUrl: './information-card.component.html',
 })
 export class InformationCardComponent implements OnChanges {
   @Input() topSpeed: number | string = '-.-';
@@ -21,10 +21,10 @@ export class InformationCardComponent implements OnChanges {
   @Input() latitude: number | string = '-.-';
   @Input() longitude: number | string = '-.-';
   @Input() unitData: UnitParams = {
-    value: AppConstant.unit.metric.value,
-    speedUnit: AppConstant.unit.metric.speedUnit,
     distanceUnit: AppConstant.unit.metric.distanceUnit,
     lengthUnit: AppConstant.unit.metric.lengthUnit,
+    speedUnit: AppConstant.unit.metric.speedUnit,
+    value: AppConstant.unit.metric.value,
   };
 
   public dataList: data[] = [];
@@ -33,23 +33,23 @@ export class InformationCardComponent implements OnChanges {
     this.dataList = [
       {
         label: 'topSpeed',
-        value: this.topSpeed,
         unit: this.unitData.speedUnit,
+        value: this.topSpeed,
       },
       {
         label: 'averageSpeed',
-        value: this.avgSpeed,
         unit: this.unitData.speedUnit,
+        value: this.avgSpeed,
       },
       {
         label: 'accuracy',
-        value: this.accuracy,
         unit: this.unitData.lengthUnit,
+        value: this.accuracy,
       },
       {
         label: 'altitude',
-        value: this.altitude,
         unit: this.unitData.lengthUnit,
+        value: this.altitude,
       },
       {
         label: 'latitude',

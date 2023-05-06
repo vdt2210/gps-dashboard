@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-icon-only-button',
-  templateUrl: './icon-only-button.component.html',
   styleUrls: ['./icon-only-button.component.scss'],
+  templateUrl: './icon-only-button.component.html',
 })
 export class IconOnlyButtonComponent {
   @Input() icon = '';

@@ -3,8 +3,8 @@ import AppConstant from 'src/app/utilities/app-constant';
 
 @Component({
   selector: 'app-button',
-  templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
+  templateUrl: './button.component.html',
 })
 export class ButtonComponent {
   @Input() expand = '';

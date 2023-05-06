@@ -4,8 +4,8 @@ import AppConstant from 'src/app/utilities/app-constant';
 
 @Component({
   selector: 'app-speed-correction',
-  templateUrl: './speed-correction.component.html',
   styleUrls: ['./speed-correction.component.scss'],
+  templateUrl: './speed-correction.component.html',
 })
 export class SpeedCorrectionComponent {
   @Output() buttonEmit = new EventEmitter();

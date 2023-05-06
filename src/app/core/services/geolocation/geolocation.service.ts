@@ -18,23 +18,23 @@ export class GeolocationService {
   private watcherId = '';
   private speedCorrection$ = new BehaviorSubject<number>(0);
   private location$ = new BehaviorSubject<Geolocation>({
-    latitude: '-.-',
-    longitude: '-.-',
     accuracy: null,
     altitude: null,
     altitudeAccuracy: null,
+    bearing: null,
+    gpsStatus: '',
+    latitude: '-.-',
+    longitude: '-.-',
     simulated: false,
     speed: null,
-    bearing: null,
     time: null,
-    gpsStatus: '',
   });
   private options = {
     backgroundMessage: 'Cancel to prevent battery drain.',
     backgroundTitle: 'Tracking You.',
+    distanceFilter: 0,
     requestPermissions: true,
     stale: false,
-    distanceFilter: 0,
   };
   private lastTimestamp = 0;
 

@@ -4,8 +4,8 @@ import AppConstant from 'src/app/utilities/app-constant';
 
 @Component({
   selector: 'app-input',
-  templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
+  templateUrl: './input.component.html',
 })
 export class InputComponent {
   @Input() formGroup!: FormGroup;

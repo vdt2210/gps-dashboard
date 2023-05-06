@@ -13,10 +13,10 @@ export class UnitService {
 
   constructor(private storageService: StorageService) {
     this.unitParams$ = new BehaviorSubject<UnitParams>({
-      value: '',
+      distanceUnit: '',
       lengthUnit: '',
       speedUnit: '',
-      distanceUnit: '',
+      value: '',
     });
 
     this.setInitialUnit();

@@ -24,13 +24,13 @@ const VALUE: speedTime[] = [];
 })
 export class CalculateService {
   calculateData$ = new BehaviorSubject<CalculatedData>({
-    speed: 0,
-    topSpeed: 0,
     accuracy: 0,
     altitude: '-.-',
+    avgSpeed: '-.-',
+    speed: 0,
+    topSpeed: 0,
     totalDistance: 0,
     tripDistance: '-.-',
-    avgSpeed: '-.-',
   });
 
   public speed!: number | string;
@@ -51,9 +51,9 @@ export class CalculateService {
   private value = [...VALUE];
 
   private distances: DistanceParams = {
+    avgSpeedTotalDistance: 0,
     totalDistance: 0,
     tripDistance: 0,
-    avgSpeedTotalDistance: 0,
   };
 
   constructor(
@@ -192,13 +192,13 @@ export class CalculateService {
     }
 
     this.calculateData$.next({
-      speed: this.speed,
-      topSpeed: this.topSpeed,
       accuracy: this.accuracy,
       altitude: this.altitude,
+      avgSpeed: this.avgSpeed,
+      speed: this.speed,
+      topSpeed: this.topSpeed,
       totalDistance: this.totalDistance,
       tripDistance: this.tripDistance,
-      avgSpeed: this.avgSpeed,
     });
   }
 
@@ -253,13 +253,13 @@ export class CalculateService {
     }
 
     this.calculateData$.next({
-      speed: this.speed,
-      topSpeed: this.topSpeed,
       accuracy: this.accuracy,
       altitude: this.altitude,
+      avgSpeed: this.avgSpeed,
+      speed: this.speed,
+      topSpeed: this.topSpeed,
       totalDistance: this.totalDistance,
       tripDistance: this.tripDistance,
-      avgSpeed: this.avgSpeed,
     });
   }
 }

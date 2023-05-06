@@ -12,32 +12,32 @@ import { AppRoutes } from 'src/app/utilities/app-routes';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'dashboard.page.html',
   styleUrls: ['dashboard.page.scss'],
+  templateUrl: 'dashboard.page.html',
 })
 export class DashboardPage implements OnInit {
   public totalTime = '00:00:00';
   public location: GeolocationDashboard = {
+    gpsStatus: '',
     latitude: '-.-',
     longitude: '-.-',
-    gpsStatus: '',
   };
 
   public calculatedData: CalculatedData = {
-    speed: '-',
-    topSpeed: '-',
     accuracy: '-',
     altitude: '-.-',
+    avgSpeed: '-.-',
+    speed: '-',
+    topSpeed: '-',
     totalDistance: '-',
     tripDistance: '-.-',
-    avgSpeed: '-.-',
   };
 
   public unitData: UnitParams = {
-    value: '',
-    speedUnit: '',
     distanceUnit: '',
     lengthUnit: '',
+    speedUnit: '',
+    value: '',
   };
 
   constructor(

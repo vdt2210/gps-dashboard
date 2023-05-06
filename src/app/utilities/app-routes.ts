@@ -1,4 +1,4 @@
 export const AppRoutes = {
-  dashboard: { path: 'dashboard', name: 'dashboard' },
-  settings: { path: 'settings', name: 'settings' },
+  dashboard: { name: 'dashboard', path: 'dashboard' },
+  settings: { name: 'settings', path: 'settings' },
 };

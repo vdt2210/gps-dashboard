@@ -9,7 +9,7 @@ import { DashboardPage } from './dashboard.page';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
-  imports: [IonicModule, CommonModule, DashboardRoutingModule, TranslateModule, SharedModule],
   declarations: [DashboardPage, InformationCardComponent],
+  imports: [IonicModule, CommonModule, DashboardRoutingModule, TranslateModule, SharedModule],
 })
 export class DashboardPageModule {}

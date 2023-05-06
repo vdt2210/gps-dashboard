@@ -1,14 +1,10 @@
 const AppUtil = {
-  toFixedNoRounding(value: number, n: number) {
-    const reg = new RegExp('^-?\\d+(?:\\.\\d{0,' + n + '})?', 'g');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const a = value.toString().match(reg)![0];
-    const dot = a.indexOf('.');
-    if (dot === -1) {
-      return a + '.' + '0'.repeat(n);
-    }
-    const b = n - (a.length - dot) + 1;
-    return b > 0 ? a + '0'.repeat(b) : a;
+  calculateSpeed(speed: number, correction: number) {
+    speed =
+      speed && correction
+        ? parseFloat(this.toFixedNoRounding(speed * (1 + correction / 100), 1))
+        : speed;
+    return speed;
   },
 
   decodeJWT(token: string) {
@@ -27,12 +23,16 @@ const AppUtil = {
     return JSON.parse(jsonPayload);
   },
 
-  calculateSpeed(speed: number, correction: number) {
-    speed =
-      speed && correction
-        ? parseFloat(this.toFixedNoRounding(speed * (1 + correction / 100), 1))
-        : speed;
-    return speed;
+  toFixedNoRounding(value: number, n: number) {
+    const reg = new RegExp('^-?\\d+(?:\\.\\d{0,' + n + '})?', 'g');
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const a = value.toString().match(reg)![0];
+    const dot = a.indexOf('.');
+    if (dot === -1) {
+      return a + '.' + '0'.repeat(n);
+    }
+    const b = n - (a.length - dot) + 1;
+    return b > 0 ? a + '0'.repeat(b) : a;
   },
 };
 

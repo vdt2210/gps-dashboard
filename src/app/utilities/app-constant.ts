@@ -1,4 +1,46 @@
 const AppConstant = Object.freeze({
+  buttonExpand: {
+    block: 'block',
+    full: 'full',
+  },
+
+  buttonType: {
+    button: 'button',
+    reset: 'reset',
+    submit: 'submit',
+  },
+
+  color: {
+    danger: 'danger',
+    dark: 'dark',
+    light: 'light',
+    medium: 'medium',
+    primary: 'primary',
+    secondary: 'secondary',
+    success: 'success',
+    tertiary: 'tertiary',
+    warning: 'warning',
+  },
+
+  fill: {
+    clear: 'clear',
+    default: 'default',
+    outline: 'outline',
+    solid: 'solid',
+  },
+
+  inputType: {
+    email: 'email',
+    number: 'number',
+    password: 'password',
+    text: 'text',
+  },
+
+  languages: {
+    en: { name: 'English', value: 'en' },
+    vi: { name: 'Tiếng Việt', value: 'vi' },
+  },
+
   storageKeys: {
     avgSpeedTotalDistance: 'avgSpeedTotalDistance',
     avgSpeedTotalTime: 'avgSpeedTotalTime',
@@ -19,62 +61,19 @@ const AppConstant = Object.freeze({
   // 	"avgSpeedTotalTime",
   // 	"topSpeed",
   // ],
-
   unit: {
-    metric: {
-      value: 'metric',
-      speedUnit: 'km/h',
-      distanceUnit: 'km',
-      lengthUnit: 'm',
-    },
     imperial: {
-      value: 'imperial',
-      speedUnit: 'mph',
       distanceUnit: 'mi',
       lengthUnit: 'ft',
+      speedUnit: 'mph',
+      value: 'imperial',
     },
-  },
-
-  languages: {
-    en: { name: 'English', value: 'en' },
-    vi: { name: 'Tiếng Việt', value: 'vi' },
-  },
-
-  inputType: {
-    text: 'text',
-    number: 'number',
-    email: 'email',
-    password: 'password',
-  },
-
-  buttonType: {
-    button: 'button',
-    submit: 'submit',
-    reset: 'reset',
-  },
-
-  buttonExpand: {
-    block: 'block',
-    full: 'full',
-  },
-
-  fill: {
-    clear: 'clear',
-    default: 'default',
-    outline: 'outline',
-    solid: 'solid',
-  },
-
-  color: {
-    danger: 'danger',
-    dark: 'dark',
-    light: 'light',
-    medium: 'medium',
-    primary: 'primary',
-    secondary: 'secondary',
-    success: 'success',
-    tertiary: 'tertiary',
-    warning: 'warning',
+    metric: {
+      distanceUnit: 'km',
+      lengthUnit: 'm',
+      speedUnit: 'km/h',
+      value: 'metric',
+    },
   },
 });
 

@@ -13,9 +13,9 @@ export class DistanceService {
 
   constructor(private storageService: StorageService) {
     this.distanceParams$ = new BehaviorSubject<DistanceParams>({
+      avgSpeedTotalDistance: 0,
       totalDistance: 0,
       tripDistance: 0,
-      avgSpeedTotalDistance: 0,
     });
     this.setInitialDistance();
   }
@@ -30,11 +30,11 @@ export class DistanceService {
     }
 
     this.distanceParams$.next({
-      totalDistance: await this.storageService.get(AppConstant.storageKeys.totalDistance),
-      tripDistance: await this.storageService.get(AppConstant.storageKeys.tripDistance),
       avgSpeedTotalDistance: await this.storageService.get(
         AppConstant.storageKeys.avgSpeedTotalDistance
       ),
+      totalDistance: await this.storageService.get(AppConstant.storageKeys.totalDistance),
+      tripDistance: await this.storageService.get(AppConstant.storageKeys.tripDistance),
     });
   }
 
@@ -69,9 +69,9 @@ export class DistanceService {
     );
 
     this.distanceParams$.next({
+      avgSpeedTotalDistance: newAvgSpeedTotalDistance,
       totalDistance: newTotalDistance,
       tripDistance: newTripDistance,
-      avgSpeedTotalDistance: newAvgSpeedTotalDistance,
     });
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { App } from '@capacitor/app';
+import { authService } from 'src/app/core/services/auth/auth.service';
 import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
 import { AppRoutes } from 'src/app/utilities/app-routes';
 
@@ -12,33 +13,34 @@ interface SettingModel {
 
 @Component({
   selector: 'app-settings',
-  templateUrl: 'settings.page.html',
   styleUrls: ['settings.page.scss'],
+  templateUrl: 'settings.page.html',
 })
 export class SettingsPage implements OnInit {
   public appRoutes = AppRoutes;
 
   public settingsList: SettingModel[] = [
-    { label: 'account', icon: 'person-outline', action: 'account' },
-    { label: 'language', icon: 'language-outline', action: 'language' },
-    { label: 'unit', icon: 'speedometer-outline', action: 'unit' },
+    { action: 'account', icon: 'person-outline', label: 'account' },
+    { action: 'language', icon: 'language-outline', label: 'language' },
+    { action: 'unit', icon: 'speedometer-outline', label: 'unit' },
     {
-      label: 'speedCorrection',
-      icon: 'speedometer-outline',
-      value: 0,
       action: 'speedCorrection',
+      icon: 'speedometer-outline',
+      label: 'speedCorrection',
+      value: 0,
     },
-    { label: 'clearData', icon: 'trash-outline', action: 'clearData' },
+    { action: 'clearData', icon: 'trash-outline', label: 'clearData' },
     {
-      label: 'checkForUpdate',
-      icon: 'download-outline',
       action: 'checkForUpdate',
+      icon: 'download-outline',
+      label: 'checkForUpdate',
     },
   ];
 
   public appVersion = '-';
 
   public isModalOpen = false;
+  public isAccount = false;
   public isLogin = false;
   public isSignUp = false;
   public isLanguage = false;
@@ -46,7 +48,7 @@ export class SettingsPage implements OnInit {
   public isSpeedCorrection = false;
   public isClearData = false;
 
-  constructor(private geolocationService: GeolocationService) {
+  constructor(private geolocationService: GeolocationService, private authService: authService) {
     this.geolocationService
       .getSpeedCorrection()
       .subscribe((val) => (this.settingsList[3].value = val));
@@ -59,8 +61,12 @@ export class SettingsPage implements OnInit {
   public onClickCard(action: string) {
     switch (action) {
       case 'account':
-        //TODO check if logged in show account detail
-        this.isLogin = true;
+        if (this.authService.currentUser) {
+          this.isAccount = true;
+        } else {
+          this.isLogin = true;
+        }
+
         this.isModalOpen = true;
         break;
       case 'language':
@@ -86,6 +92,7 @@ export class SettingsPage implements OnInit {
 
   public onModalDismiss() {
     this.isModalOpen = false;
+    this.isAccount = false;
     this.isLogin = false;
     this.isSignUp = false;
     this.isLanguage = false;
@@ -98,12 +105,20 @@ export class SettingsPage implements OnInit {
     switch (action) {
       case 'signUp':
         this.isLogin = false;
+        this.isAccount = false;
         this.isSignUp = true;
         break;
 
       case 'login':
         this.isSignUp = false;
+        this.isAccount = false;
         this.isLogin = true;
+        break;
+
+      case 'account':
+        this.isLogin = false;
+        this.isSignUp = false;
+        this.isAccount = true;
         break;
 
       default:

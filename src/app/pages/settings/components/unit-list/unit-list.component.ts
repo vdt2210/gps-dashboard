@@ -9,8 +9,8 @@ interface Unit {
 
 @Component({
   selector: 'app-unit-list',
-  templateUrl: './unit-list.component.html',
   styleUrls: ['./unit-list.component.scss'],
+  templateUrl: './unit-list.component.html',
 })
 export class UnitListComponent {
   @Output() buttonEmit = new EventEmitter();
