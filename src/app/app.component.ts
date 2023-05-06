@@ -1,15 +1,16 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { App } from '@capacitor/app';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { KeepAwake } from '@capacitor-community/keep-awake';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+
+import { CalculateService } from './core/services/calculate/calculate.service';
 import { GeolocationService } from './core/services/geolocation/geolocation.service';
 import { LanguageService } from './core/services/language/language.service';
-import { SplashScreen } from '@capacitor/splash-screen';
-import { Router } from '@angular/router';
-import { AppRoutes } from './utilities/app-routes';
-import { Location } from '@angular/common';
-import { CalculateService } from './core/services/calculate/calculate.service';
 import { TimerService } from './core/services/timer/timer.service';
-import { KeepAwake } from '@capacitor-community/keep-awake';
+import { AppRoutes } from './utilities/app-routes';
 
 @Component({
   selector: 'app-root',
