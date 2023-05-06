@@ -4,21 +4,21 @@ import { IonicModule } from '@ionic/angular';
 import { SignUpFormComponent } from './sign-up-form.component';
 
 describe('SignUpModalComponent', () => {
-	let component: SignUpFormComponent;
-	let fixture: ComponentFixture<SignUpFormComponent>;
+  let component: SignUpFormComponent;
+  let fixture: ComponentFixture<SignUpFormComponent>;
 
-	beforeEach(waitForAsync(() => {
-		TestBed.configureTestingModule({
-			declarations: [SignUpFormComponent],
-			imports: [IonicModule.forRoot()],
-		}).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [SignUpFormComponent],
+      imports: [IonicModule.forRoot()],
+    }).compileComponents();
 
-		fixture = TestBed.createComponent(SignUpFormComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	}));
+    fixture = TestBed.createComponent(SignUpFormComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

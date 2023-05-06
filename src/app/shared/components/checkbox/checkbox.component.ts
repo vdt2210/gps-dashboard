@@ -1,21 +1,21 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 interface Item {
-	name: string;
-	isChecked: boolean;
+  name: string;
+  isChecked: boolean;
 }
 
 @Component({
-	selector: 'app-checkbox',
-	templateUrl: './checkbox.component.html',
-	styleUrls: ['./checkbox.component.scss'],
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
 })
 export class CheckboxComponent {
-	@Input() listItems: Item[] = [];
+  @Input() listItems: Item[] = [];
 
-	@Output() selectEmit = new EventEmitter();
+  @Output() selectEmit = new EventEmitter();
 
-	public onSelect(ev: any) {
-		this.selectEmit.emit(ev.detail);
-	}
+  public onSelect(ev: any) {
+    this.selectEmit.emit(ev.detail);
+  }
 }
