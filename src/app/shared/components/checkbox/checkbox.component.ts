@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 interface Item {
-  name: string;
   isChecked: boolean;
+  name: string;
 }
 
 @Component({

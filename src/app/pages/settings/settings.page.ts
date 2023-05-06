@@ -4,10 +4,10 @@ import { GeolocationService } from 'src/app/core/services/geolocation/geolocatio
 import { AppRoutes } from 'src/app/utilities/app-routes';
 
 interface SettingModel {
-  label: string;
-  icon: string;
-  value?: number;
   action: any;
+  icon: string;
+  label: string;
+  value?: number;
 }
 
 @Component({

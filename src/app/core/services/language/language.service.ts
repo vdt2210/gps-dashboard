@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Device } from '@capacitor/device';
+import { TranslateService } from '@ngx-translate/core';
 import AppConstant from 'src/app/utilities/app-constant';
+
 import { StorageService } from '../storage/storage.service';
 
 @Injectable({
