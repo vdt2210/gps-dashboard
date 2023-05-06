@@ -2,11 +2,12 @@ import { Injectable, NgZone } from '@angular/core';
 import { registerPlugin } from '@capacitor/core';
 import { BackgroundGeolocationPlugin } from '@capacitor-community/background-geolocation';
 import { BehaviorSubject } from 'rxjs';
-import { Geolocation } from '../../models/geolocation.model';
 import AppConstant from 'src/app/utilities/app-constant';
-import { TopSpeedService } from '../top-speed/top-speed.service';
 import AppUtil from 'src/app/utilities/app-util';
+
+import { Geolocation } from '../../models/geolocation.model';
 import { TimerService } from '../timer/timer.service';
+import { TopSpeedService } from '../top-speed/top-speed.service';
 import { StorageService } from './../storage/storage.service';
 const BackgroundGeolocation = registerPlugin<BackgroundGeolocationPlugin>('BackgroundGeolocation');
 

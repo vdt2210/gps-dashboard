@@ -1,6 +1,6 @@
 export interface UnitParams {
-  value: string;
-  speedUnit: string;
   distanceUnit: string;
   lengthUnit: string;
+  speedUnit: string;
+  value: string;
 }

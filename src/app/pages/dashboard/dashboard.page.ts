@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CalculateService } from 'src/app/core/services/calculate/calculate.service';
+import { Router } from '@angular/router';
 import { CalculatedData } from 'src/app/core/models/calculate.model';
 import { GeolocationDashboard } from 'src/app/core/models/geolocation.model';
-
+import { UnitParams } from 'src/app/core/models/unit.model';
+import { CalculateService } from 'src/app/core/services/calculate/calculate.service';
 import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
-import { AppRoutes } from 'src/app/utilities/app-routes';
 import { TimerService } from 'src/app/core/services/timer/timer.service';
 import { UnitService } from 'src/app/core/services/unit/unit.service';
-import { UnitParams } from 'src/app/core/models/unit.model';
 import AppConstant from 'src/app/utilities/app-constant';
-import { Router } from '@angular/router';
+import { AppRoutes } from 'src/app/utilities/app-routes';
 
 @Component({
   selector: 'app-dashboard',

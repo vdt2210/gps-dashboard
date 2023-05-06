@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { GeolocationService } from '../../services/geolocation/geolocation.service';
-import AppUtil from 'src/app/utilities/app-util';
 import { BehaviorSubject } from 'rxjs';
 import AppConstant from 'src/app/utilities/app-constant';
+import AppUtil from 'src/app/utilities/app-util';
+
 import { CalculatedData } from '../../models/calculate.model';
+import { DistanceParams } from '../../models/distance.model';
+import { Geolocation } from '../../models/geolocation.model';
+import { GeolocationService } from '../../services/geolocation/geolocation.service';
+import { DistanceService } from '../distance/distance.service';
 import { TimerService } from '../timer/timer.service';
 import { TopSpeedService } from '../top-speed/top-speed.service';
-import { Geolocation } from '../../models/geolocation.model';
-import { DistanceService } from '../distance/distance.service';
-import { DistanceParams } from '../../models/distance.model';
 import { UnitService } from '../unit/unit.service';
 
 interface speedTime {

@@ -4,8 +4,8 @@ import AppConstant from 'src/app/utilities/app-constant';
 
 interface data {
   label: string;
-  value: number | string;
   unit?: string;
+  value: number | string;
 }
 
 @Component({
