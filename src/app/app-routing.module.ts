@@ -5,23 +5,23 @@ import { AppRoutes } from './utilities/app-routes';
 
 const routes: Routes = [
   {
-    path: AppRoutes.dashboard.path,
     loadChildren: () =>
       import('./pages/dashboard/dashboard.module').then((m) => m.DashboardPageModule),
+    path: AppRoutes.dashboard.path,
   },
   {
-    path: AppRoutes.settings.path,
     loadChildren: () =>
       import('./pages/settings/settings.module').then((m) => m.SettingsPageModule),
+    path: AppRoutes.settings.path,
   },
   {
     path: '',
-    redirectTo: AppRoutes.dashboard.path,
     pathMatch: 'full',
+    redirectTo: AppRoutes.dashboard.path,
   },
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
 })
 export class AppRoutingModule {}

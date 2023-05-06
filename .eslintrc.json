@@ -4,16 +4,16 @@
   "overrides": [
     {
       "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
-      "plugins": ["@typescript-eslint", "simple-import-sort", "typescript-sort-keys", "prettier"],
+      "plugins": ["@typescript-eslint", "simple-import-sort", "sort-keys-fix", "prettier"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:@typescript-eslint/recommended",
-        "plugin:typescript-sort-keys/recommended",
         "plugin:prettier/recommended"
       ],
       "rules": {
@@ -48,7 +48,7 @@
             "useTabs": false
           }
         ],
-
+        "sort-keys-fix/sort-keys-fix": "warn",
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error"
       }

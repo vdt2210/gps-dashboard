@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-range',
-  templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss'],
+  templateUrl: './range.component.html',
 })
 export class RangeComponent {
   @Input() minValue = 0;

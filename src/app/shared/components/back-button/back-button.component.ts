@@ -3,8 +3,8 @@ import { AppRoutes } from 'src/app/utilities/app-routes';
 
 @Component({
   selector: 'app-back-button',
-  templateUrl: './back-button.component.html',
   styleUrls: ['./back-button.component.scss'],
+  templateUrl: './back-button.component.html',
 })
 export class BackButtonComponent {
   public appRoutes = AppRoutes;

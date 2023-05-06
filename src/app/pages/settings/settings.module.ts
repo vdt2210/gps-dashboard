@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+import { AccountComponent } from './components/account/account.component';
 import { ClearDataComponent } from './components/clear-data/clear-data.component';
 import { LanguageSelectListComponent } from './components/language-list/language-list.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
@@ -14,9 +15,9 @@ import { SettingsPage } from './settings.page';
 import { SettingsRoutingModule } from './settings-routing.module';
 
 @NgModule({
-  imports: [IonicModule, CommonModule, SettingsRoutingModule, TranslateModule, SharedModule],
   declarations: [
     SettingsPage,
+    AccountComponent,
     LoginFormComponent,
     SignUpFormComponent,
     LanguageSelectListComponent,
@@ -24,5 +25,6 @@ import { SettingsRoutingModule } from './settings-routing.module';
     SpeedCorrectionComponent,
     ClearDataComponent,
   ],
+  imports: [IonicModule, CommonModule, SettingsRoutingModule, TranslateModule, SharedModule],
 })
 export class SettingsPageModule {}

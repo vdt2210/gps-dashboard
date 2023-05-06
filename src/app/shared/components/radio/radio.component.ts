@@ -7,8 +7,8 @@ interface Item {
 
 @Component({
   selector: 'app-radio',
-  templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
+  templateUrl: './radio.component.html',
 })
 export class RadioComponent {
   @Input() selectedValue = '';

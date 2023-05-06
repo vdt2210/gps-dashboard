@@ -5,12 +5,12 @@ import { SettingsPage } from './settings.page';
 
 const routes: Routes = [
   {
-    path: '',
     component: SettingsPage,
+    path: '',
   },
 ];
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
 })
 export class SettingsRoutingModule {}

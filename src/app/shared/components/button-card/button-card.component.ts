@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button-card',
-  templateUrl: './button-card.component.html',
   styleUrls: ['./button-card.component.scss'],
+  templateUrl: './button-card.component.html',
 })
 export class ButtonCardComponent {
   @Input() icon = '';

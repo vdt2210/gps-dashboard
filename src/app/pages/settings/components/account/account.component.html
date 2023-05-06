@@ -1,0 +1,30 @@
+<h1
+  class="ion-text-center"
+  translate="account"
+></h1>
+
+<app-avatar></app-avatar>
+
+<div class="form-input-container">
+  <ion-list
+    [inset]="true"
+    lines="full"
+    class="no-margin-list"
+  >
+  </ion-list>
+</div>
+
+<div class="ion-text-center">
+  <app-button
+    buttonLabel="signUp"
+    [expand]="appConstant.buttonExpand.full"
+    [buttonType]="appConstant.buttonType.submit"
+  ></app-button>
+
+  <app-button
+    buttonLabel="logOut"
+    [buttonType]="appConstant.buttonType.button"
+    [fill]="appConstant.fill.clear"
+    (clickEmit)="onLogOut()"
+  ></app-button>
+</div>

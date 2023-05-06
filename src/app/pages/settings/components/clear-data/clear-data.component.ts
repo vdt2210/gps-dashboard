@@ -6,18 +6,18 @@ import AppConstant from 'src/app/utilities/app-constant';
 
 @Component({
   selector: 'app-clear-data',
-  templateUrl: './clear-data.component.html',
   styleUrls: ['./clear-data.component.scss'],
+  templateUrl: './clear-data.component.html',
 })
 export class ClearDataComponent {
   @Output() buttonEmit = new EventEmitter();
 
   public appConstant = AppConstant;
   public clearableKeys = [
-    { name: 'averageSpeed', isChecked: false },
-    { name: AppConstant.storageKeys.topSpeed, isChecked: false },
-    { name: AppConstant.storageKeys.totalTime, isChecked: false },
-    { name: AppConstant.storageKeys.tripDistance, isChecked: false },
+    { isChecked: false, name: 'averageSpeed' },
+    { isChecked: false, name: AppConstant.storageKeys.topSpeed },
+    { isChecked: false, name: AppConstant.storageKeys.totalTime },
+    { isChecked: false, name: AppConstant.storageKeys.tripDistance },
   ];
 
   constructor(

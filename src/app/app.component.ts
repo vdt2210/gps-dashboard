@@ -14,8 +14,8 @@ import { AppRoutes } from './utilities/app-routes';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
+  templateUrl: 'app.component.html',
 })
 export class AppComponent implements OnInit {
   constructor(
