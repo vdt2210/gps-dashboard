@@ -8,7 +8,7 @@ import { InformationCardComponent } from './components/information-card/informat
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-	imports: [IonicModule, CommonModule, DashboardRoutingModule, TranslateModule, SharedModule],
-	declarations: [DashboardPage, InformationCardComponent],
+  imports: [IonicModule, CommonModule, DashboardRoutingModule, TranslateModule, SharedModule],
+  declarations: [DashboardPage, InformationCardComponent],
 })
 export class DashboardPageModule {}

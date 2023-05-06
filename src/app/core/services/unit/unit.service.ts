@@ -5,44 +5,44 @@ import { BehaviorSubject } from 'rxjs';
 import { UnitParams } from '../../models/unit.model';
 
 @Injectable({
-	providedIn: 'root',
+  providedIn: 'root',
 })
 export class UnitService {
-	private unitParams$: BehaviorSubject<UnitParams>;
+  private unitParams$: BehaviorSubject<UnitParams>;
 
-	constructor(private storageService: StorageService) {
-		this.unitParams$ = new BehaviorSubject<UnitParams>({
-			value: '',
-			lengthUnit: '',
-			speedUnit: '',
-			distanceUnit: '',
-		});
+  constructor(private storageService: StorageService) {
+    this.unitParams$ = new BehaviorSubject<UnitParams>({
+      value: '',
+      lengthUnit: '',
+      speedUnit: '',
+      distanceUnit: '',
+    });
 
-		this.setInitialUnit();
-	}
+    this.setInitialUnit();
+  }
 
-	public async setInitialUnit() {
-		const unit =
-			(await this.storageService.get(AppConstant.storageKeys.unit)) ??
-			AppConstant.unit.metric.value;
-		this.setUnit(unit);
-	}
+  public async setInitialUnit() {
+    const unit =
+      (await this.storageService.get(AppConstant.storageKeys.unit)) ??
+      AppConstant.unit.metric.value;
+    this.setUnit(unit);
+  }
 
-	public getUnit() {
-		return this.unitParams$;
-	}
+  public getUnit() {
+    return this.unitParams$;
+  }
 
-	public async setUnit(unit: string) {
-		await this.storageService.set(AppConstant.storageKeys.unit, unit);
-		this.unitParams$.next(this.getUnitSystem(unit));
-	}
+  public async setUnit(unit: string) {
+    await this.storageService.set(AppConstant.storageKeys.unit, unit);
+    this.unitParams$.next(this.getUnitSystem(unit));
+  }
 
-	private getUnitSystem(unit: string) {
-		switch (unit) {
-			case AppConstant.unit.imperial.value:
-				return AppConstant.unit.imperial;
-			default:
-				return AppConstant.unit.metric;
-		}
-	}
+  private getUnitSystem(unit: string) {
+    switch (unit) {
+      case AppConstant.unit.imperial.value:
+        return AppConstant.unit.imperial;
+      default:
+        return AppConstant.unit.metric;
+    }
+  }
 }

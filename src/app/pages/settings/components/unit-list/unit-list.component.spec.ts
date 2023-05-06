@@ -4,21 +4,21 @@ import { IonicModule } from '@ionic/angular';
 import { UnitListComponent } from './unit-list.component';
 
 describe('LoginModalComponent', () => {
-	let component: UnitListComponent;
-	let fixture: ComponentFixture<UnitListComponent>;
+  let component: UnitListComponent;
+  let fixture: ComponentFixture<UnitListComponent>;
 
-	beforeEach(waitForAsync(() => {
-		TestBed.configureTestingModule({
-			declarations: [UnitListComponent],
-			imports: [IonicModule.forRoot()],
-		}).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [UnitListComponent],
+      imports: [IonicModule.forRoot()],
+    }).compileComponents();
 
-		fixture = TestBed.createComponent(UnitListComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	}));
+    fixture = TestBed.createComponent(UnitListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

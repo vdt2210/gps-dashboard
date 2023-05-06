@@ -13,15 +13,15 @@ import { SpeedCorrectionComponent } from './components/speed-correction/speed-co
 import { ClearDataComponent } from './components/clear-data/clear-data.component';
 
 @NgModule({
-	imports: [IonicModule, CommonModule, SettingsRoutingModule, TranslateModule, SharedModule],
-	declarations: [
-		SettingsPage,
-		LoginFormComponent,
-		SignUpFormComponent,
-		LanguageSelectListComponent,
-		UnitListComponent,
-		SpeedCorrectionComponent,
-		ClearDataComponent,
-	],
+  imports: [IonicModule, CommonModule, SettingsRoutingModule, TranslateModule, SharedModule],
+  declarations: [
+    SettingsPage,
+    LoginFormComponent,
+    SignUpFormComponent,
+    LanguageSelectListComponent,
+    UnitListComponent,
+    SpeedCorrectionComponent,
+    ClearDataComponent,
+  ],
 })
 export class SettingsPageModule {}
