@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -20,6 +21,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
@@ -39,8 +41,8 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}
