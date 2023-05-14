@@ -1,97 +1,97 @@
 .error-blink {
-	animation: error-blink 3s linear infinite;
+  animation: error-blink 3s linear infinite;
 }
 
 @keyframes error-blink {
-	0% {
-		opacity: 0;
-	}
-	10% {
-		opacity: 0.5;
-	}
-	20% {
-		opacity: 1;
-	}
-	30% {
-		opacity: 0;
-	}
-	40% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0;
-	}
-	60% {
-		opacity: 1;
-	}
-	70% {
-		opacity: 0;
-	}
-	80% {
-		opacity: 1;
-	}
-	90% {
-		opacity: 0.5;
-	}
-	100% {
-		opacity: 0.25;
-	}
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.25;
+  }
 }
 
 .standby-blink {
-	animation: standby-blink 5s linear infinite;
+  animation: standby-blink 5s linear infinite;
 }
 
 @keyframes standby-blink {
-	0% {
-		opacity: 0;
-	}
-	10% {
-		opacity: 0.25;
-	}
-	20% {
-		opacity: 0.5;
-	}
-	30% {
-		opacity: 1;
-	}
-	40% {
-		opacity: 0;
-	}
-	50% {
-		opacity: 1;
-	}
-	60% {
-		opacity: 0;
-	}
-	70% {
-		opacity: 1;
-	}
-	80% {
-		opacity: 0.75;
-	}
-	90% {
-		opacity: 0.5;
-	}
-	100% {
-		opacity: 0.25;
-	}
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.25;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  30% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.75;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.25;
+  }
 }
 
 .detail-showup {
-	animation: show 0.5s;
+  animation: show 0.5s;
 }
 
 @keyframes show {
-	0% {
-		overflow: hidden;
-		width: 0;
-		padding: 0;
-	}
-	50% {
-		overflow: hidden;
-	}
-	100% {
-		width: 100%;
-	}
+  0% {
+    overflow: hidden;
+    width: 0;
+    padding: 0;
+  }
+  50% {
+    overflow: hidden;
+  }
+  100% {
+    width: 100%;
+  }
 }

@@ -58,10 +58,10 @@ export class SettingsPage implements OnInit {
     this.appVersion = (await App.getInfo()).version;
   }
 
-  public onClickCard(action: string) {
+  public async onClickCard(action: string) {
     switch (action) {
       case 'account':
-        if (this.authService.currentUser) {
+        if (await this.authService.currentToken) {
           this.isAccount = true;
         } else {
           this.isLogin = true;

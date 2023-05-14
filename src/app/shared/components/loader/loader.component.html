@@ -1,0 +1,11 @@
+<div
+  *ngIf="loaderService.loaderState | async"
+  class="loader-overlay"
+>
+  <div class="loader-container">
+    <ion-spinner
+      name="crescent"
+      class="spinner"
+    ></ion-spinner>
+  </div>
+</div>
