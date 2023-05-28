@@ -7,7 +7,7 @@
   (submit)="onSubmit()"
   (keydown.enter)="onSubmit()"
 >
-  <app-avatar [src]="signUpForm.value.avatarUrl"></app-avatar>
+  <app-avatar [src]="signUpForm.value.photoURL"></app-avatar>
 
   <div class="form-input-container">
     <ion-list
@@ -19,8 +19,8 @@
         <app-input
           class="w-full"
           [formGroup]="signUpForm"
-          inputLabel="fullName"
-          controlName="fullName"
+          inputLabel="displayName"
+          controlName="displayName"
         ></app-input>
       </ion-item>
 

@@ -24,10 +24,10 @@ export class SignUpFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private authService: authService) {
     this.signUpForm = this.formBuilder.group({
-      avatarUrl: [''],
+      photoURL: [''],
       confirmPassword: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      fullName: ['', Validators.required],
+      displayName: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }

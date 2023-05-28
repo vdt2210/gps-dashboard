@@ -21,8 +21,10 @@ export class AccountComponent implements OnInit {
 
   public detailForm: FormGroup;
   public changePasswordForm: FormGroup;
-  public isReadonly = true;
 
+  public uid = '';
+
+  public isReadonly = true;
   public isShowPassword = false;
   public passwordIcon = ICONS.eyeOff;
 
@@ -32,13 +34,13 @@ export class AccountComponent implements OnInit {
     private accountService: AccountService
   ) {
     this.detailForm = this.formBuilder.group({
-      avatarUrl: [''],
+      displayName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      fullName: ['', Validators.required],
+      photoURL: [''],
     });
 
     this.changePasswordForm = this.formBuilder.group({
-      confirmNewPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
       currentPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(8)]],
     });
@@ -56,10 +58,12 @@ export class AccountComponent implements OnInit {
   private onPatchValue() {
     this.accountService.userDetail.subscribe((detail) => {
       if (detail) {
+        this.uid = detail.uid;
+
         this.detailForm.patchValue({
-          avatarUrl: detail.photoURL,
+          displayName: detail.displayName,
           email: detail.email,
-          fullName: detail.displayName,
+          photoURL: detail.photoURL,
         });
       }
     });
@@ -78,9 +82,15 @@ export class AccountComponent implements OnInit {
     this.passwordIcon = this.isShowPassword ? ICONS.eye : ICONS.eyeOff;
   }
 
-  public onSubmit() {
-    if (this.detailForm.valid) {
-      //TODO update detail api
+  public onSubmitDetail() {
+    this.detailForm.markAllAsTouched();
+
+    if (this.detailForm.invalid) {
+      return;
     }
+
+    this.accountService.updateInformation(this.uid, this.detailForm.value);
   }
+
+  public onSubmit() {}
 }

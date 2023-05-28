@@ -5,12 +5,12 @@
 
 <form
   [formGroup]="detailForm"
-  (submit)="onSubmit()"
-  (keydown.enter)="onSubmit()"
+  (submit)="onSubmitDetail()"
+  (keydown.enter)="onSubmitDetail()"
 >
-  <h3 translate="yourDetail"></h3>
+  <h3 translate="yourInformation"></h3>
 
-  <app-avatar [src]="detailForm.value.avatarUrl"></app-avatar>
+  <app-avatar [src]="detailForm.value.photoURL"></app-avatar>
 
   <div class="form-input-container">
     <ion-list
@@ -22,8 +22,8 @@
         <app-input
           class="w-full"
           [formGroup]="detailForm"
-          inputLabel="fullName"
-          controlName="fullName"
+          inputLabel="displayName"
+          controlName="displayName"
         ></app-input>
       </ion-item>
 
@@ -41,7 +41,7 @@
 
   <div class="ion-text-center">
     <app-button
-      buttonLabel="updateDetail"
+      buttonLabel="updateInformation"
       [expand]="appConstant.buttonExpand.full"
       [buttonType]="appConstant.buttonType.submit"
     ></app-button>
@@ -87,8 +87,8 @@
         <app-input
           class="w-full"
           [formGroup]="changePasswordForm"
-          inputLabel="confirmNewPassword"
-          controlName="confirmNewPassword"
+          inputLabel="confirmPassword"
+          controlName="confirmPassword"
           [inputType]="isShowPassword ? appConstant.inputType.text : appConstant.inputType.password"
         ></app-input>
       </ion-item>
