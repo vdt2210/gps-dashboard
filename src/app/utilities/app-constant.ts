@@ -44,6 +44,7 @@ const AppConstant = Object.freeze({
   storageKeys: {
     avgSpeedTotalDistance: 'avgSpeedTotalDistance',
     avgSpeedTotalTime: 'avgSpeedTotalTime',
+    jwtToken: 'jwtToken',
     language: 'language',
     speedCorrection: 'speedCorrection',
     topSpeed: 'topSpeed',

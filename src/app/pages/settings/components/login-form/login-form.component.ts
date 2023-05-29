@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { authService } from 'src/app/core/services/auth/auth.service';
 import AppConstant from 'src/app/utilities/app-constant';
@@ -13,7 +13,7 @@ const ICONS = {
   styleUrls: ['./login-form.component.scss'],
   templateUrl: './login-form.component.html',
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   @Output() buttonEmit = new EventEmitter();
 
   public appConstant = AppConstant;
@@ -29,12 +29,17 @@ export class LoginFormComponent {
     });
   }
 
+  public async ngOnInit(): Promise<void> {
+    if (await this.authService.currentToken) {
+      this.buttonClick('account');
+      return;
+    }
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
-      // Handle form submission
-      console.log(this.loginForm.value);
-      this.authService.login(this.loginForm.value).then((user) => {
-        if (user) {
+      this.authService.login(this.loginForm.value).then((token: string | undefined) => {
+        if (token) {
           this.buttonClick('account');
         }
       });

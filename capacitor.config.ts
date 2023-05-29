@@ -6,7 +6,6 @@ const config: CapacitorConfig = {
   },
   appId: 'io.ionic.starter',
   appName: 'GPS Dashboard',
-  bundledWebRuntime: false,
   webDir: 'www',
 };
 

@@ -1,0 +1,32 @@
+.loader-overlay {
+  position: fixed;
+  z-index: 999999;
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  .loader-container {
+    width: 110px;
+    height: 110px;
+
+    .spinner {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.loader-overlay:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}

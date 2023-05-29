@@ -1,6 +1,6 @@
 export interface signUpParams {
   email: string;
-  fullName: string;
+  displayName: string;
   password: string;
 }
 
