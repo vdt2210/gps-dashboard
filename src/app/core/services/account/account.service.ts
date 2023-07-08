@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Auth, User, user } from '@angular/fire/auth';
-import { DocumentData } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 import { FirebaseService } from '../firebase/firebase.service';
@@ -27,11 +26,11 @@ export class AccountService {
       if (userDetail) {
         this.firebaseService
           .getById(this.docRef, userDetail.uid)
-          .subscribe((user: DocumentData | undefined) => {
+          .subscribe((user: User | undefined) => {
             this.userDetail$.next({
               ...userDetail,
-              displayName: user?.['params'].displayName || null,
-              photoURL: user?.['params'].photoURL || null,
+              displayName: user?.displayName || null,
+              photoURL: user?.photoURL || null,
             });
           });
       }
@@ -39,6 +38,6 @@ export class AccountService {
   }
 
   public updateInformation(uid: string, params: User) {
-    this.firebaseService.set(this.docRef, { params }, uid);
+    this.firebaseService.setDoc(`${this.docRef}/${uid}`, { ...params, isActivated: true });
   }
 }

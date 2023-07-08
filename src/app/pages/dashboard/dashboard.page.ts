@@ -48,14 +48,12 @@ export class DashboardPage implements OnInit {
     private router: Router
   ) {}
 
-  public async ngOnInit() {
+  public ngOnInit() {
     this.timerService.getTotalTime().subscribe((data) => {
       this.totalTime = data;
     });
 
     this.geolocationService.getLocation().subscribe((data) => {
-      console.log(JSON.stringify(data));
-
       this.location = data;
       this.updateGpsStatusIcon(data.gpsStatus);
     });

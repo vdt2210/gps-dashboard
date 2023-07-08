@@ -10,6 +10,7 @@ export class ButtonCardComponent {
   @Input() cardLabel = '';
   @Input() value?: string | number;
   @Input() action = '';
+  @Input() isDisabled? = false;
 
   @Output() clickEmit = new EventEmitter();
 

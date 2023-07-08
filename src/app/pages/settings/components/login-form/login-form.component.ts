@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { authService } from 'src/app/core/services/auth/auth.service';
-import AppConstant from 'src/app/utilities/app-constant';
+import APP_CONSTANT from 'src/app/utilities/app-constant';
 
 const ICONS = {
   eye: 'eye',
@@ -16,7 +16,7 @@ const ICONS = {
 export class LoginFormComponent implements OnInit {
   @Output() buttonEmit = new EventEmitter();
 
-  public appConstant = AppConstant;
+  public appConstant = APP_CONSTANT;
 
   public loginForm: FormGroup;
   public isShowPassword = false;

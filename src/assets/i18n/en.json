@@ -30,5 +30,8 @@
   "updateInformation": "Update information",
   "changePassword": "Change password",
   "currentPassword": "Current password",
-  "newPassword": "New password"
+  "newPassword": "New password",
+  "syncData": "Sync data",
+  "import": "Import",
+  "export": "Export"
 }

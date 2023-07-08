@@ -28,6 +28,10 @@ export class authService {
     return this.storageService.get(AppConstant.storageKeys.jwtToken);
   }
 
+  public get userId() {
+    return this.storageService.get(AppConstant.storageKeys.uid);
+  }
+
   public async signUp(params: signUpParams) {
     this.loaderService.show();
     try {
@@ -62,18 +66,20 @@ export class authService {
 
   public async logOut() {
     this.loaderService.show();
-    await signOut(this.auth).then(async () => {
-      this.loaderService.hide();
-      return await this.storageService.remove(AppConstant.storageKeys.jwtToken);
-    });
+    await signOut(this.auth);
+    this.storageService.remove(AppConstant.storageKeys.jwtToken);
+    this.storageService.remove(AppConstant.storageKeys.uid);
+    this.loaderService.hide();
   }
 
   public observableToken() {
     idToken(this.auth).subscribe((token: string | null) => {
       if (token) {
         this.storageService.set(AppConstant.storageKeys.jwtToken, token);
+        this.storageService.set(AppConstant.storageKeys.uid, this.auth.currentUser?.uid);
       } else {
         this.storageService.remove(AppConstant.storageKeys.jwtToken);
+        this.storageService.remove(AppConstant.storageKeys.uid);
       }
     });
   }

@@ -2,6 +2,7 @@
   button
   class="ion-text-center"
   (click)="onClick()"
+  [disabled]="isDisabled"
 >
   <ion-card-content>
     <div class="card-top">
@@ -10,7 +11,7 @@
         *ngIf="value !== undefined"
         class="card-value"
       >
-        +{{ value }}%
+        {{ value }}
       </p>
     </div>
 
