@@ -15,7 +15,7 @@ export class TopSpeedService {
     this.setInitialTopSpeed();
   }
 
-  private async setInitialTopSpeed(): Promise<void> {
+  public async setInitialTopSpeed(): Promise<void> {
     await this.storageService
       .get(AppConstant.storageKeys.topSpeed)
       .then((val) => {

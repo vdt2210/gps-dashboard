@@ -1,22 +1,22 @@
 <ion-radio-group
-	[value]="selectedValue"
-	(ionChange)="onChangeValue($event)"
+  [value]="selectedValue"
+  (ionChange)="onChangeValue($event)"
 >
-	<ion-list
-		[inset]="true"
-		lines="full"
-		class="no-margin-list"
-	>
-		<ion-item
-			class="radio-item"
-			*ngFor="let item of listItems"
-		>
-			<ion-radio
-				[value]="item.value"
-				aria-label=""
-			>
-				{{ item.name | translate }}
-			</ion-radio>
-		</ion-item>
-	</ion-list>
+  <ion-list
+    [inset]="true"
+    lines="full"
+    class="no-margin-list"
+  >
+    <ion-item
+      class="radio-item"
+      *ngFor="let item of listItems"
+    >
+      <ion-radio
+        [value]="item.id || item.value"
+        aria-label=""
+      >
+        {{ (item.name | translate) || item.id }}
+      </ion-radio>
+    </ion-item>
+  </ion-list>
 </ion-radio-group>

@@ -1,26 +1,26 @@
 <h1
-	class="ion-text-center"
-	translate="speedCorrection"
+  class="ion-text-center"
+  translate="speedCorrection"
 ></h1>
 
 <app-range
-	startLabel="+0%"
-	endLabel="+10%"
-	[currentValue]="selectedSpeedCorrection"
-	(changeEmit)="onChangeSpeedCorrection($event)"
+  startLabel="+0%"
+  endLabel="+10%"
+  [currentValue]="selectedSpeedCorrection"
+  (changeEmit)="onChangeSpeedCorrection($event)"
 />
 
 <div class="d-flex ion-align-items-center ion-justify-content-center">
-	<app-button
-		buttonLabel="cancel"
-		[fill]="appConstant.fill.clear"
-		[color]="appConstant.color.medium"
-		(clickEmit)="buttonEmit.emit()"
-	></app-button>
+  <app-button
+    buttonLabel="cancel"
+    [fill]="appConstant.fill.clear"
+    [color]="appConstant.color.medium"
+    (clickEmit)="buttonEmit.emit()"
+  ></app-button>
 
-	<app-button
-		buttonLabel="confirm"
-		[fill]="appConstant.fill.clear"
-		(clickEmit)="onConfirm()"
-	></app-button>
+  <app-button
+    buttonLabel="confirm"
+    [fill]="appConstant.fill.clear"
+    (clickEmit)="onConfirm()"
+  ></app-button>
 </div>

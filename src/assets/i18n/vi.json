@@ -30,5 +30,8 @@
   "updateInformation": "Cập nhật thông tin",
   "changePassword": "Đổi mật khẩu",
   "currentPassword": "Mật khẩu hiện tại",
-  "newPassword": "Mật khẩu mới"
+  "newPassword": "Mật khẩu mới",
+  "syncData": "Đồng bộ dữ liệu",
+  "import": "Import",
+  "export": "Export"
 }
