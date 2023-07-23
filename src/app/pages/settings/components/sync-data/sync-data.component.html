@@ -1,0 +1,23 @@
+<h1
+  class="ion-text-center"
+  translate="syncData"
+></h1>
+
+<app-radio
+  [listItems]="listDevices"
+  (changeEmit)="selectedId = $event"
+/>
+
+<div class="d-flex ion-align-items-center ion-justify-content-center">
+  <app-button
+    buttonLabel="import"
+    (clickEmit)="importData()"
+    [isDisabled]="!!!selectedId"
+  />
+
+  <app-button
+    buttonLabel="export"
+    (clickEmit)="exportData()"
+    [isDisabled]="!!selectedId"
+  />
+</div>

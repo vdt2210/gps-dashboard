@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { authService } from 'src/app/core/services/auth/auth.service';
-import AppConstant from 'src/app/utilities/app-constant';
+import APP_CONSTANT from 'src/app/utilities/app-constant';
 
 const ICONS = {
   eye: 'eye',
@@ -13,10 +13,10 @@ const ICONS = {
   styleUrls: ['./sign-up-form.component.scss'],
   templateUrl: './sign-up-form.component.html',
 })
-export class SignUpFormComponent {
+export class SignUpFormComponent implements OnInit {
   @Output() buttonEmit = new EventEmitter();
 
-  public appConstant = AppConstant;
+  public appConstant = APP_CONSTANT;
 
   public signUpForm: FormGroup;
   public isShowPassword = false;
@@ -24,19 +24,25 @@ export class SignUpFormComponent {
 
   constructor(private formBuilder: FormBuilder, private authService: authService) {
     this.signUpForm = this.formBuilder.group({
-      avatarUrl: [''],
       confirmPassword: ['', Validators.required],
+      displayName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      fullName: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
+      photoURL: [''],
     });
+  }
+
+  public async ngOnInit(): Promise<void> {
+    if (await this.authService.currentToken) {
+      this.buttonClick('account');
+      return;
+    }
   }
 
   onSubmit() {
     if (this.signUpForm.valid) {
-      this.authService.signUp(this.signUpForm.value).then((user) => {
-        if (user) {
-          console.log(this.authService.currentUser);
+      this.authService.signUp(this.signUpForm.value).then((token: string | undefined) => {
+        if (token) {
           this.buttonClick('account');
         }
       });

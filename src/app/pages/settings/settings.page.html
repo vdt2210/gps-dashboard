@@ -67,6 +67,11 @@
         (buttonEmit)="modalButtonAction($event)"
       />
 
+      <app-sync-data
+        *ngIf="isSyncData"
+        (buttonEmit)="modalButtonAction($event)"
+      />
+
       <app-language-list
         *ngIf="isLanguage"
         (buttonEmit)="onModalDismiss()"

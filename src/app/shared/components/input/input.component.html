@@ -1,19 +1,19 @@
 <form [formGroup]="formGroup">
-	<div class="w-full d-flex ion-align-items-center">
-		<ion-input
-			[label]="inputLabel | translate"
-			aria-label=""
-			labelPlacement="floating"
-			[formControlName]="controlName"
-			[type]="inputType"
-		></ion-input>
+  <div class="w-full d-flex ion-align-items-center">
+    <ion-input
+      [label]="inputLabel | translate"
+      aria-label=""
+      labelPlacement="floating"
+      [formControlName]="controlName"
+      [type]="inputType"
+    ></ion-input>
 
-		<ion-icon
-			*ngIf="inputIcon"
-			slot="end"
-			[name]="inputIcon"
-			(click)="onIconClick()"
-			class="input-icon"
-		></ion-icon>
-	</div>
+    <ion-icon
+      *ngIf="inputIcon"
+      slot="end"
+      [name]="inputIcon"
+      (click)="onIconClick()"
+      class="input-icon"
+    ></ion-icon>
+  </div>
 </form>

@@ -3,28 +3,110 @@
   translate="account"
 ></h1>
 
-<app-avatar></app-avatar>
+<form
+  [formGroup]="detailForm"
+  (submit)="onSubmitDetail()"
+  (keydown.enter)="onSubmitDetail()"
+>
+  <h3 translate="yourInformation"></h3>
 
-<div class="form-input-container">
-  <ion-list
-    [inset]="true"
-    lines="full"
-    class="no-margin-list"
-  >
-  </ion-list>
-</div>
+  <app-avatar [src]="detailForm.value.photoURL"></app-avatar>
 
-<div class="ion-text-center">
-  <app-button
-    buttonLabel="signUp"
-    [expand]="appConstant.buttonExpand.full"
-    [buttonType]="appConstant.buttonType.submit"
-  ></app-button>
+  <div class="form-input-container">
+    <ion-list
+      [inset]="true"
+      lines="full"
+      class="no-margin-list"
+    >
+      <ion-item>
+        <app-input
+          class="w-full"
+          [formGroup]="detailForm"
+          inputLabel="displayName"
+          controlName="displayName"
+        ></app-input>
+      </ion-item>
 
-  <app-button
-    buttonLabel="logOut"
-    [buttonType]="appConstant.buttonType.button"
-    [fill]="appConstant.fill.clear"
-    (clickEmit)="onLogOut()"
-  ></app-button>
-</div>
+      <ion-item>
+        <app-input
+          class="w-full"
+          [formGroup]="detailForm"
+          inputLabel="email"
+          controlName="email"
+          [inputType]="appConstant.inputType.email"
+        ></app-input>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="ion-text-center">
+    <app-button
+      buttonLabel="updateInformation"
+      [expand]="appConstant.buttonExpand.full"
+      [buttonType]="appConstant.buttonType.submit"
+    ></app-button>
+  </div>
+</form>
+
+<form
+  [formGroup]="changePasswordForm"
+  (submit)="onSubmit()"
+  (keydown.enter)="onSubmit()"
+>
+  <h3 translate="changePassword"></h3>
+
+  <div class="form-input-container">
+    <ion-list
+      [inset]="true"
+      lines="full"
+      class="no-margin-list"
+    >
+      <ion-item>
+        <app-input
+          class="w-full"
+          [formGroup]="changePasswordForm"
+          inputLabel="currentPassword"
+          controlName="currentPassword"
+          [inputType]="isShowPassword ? appConstant.inputType.text : appConstant.inputType.password"
+          [inputIcon]="passwordIcon"
+          (iconClickEmit)="hideShowPassword()"
+        ></app-input>
+      </ion-item>
+
+      <ion-item>
+        <app-input
+          class="w-full"
+          [formGroup]="changePasswordForm"
+          inputLabel="newPassword"
+          controlName="newPassword"
+          [inputType]="isShowPassword ? appConstant.inputType.text : appConstant.inputType.password"
+        ></app-input>
+      </ion-item>
+
+      <ion-item>
+        <app-input
+          class="w-full"
+          [formGroup]="changePasswordForm"
+          inputLabel="confirmPassword"
+          controlName="confirmPassword"
+          [inputType]="isShowPassword ? appConstant.inputType.text : appConstant.inputType.password"
+        ></app-input>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="ion-text-center">
+    <app-button
+      buttonLabel="changePassword"
+      [expand]="appConstant.buttonExpand.full"
+      [buttonType]="appConstant.buttonType.submit"
+    ></app-button>
+
+    <app-button
+      buttonLabel="logOut"
+      [buttonType]="appConstant.buttonType.button"
+      [fill]="appConstant.fill.clear"
+      (clickEmit)="onLogOut()"
+    ></app-button>
+  </div>
+</form>
