@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
-import AppConstant from 'src/app/utilities/app-constant';
+import APP_CONSTANT from 'src/app/utilities/app-constant';
 
 @Component({
   selector: 'app-speed-correction',
@@ -10,7 +10,7 @@ import AppConstant from 'src/app/utilities/app-constant';
 export class SpeedCorrectionComponent {
   @Output() buttonEmit = new EventEmitter();
 
-  public appConstant = AppConstant;
+  public appConstant = APP_CONSTANT;
   public selectedSpeedCorrection: number = this.geolocationService.getSpeedCorrection().getValue();
 
   constructor(private geolocationService: GeolocationService) {}

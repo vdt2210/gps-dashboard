@@ -1,55 +1,55 @@
 <h1
-	class="ion-text-center"
-	translate="login"
+  class="ion-text-center"
+  translate="login"
 ></h1>
 <form
-	[formGroup]="loginForm"
-	(submit)="onSubmit()"
-	(keydown.enter)="onSubmit()"
+  [formGroup]="loginForm"
+  (submit)="onSubmit()"
+  (keydown.enter)="onSubmit()"
 >
-	<div class="form-input-container">
-		<ion-list
-			[inset]="true"
-			lines="full"
-			class="no-margin-list"
-		>
-			<ion-item>
-				<app-input
-					class="w-full"
-					[formGroup]="loginForm"
-					inputLabel="email"
-					controlName="email"
-					[inputType]="appConstant.inputType.email"
-				></app-input>
-			</ion-item>
+  <div class="form-input-container">
+    <ion-list
+      [inset]="true"
+      lines="full"
+      class="no-margin-list"
+    >
+      <ion-item>
+        <app-input
+          class="w-full"
+          [formGroup]="loginForm"
+          inputLabel="email"
+          controlName="email"
+          [inputType]="appConstant.inputType.email"
+        ></app-input>
+      </ion-item>
 
-			<ion-item>
-				<app-input
-					class="w-full"
-					[formGroup]="loginForm"
-					inputLabel="password"
-					controlName="password"
-					[inputType]="isShowPassword ? appConstant.inputType.text : appConstant.inputType.password"
-					[inputIcon]="passwordIcon"
-					(iconClickEmit)="hideShowPassword()"
-				></app-input>
-			</ion-item>
-		</ion-list>
-	</div>
+      <ion-item>
+        <app-input
+          class="w-full"
+          [formGroup]="loginForm"
+          inputLabel="password"
+          controlName="password"
+          [inputType]="isShowPassword ? appConstant.inputType.text : appConstant.inputType.password"
+          [inputIcon]="passwordIcon"
+          (iconClickEmit)="hideShowPassword()"
+        ></app-input>
+      </ion-item>
+    </ion-list>
+  </div>
 
-	<div class="ion-text-center">
-		<app-button
-			buttonLabel="login"
-			[expand]="appConstant.buttonExpand.full"
-			[isDisabled]="loginForm.invalid || loginForm.disabled"
-			[buttonType]="appConstant.buttonType.submit"
-		></app-button>
+  <div class="ion-text-center">
+    <app-button
+      buttonLabel="login"
+      [expand]="appConstant.buttonExpand.full"
+      [isDisabled]="loginForm.invalid || loginForm.disabled"
+      [buttonType]="appConstant.buttonType.submit"
+    ></app-button>
 
-		<app-button
-			buttonLabel="signUp"
-			[buttonType]="appConstant.buttonType.button"
-			[fill]="appConstant.fill.clear"
-			(clickEmit)="buttonClick('signUp')"
-		></app-button>
-	</div>
+    <app-button
+      buttonLabel="signUp"
+      [buttonType]="appConstant.buttonType.button"
+      [fill]="appConstant.fill.clear"
+      (clickEmit)="buttonClick('signUp')"
+    ></app-button>
+  </div>
 </form>

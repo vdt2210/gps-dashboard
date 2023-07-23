@@ -7,6 +7,7 @@ import { KeepAwake } from '@capacitor-community/keep-awake';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 
 import { CalculateService } from './core/services/calculate/calculate.service';
+import { DeviceService } from './core/services/device/device.service';
 import { GeolocationService } from './core/services/geolocation/geolocation.service';
 import { LanguageService } from './core/services/language/language.service';
 import { TimerService } from './core/services/timer/timer.service';
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit {
     private languageService: LanguageService,
     private geolocationService: GeolocationService,
     private calculateService: CalculateService,
-    private timerService: TimerService
+    private timerService: TimerService,
+    private deviceService: DeviceService
   ) {
     this.getStorageValue();
     SplashScreen.hide();
@@ -51,6 +53,7 @@ export class AppComponent implements OnInit {
     this.geolocationService.startBackgroundGeolocation();
     this.timerService.setInitialTotalTime();
     this.calculateService.initialCalculate();
+    this.deviceService.setInitialDeviceId();
   }
 
   private async keepScreenOn() {

@@ -8,7 +8,7 @@ interface SettingModel {
   action: any;
   icon: string;
   label: string;
-  value?: number;
+  value?: string;
 }
 
 @Component({
@@ -21,13 +21,18 @@ export class SettingsPage implements OnInit {
 
   public settingsList: SettingModel[] = [
     { action: 'account', icon: 'person-outline', label: 'account' },
+    {
+      action: 'syncData',
+      icon: 'sync-outline',
+      label: 'syncData',
+    },
     { action: 'language', icon: 'language-outline', label: 'language' },
     { action: 'unit', icon: 'speedometer-outline', label: 'unit' },
     {
       action: 'speedCorrection',
       icon: 'speedometer-outline',
       label: 'speedCorrection',
-      value: 0,
+      value: '+0%',
     },
     { action: 'clearData', icon: 'trash-outline', label: 'clearData' },
     {
@@ -42,6 +47,7 @@ export class SettingsPage implements OnInit {
   public isModalOpen = false;
   public isAccount = false;
   public isLogin = false;
+  public isSyncData = false;
   public isSignUp = false;
   public isLanguage = false;
   public isUnit = false;
@@ -51,40 +57,54 @@ export class SettingsPage implements OnInit {
   constructor(private geolocationService: GeolocationService, private authService: authService) {
     this.geolocationService
       .getSpeedCorrection()
-      .subscribe((val) => (this.settingsList[3].value = val));
+      .subscribe((val) => (this.settingsList[4].value = `+${val}%`));
   }
 
   async ngOnInit(): Promise<void> {
     this.appVersion = (await App.getInfo()).version;
   }
 
-  public onClickCard(action: string) {
+  public async onClickCard(action: string) {
+    this.isModalOpen = true;
+
     switch (action) {
       case 'account':
-        if (this.authService.currentUser) {
+        if (await this.authService.currentToken) {
           this.isAccount = true;
         } else {
           this.isLogin = true;
         }
 
-        this.isModalOpen = true;
         break;
+
+      case 'syncData':
+        if (await this.authService.currentToken) {
+          this.isSyncData = true;
+        } else {
+          this.isLogin = true;
+        }
+
+        break;
+
       case 'language':
         this.isLanguage = true;
-        this.isModalOpen = true;
+
         break;
+
       case 'unit':
         this.isUnit = true;
-        this.isModalOpen = true;
+
         break;
+
       case 'speedCorrection':
         this.isSpeedCorrection = true;
-        this.isModalOpen = true;
+
         break;
+
       case 'clearData':
         this.isClearData = true;
-        this.isModalOpen = true;
         break;
+
       case 'checkForUpdate':
         break;
     }
@@ -99,6 +119,7 @@ export class SettingsPage implements OnInit {
     this.isUnit = false;
     this.isSpeedCorrection = false;
     this.isClearData = false;
+    this.isSyncData = false;
   }
 
   public modalButtonAction(action: string) {

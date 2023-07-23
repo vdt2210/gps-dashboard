@@ -10,6 +10,7 @@ import { LanguageSelectListComponent } from './components/language-list/language
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
 import { SpeedCorrectionComponent } from './components/speed-correction/speed-correction.component';
+import { SyncDataComponent } from './components/sync-data/sync-data.component';
 import { UnitListComponent } from './components/unit-list/unit-list.component';
 import { SettingsPage } from './settings.page';
 import { SettingsRoutingModule } from './settings-routing.module';
@@ -24,6 +25,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
     UnitListComponent,
     SpeedCorrectionComponent,
     ClearDataComponent,
+    SyncDataComponent,
   ],
   imports: [IonicModule, CommonModule, SettingsRoutingModule, TranslateModule, SharedModule],
 })

@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 import { SharedModule } from './shared/shared.module';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -22,8 +23,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   bootstrap: [AppComponent],
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, LoaderComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot({ mode: 'ios' }),
