@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Device } from '@capacitor/device';
 import { BehaviorSubject } from 'rxjs';
-import appConstant from 'src/app/utilities/app-constant';
 
-import { authService } from '../auth/auth.service';
-import { FirebaseService } from '../firebase/firebase.service';
-import { StorageService } from '../storage/storage.service';
-import { DeviceInfo } from './device.model';
+import { AppConstant } from '@utilities/index';
+
+import { DeviceInfo } from '@models/index';
+
+import { authService, FirebaseService, StorageService } from '../index';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class DeviceService {
 
   public async setInitialDeviceId() {
     await this.storageService
-      .get(appConstant.storageKeys.deviceId)
+      .get(AppConstant.storageKeys.deviceId)
       .then(async (val) => {
         if (val) {
           this.deviceId$.next(val);
@@ -43,7 +43,7 @@ export class DeviceService {
   }
 
   public async setDeviceId(id: string) {
-    await this.storageService.set(appConstant.storageKeys.deviceId, id);
+    await this.storageService.set(AppConstant.storageKeys.deviceId, id);
     this.deviceId$.next(id);
     this.setDeviceInfo();
   }

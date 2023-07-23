@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import appConstant from 'src/app/utilities/app-constant';
 
-import { authService } from '../auth/auth.service';
-import { DeviceService } from '../device/device.service';
-import { DistanceService } from '../distance/distance.service';
-import { FirebaseService } from '../firebase/firebase.service';
-import { StorageService } from '../storage/storage.service';
-import { TimerService } from '../timer/timer.service';
-import { TopSpeedService } from '../top-speed/top-speed.service';
+import { AppConstant } from '@utilities/index';
+
+import {
+  DeviceService,
+  DistanceService,
+  FirebaseService,
+  authService,
+  StorageService,
+  TimerService,
+  TopSpeedService,
+} from '../index';
 
 @Injectable({
   providedIn: 'root',
@@ -27,9 +30,9 @@ export class SyncDataService {
 
   public async setBackupValue() {
     let params: { [key: string]: any } = {};
-    for (const key of appConstant.backupKeys) {
+    for (const key of AppConstant.backupKeys) {
       params[key] = await this.storageService.get(
-        (appConstant.storageKeys as { [key: string]: string })[key]
+        (AppConstant.storageKeys as { [key: string]: string })[key]
       );
     }
 
@@ -50,9 +53,9 @@ export class SyncDataService {
 
     this.firebaseService.getById(this.docRef, dataId).subscribe(async (data) => {
       if (data) {
-        for (const key of appConstant.backupKeys) {
+        for (const key of AppConstant.backupKeys) {
           await this.storageService.set(
-            (appConstant.storageKeys as { [key: string]: string })[key],
+            (AppConstant.storageKeys as { [key: string]: string })[key],
             data[key]
           );
         }

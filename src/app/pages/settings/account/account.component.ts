@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { AccountService } from 'src/app/core/services/account/account.service';
-import { authService } from 'src/app/core/services/auth/auth.service';
-import APP_CONSTANT from 'src/app/utilities/app-constant';
+
+import { AccountService, authService } from '@services/index';
+
+import { AppConstant } from '@utilities/index';
 
 const ICONS = {
   eye: 'eye',
@@ -20,7 +21,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   private onDestroy$: Subject<void> = new Subject<void>();
 
-  public appConstant = APP_CONSTANT;
+  public appConstant = AppConstant;
 
   public detailForm: FormGroup;
   public changePasswordForm: FormGroup;

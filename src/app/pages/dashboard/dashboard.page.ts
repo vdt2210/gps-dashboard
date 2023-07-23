@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CalculatedData } from 'src/app/core/models/calculate.model';
-import { GeolocationDashboard } from 'src/app/core/models/geolocation.model';
-import { UnitParams } from 'src/app/core/models/unit.model';
-import { CalculateService } from 'src/app/core/services/calculate/calculate.service';
-import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
-import { TimerService } from 'src/app/core/services/timer/timer.service';
-import { UnitService } from 'src/app/core/services/unit/unit.service';
-import AppConstant from 'src/app/utilities/app-constant';
-import { AppRoutes } from 'src/app/utilities/app-routes';
+
+import { CalculateService, GeolocationService, TimerService, UnitService } from '@services/index';
+
+import { AppConstant } from '@utilities/index';
+
+import { CalculatedData, UnitParams, EGpsStatusColor, TGeolocationDashboard } from '@models/index';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,8 +13,8 @@ import { AppRoutes } from 'src/app/utilities/app-routes';
 })
 export class DashboardPage implements OnInit {
   public totalTime = '00:00:00';
-  public location: GeolocationDashboard = {
-    gpsStatus: '',
+  public location: TGeolocationDashboard = {
+    gpsStatusColor: '' as EGpsStatusColor,
     latitude: '-.-',
     longitude: '-.-',
   };
@@ -44,8 +40,7 @@ export class DashboardPage implements OnInit {
     private geolocationService: GeolocationService,
     private calculateService: CalculateService,
     private timerService: TimerService,
-    private unitService: UnitService,
-    private router: Router
+    private unitService: UnitService
   ) {}
 
   public ngOnInit() {
@@ -55,7 +50,6 @@ export class DashboardPage implements OnInit {
 
     this.geolocationService.getLocation().subscribe((data) => {
       this.location = data;
-      this.updateGpsStatusIcon(data.gpsStatus);
     });
 
     this.calculateService.getCalculateData().subscribe((data) => {
@@ -65,32 +59,6 @@ export class DashboardPage implements OnInit {
     this.unitService.getUnit().subscribe((data) => {
       this.unitData = data;
     });
-  }
-
-  private updateGpsStatusIcon(status: string) {
-    const gpsStatus = document.getElementById('gpsStatus');
-
-    switch (status) {
-      case 'success':
-        gpsStatus?.classList.remove('error-blink');
-        gpsStatus?.classList.remove('standby-blink');
-        break;
-
-      case 'warning':
-        gpsStatus?.classList.remove('error-blink');
-        gpsStatus?.classList.remove('standby-blink');
-        break;
-
-      case 'danger':
-        gpsStatus?.classList.remove('standby-blink');
-        gpsStatus?.classList.add('error-blink');
-        break;
-
-      default:
-        gpsStatus?.classList.remove('error-blink');
-        gpsStatus?.classList.add('standby-blink');
-        break;
-    }
   }
 
   public switchUnit() {
@@ -103,9 +71,5 @@ export class DashboardPage implements OnInit {
         this.unitService.setUnit(AppConstant.unit.metric.value);
         break;
     }
-  }
-
-  public goToSetting() {
-    this.router.navigateByUrl(`/${AppRoutes.settings.path}`);
   }
 }

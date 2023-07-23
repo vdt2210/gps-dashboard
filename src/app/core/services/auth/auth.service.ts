@@ -6,11 +6,12 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from '@angular/fire/auth';
-import AppConstant from 'src/app/utilities/app-constant';
 
-import { LoaderService } from '../loader/loader.service';
-import { StorageService } from '../storage/storage.service';
-import { loginParams, signUpParams } from './auth.model';
+import { LoaderService, StorageService } from '@services/index';
+
+import { AppConstant } from '@utilities/index';
+
+import { loginParams, signUpParams } from '@models/index';
 
 @Injectable({
   providedIn: 'root',

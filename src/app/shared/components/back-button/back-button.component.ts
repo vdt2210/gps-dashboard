@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AppRoutes } from 'src/app/utilities/app-routes';
+
+import { AppRoutes } from '@utilities/app-routes';
 
 @Component({
   selector: 'app-back-button',

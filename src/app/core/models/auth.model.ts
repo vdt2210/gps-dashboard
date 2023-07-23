@@ -5,6 +5,6 @@ export interface signUpParams {
 }
 
 export interface loginParams {
-  email: string;
   password: string;
+  email: string;
 }

@@ -1,0 +1,9 @@
+@import 'src/styles/mixin.scss';
+
+.header-bar {
+  padding: 10px;
+  min-height: 40px;
+  align-items: center;
+  font-size: 22px;
+  gap: 10%;
+}

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { UnitService } from 'src/app/core/services/unit/unit.service';
-import AppConstant from 'src/app/utilities/app-constant';
+
+import { UnitService } from '@services/unit/unit.service';
+
+import { AppConstant } from '@utilities/index';
 
 interface Unit {
   name: string;

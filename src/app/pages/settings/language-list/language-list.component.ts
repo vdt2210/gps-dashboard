@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { LanguageService } from 'src/app/core/services/language/language.service';
-import AppConstant from 'src/app/utilities/app-constant';
+
+import { LanguageService } from '@services/index';
+
+import { AppConstant } from '@utilities/index';
 
 interface Language {
   name: string;

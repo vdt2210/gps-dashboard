@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { DistanceService } from 'src/app/core/services/distance/distance.service';
-import { TimerService } from 'src/app/core/services/timer/timer.service';
-import { TopSpeedService } from 'src/app/core/services/top-speed/top-speed.service';
-import AppConstant from 'src/app/utilities/app-constant';
+
+import { DistanceService, TopSpeedService, TimerService } from '@services/index';
+
+import { AppConstant } from '@utilities/index';
 
 @Component({
   selector: 'app-clear-data',
@@ -27,7 +27,6 @@ export class ClearDataComponent {
   ) {}
 
   public onSelect(ev: { checked: boolean; value: string }) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.clearableKeys.find((val) => val.name === ev.value)!.isChecked = ev.checked;
   }
 

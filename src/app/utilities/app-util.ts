@@ -1,4 +1,6 @@
-const AppUtil = {
+import { EGpsStatusColor } from '@models/index';
+
+export const AppUtil = {
   calculateSpeed(speed: number, correction: number) {
     speed =
       speed && correction
@@ -23,9 +25,21 @@ const AppUtil = {
     return JSON.parse(jsonPayload);
   },
 
+  getGpsStatusColor(accuracy: number): EGpsStatusColor {
+    switch (true) {
+      case accuracy <= 6:
+        return EGpsStatusColor.success;
+      case accuracy <= 25:
+        return EGpsStatusColor.warning;
+      case accuracy > 25:
+        return EGpsStatusColor.danger;
+      default:
+        return '' as EGpsStatusColor;
+    }
+  },
+
   toFixedNoRounding(value: number, n: number) {
     const reg = new RegExp('^-?\\d+(?:\\.\\d{0,' + n + '})?', 'g');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const a = value.toString().match(reg)![0];
     const dot = a.indexOf('.');
     if (dot === -1) {
@@ -35,5 +49,3 @@ const AppUtil = {
     return b > 0 ? a + '0'.repeat(b) : a;
   },
 };
-
-export default AppUtil;

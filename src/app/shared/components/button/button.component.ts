@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import AppConstant from 'src/app/utilities/app-constant';
+
+import { AppConstant } from '@utilities/index';
 
 @Component({
   selector: 'app-button',

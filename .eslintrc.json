@@ -9,7 +9,13 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
-      "plugins": ["@typescript-eslint", "simple-import-sort", "sort-keys-fix", "prettier"],
+      "plugins": [
+        "@typescript-eslint",
+        "simple-import-sort",
+        "sort-keys-fix",
+        "prettier",
+        "import"
+      ],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
@@ -42,15 +48,95 @@
         "@typescript-eslint/no-explicit-any": "off",
         "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
         "prettier/prettier": [
-          "error",
+          "warn",
           {
             "arrowParens": "always",
-            "useTabs": false
+            "singleAttributePerLine": true,
+            "endOfLine": "auto"
           }
         ],
-        "sort-keys-fix/sort-keys-fix": "warn",
-        "simple-import-sort/imports": "error",
-        "simple-import-sort/exports": "error"
+        "sort-keys-fix/sort-keys-fix": "error",
+        "simple-import-sort/exports": "error",
+        "import/order": [
+          "error",
+          {
+            "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"]],
+            "newlines-between": "always",
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            },
+            "pathGroups": [
+              {
+                "pattern": "@angular/**",
+                "group": "external"
+              },
+              {
+                "pattern": "@capacitor/**",
+                "group": "external"
+              },
+              {
+                "pattern": "@ionic/**",
+                "group": "external"
+              },
+              {
+                "pattern": "@ngx-translate/**",
+                "group": "external"
+              },
+
+              {
+                "pattern": "@components/**",
+                "group": "internal"
+              },
+              {
+                "pattern": "@models/**",
+                "group": "internal"
+              },
+              {
+                "pattern": "@pages/**",
+                "group": "internal"
+              },
+              {
+                "pattern": "@services/**",
+                "group": "internal",
+                "position": "before"
+              },
+              {
+                "pattern": "@shared/**",
+                "group": "internal",
+                "position": "before"
+              },
+              {
+                "pattern": "@utilities/**",
+                "group": "internal",
+                "position": "before"
+              }
+            ],
+            "pathGroupsExcludedImportTypes": ["builtin"]
+          }
+        ],
+        "import/no-duplicates": ["error", { "prefer-inline": true }]
+      },
+      "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".ts"]
+          },
+          "typescript": {
+            "project": "./tsconfig.json"
+          }
+        },
+        "import/alias": {
+          "alias": {
+            "@/*": "./src",
+            "@utilities/*": "app/utilities/*",
+            "@services/*": "app/core/services/*",
+            "@models/*": "app/core/models/*",
+            "@components/*": "app/shared/components/*",
+            "@shared/*": "app/shared/*",
+            "@environments/*": "environments/*"
+          }
+        }
       }
     },
     {

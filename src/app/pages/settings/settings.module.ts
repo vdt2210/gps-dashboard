@@ -2,18 +2,19 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from 'src/app/shared/shared.module';
 
-import { AccountComponent } from './components/account/account.component';
-import { ClearDataComponent } from './components/clear-data/clear-data.component';
-import { LanguageSelectListComponent } from './components/language-list/language-list.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
-import { SpeedCorrectionComponent } from './components/speed-correction/speed-correction.component';
-import { SyncDataComponent } from './components/sync-data/sync-data.component';
-import { UnitListComponent } from './components/unit-list/unit-list.component';
-import { SettingsPage } from './settings.page';
+import { SharedModule } from '@shared/shared.module';
+
+import { AccountComponent } from './account/account.component';
+import { ClearDataComponent } from './clear-data/clear-data.component';
+import { LanguageSelectListComponent } from './language-list/language-list.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 import { SettingsRoutingModule } from './settings-routing.module';
+import { SettingsPage } from './settings.page';
+import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
+import { SpeedCorrectionComponent } from './speed-correction/speed-correction.component';
+import { SyncDataComponent } from './sync-data/sync-data.component';
+import { UnitListComponent } from './unit-list/unit-list.component';
 
 @NgModule({
   declarations: [

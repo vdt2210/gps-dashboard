@@ -1,9 +1,9 @@
-export interface Geolocation {
+export interface IGeolocation {
   accuracy: number | null;
   altitude: number | null;
   altitudeAccuracy: number | null;
   bearing: number | null;
-  gpsStatus: string;
+  gpsStatusColor: EGpsStatusColor;
   latitude: string;
   longitude: string;
   simulated: boolean;
@@ -11,8 +11,24 @@ export interface Geolocation {
   time: number | null;
 }
 
-export interface GeolocationDashboard {
-  gpsStatus: string;
-  latitude: string;
-  longitude: string;
+export type TGeolocation = Pick<
+  IGeolocation,
+  | 'accuracy'
+  | 'altitude'
+  | 'altitudeAccuracy'
+  | 'bearing'
+  | 'gpsStatusColor'
+  | 'latitude'
+  | 'longitude'
+  | 'simulated'
+  | 'speed'
+  | 'time'
+>;
+
+export type TGeolocationDashboard = Pick<IGeolocation, 'gpsStatusColor' | 'latitude' | 'longitude'>;
+
+export enum EGpsStatusColor {
+  success = 'success',
+  warning = 'warning',
+  danger = 'danger',
 }

@@ -1,73 +1,55 @@
-<ion-header>
-	<div class="d-flex ion-justify-content-between header-bar">
-		<div class="left-side ion-align-items-center d-flex">
-			<ion-icon
-				id="gpsStatus"
-				name="locate"
-				[color]="location.gpsStatus"
-			/>
-		</div>
-
-		<p class="ion-no-margin">{{ totalTime }}</p>
-
-		<div class="right-side d-flex">
-			<ion-buttons>
-				<app-icon-only-button
-					icon="settings-outline"
-					(clickEmit)="goToSetting()"
-				/>
-			</ion-buttons>
-		</div>
-	</div>
-</ion-header>
+<app-header
+  [gpsStatusColor]="location.gpsStatusColor"
+  [totalTime]="totalTime"
+/>
 
 <ion-content [fullscreen]="true">
-	<div class="center">
-		<div class="speed-container">
-			<div>
-				<div class="speed">{{ calculatedData.speed }}</div>
-				<div
-					class="unit"
-					(click)="switchUnit()"
-				>
-					{{ unitData.speedUnit }}
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="center">
+    <div class="speed-container">
+      <div>
+        <div class="speed">{{ calculatedData.speed }}</div>
+        <div
+          class="unit"
+          (click)="switchUnit()"
+        >
+          {{ unitData.speedUnit }}
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer>
-	<div class="footer-bar">
-		<div class="d-flex ion-justify-content-between ion-align-items-center">
-			<div class="left-side d-flex"></div>
+  <div class="footer-bar">
+    <div class="d-flex ion-justify-content-between ion-align-items-center">
+      <div class="left-side d-flex"></div>
 
-			<p class="ion-no-margin">{{ calculatedData.totalDistance }} {{unitData.distanceUnit}}</p>
+      <p class="ion-no-margin">{{ calculatedData.totalDistance }} {{unitData.distanceUnit}}</p>
 
-			<p class="ion-no-margin">{{ calculatedData.tripDistance }} {{unitData.distanceUnit}}</p>
+      <p class="ion-no-margin">{{ calculatedData.tripDistance }} {{unitData.distanceUnit}}</p>
 
-			<div class="right-side d-flex">
-				<span class="landscape-coordinates">
-					<span class="ion-text-left">
-						<div>{{ "latitude" | translate }}:</div>
-						<div>{{ "longitude" | translate }}:</div>
-					</span>
-					<span class="ion-text-left">
-						<div>{{ location.latitude }}</div>
-						<div>{{ location.longitude }}</div>
-					</span>
-				</span>
-			</div>
-		</div>
+      <div class="right-side d-flex">
+        <span class="landscape-coordinates">
+          <span class="ion-text-left">
+            <div>{{ "latitude" | translate }}:</div>
+            <div>{{ "longitude" | translate }}:</div>
+          </span>
+          <span class="ion-text-left">
+            <div>{{ location.latitude }}</div>
+            <div>{{ location.longitude }}</div>
+          </span>
+        </span>
+      </div>
+    </div>
 
-		<app-information-card
-			[topSpeed]="calculatedData.topSpeed"
-			[accuracy]="calculatedData.accuracy"
-			[altitude]="calculatedData.altitude"
-			[avgSpeed]="calculatedData.avgSpeed"
-			[latitude]="location.latitude"
-			[longitude]="location.longitude"
-			[unitData]="unitData"
-		/>
-	</div>
+    <app-information-card
+      [topSpeed]="calculatedData.topSpeed"
+      [accuracy]="calculatedData.accuracy"
+      [altitude]="calculatedData.altitude"
+      [avgSpeed]="calculatedData.avgSpeed"
+      [latitude]="location.latitude"
+      [longitude]="location.longitude"
+      [unitData]="unitData"
+    />
+  </div>
 </ion-footer>
