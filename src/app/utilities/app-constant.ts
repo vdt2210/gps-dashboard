@@ -31,6 +31,12 @@ export const AppConstant = Object.freeze({
     warning: 'warning',
   },
 
+  docEndPoint: {
+    data: 'data',
+    devices: 'devices',
+    users: 'users',
+  },
+
   fill: {
     clear: 'clear',
     default: 'default',

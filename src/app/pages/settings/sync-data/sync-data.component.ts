@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
-import { DeviceService } from '@services/device/device.service';
 import { authService, SyncDataService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
-import { DeviceInfo } from '@models/index';
+import { RadioOption } from '@components/radio/radio.component';
+import { TSyncData } from '@models/index';
 
 @Component({
   selector: 'app-sync-data',
@@ -19,12 +19,12 @@ export class SyncDataComponent implements OnInit, OnDestroy {
   private onDestroy$: Subject<void> = new Subject<void>();
 
   public appConstant = AppConstant;
-  public listDevices: DeviceInfo[] = [];
-  public selectedId?: string;
+  public listSyncData: TSyncData[] = [];
+  public listSyncDataOptions: RadioOption[] = [];
+  public selectedSyncDataId?: string;
 
   constructor(
     private authService: authService,
-    private deviceService: DeviceService,
     private syncDataService: SyncDataService
   ) {}
 
@@ -34,10 +34,14 @@ export class SyncDataComponent implements OnInit, OnDestroy {
       return;
     }
 
-    (await this.deviceService.getList())
+    (await this.syncDataService.getList())
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe((res: DeviceInfo[]) => {
-        this.listDevices = res;
+      .subscribe((res: TSyncData[]) => {
+        this.listSyncData = res;
+        this.listSyncDataOptions = res.map((item) => ({
+          label: item.deviceName,
+          value: item.id,
+        }));
       });
   }
 
@@ -50,9 +54,11 @@ export class SyncDataComponent implements OnInit, OnDestroy {
   }
 
   public importData() {
-    if (this.selectedId) {
+    if (this.selectedSyncDataId) {
       //TODO show confirm popup
-      this.syncDataService.getAndPatchBackupValue(this.selectedId);
+      console.log(this.selectedSyncDataId);
+
+      this.syncDataService.getAndPatchBackupValue(this.selectedSyncDataId);
       this.buttonClick();
     }
   }

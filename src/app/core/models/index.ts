@@ -3,4 +3,5 @@ export * from './calculate.model';
 export * from './device.model';
 export * from './distance.model';
 export * from './geolocation.model';
+export * from './sync-data.model';
 export * from './unit.model';

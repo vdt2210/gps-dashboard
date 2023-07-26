@@ -16,8 +16,7 @@ import {
 } from '@angular/fire/firestore';
 import { catchError, finalize, from, map, Observable, switchMap, tap } from 'rxjs';
 
-import { authService } from '../auth/auth.service';
-import { LoaderService } from '../loader/loader.service';
+import { LoaderService, authService } from '@services/index';
 
 @Injectable({
   providedIn: 'root',
@@ -29,8 +28,8 @@ export class FirebaseService {
     private authService: authService
   ) {}
 
-  public async checkDocExists(doc: any) {
-    return (await getDoc(doc)).exists();
+  public async checkDocExists(path: string) {
+    return (await getDoc(doc(this.firestore, path))).exists();
   }
 
   async checkDocExistsById(path: string, uid: string, id: string) {
@@ -53,10 +52,9 @@ export class FirebaseService {
     this.loaderService.show();
     const ref = query(
       collection(this.firestore, path),
-      where('uid', '==', await this.authService.userId),
-      where('isActivated', '==', true)
+      where('uid', '==', await this.authService.userId) || where('isActivated', '==', true)
     );
-    // const ref = collection(this.firestore, path);
+
     return (collectionData(ref) as Observable<any>).pipe(
       tap(() => this.loaderService.hide()),
       catchError((error) => {
@@ -145,7 +143,7 @@ export class FirebaseService {
     this.loaderService.show();
     try {
       const ref = doc(this.firestore, path);
-      if (await this.checkDocExists(ref)) {
+      if (await this.checkDocExists(path)) {
         await setDoc(ref, { ...params, lastUpdated: serverTimestamp() }, { merge: true });
       } else {
         await setDoc(ref, { ...params, createdDate: serverTimestamp() });
@@ -175,18 +173,6 @@ export class FirebaseService {
   //         { merge: true }
   //       );
   //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  //   this.loaderService.hide();
-  // }
-
-  // TODO
-  // async setList(path: string, collection: string, params: object) {
-  //   this.loaderService.show();
-  //   try {
-  //     const ref = doc(this.firestore, path);
-  //     await setDoc(ref, params, { merge: true });
   //   } catch (error) {
   //     console.error(error);
   //   }

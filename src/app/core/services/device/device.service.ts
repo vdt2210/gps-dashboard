@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Device } from '@capacitor/device';
+import { Device, DeviceInfo } from '@capacitor/device';
 import { BehaviorSubject } from 'rxjs';
 
 import { AppConstant } from '@utilities/index';
 
-import { DeviceInfo } from '@models/index';
+import { TDeviceInfo, TDeviceInfoDTO } from '@models/index';
 
 import { authService, FirebaseService, StorageService } from '../index';
 
@@ -12,10 +12,9 @@ import { authService, FirebaseService, StorageService } from '../index';
   providedIn: 'root',
 })
 export class DeviceService {
-  docRef = 'devices';
-
   deviceId$: BehaviorSubject<string>;
-  devicesList$: BehaviorSubject<DeviceInfo[]>;
+  deviceInfo$: BehaviorSubject<DeviceInfo | null>;
+  devicesList$: BehaviorSubject<TDeviceInfo[]>;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -23,10 +22,13 @@ export class DeviceService {
     private storageService: StorageService
   ) {
     this.deviceId$ = new BehaviorSubject<string>('');
-    this.devicesList$ = new BehaviorSubject<DeviceInfo[]>([]);
+    this.deviceInfo$ = new BehaviorSubject<DeviceInfo | null>(null);
+    this.devicesList$ = new BehaviorSubject<TDeviceInfo[]>([]);
   }
 
   public async setInitialDeviceId() {
+    this.deviceInfo$.next(await Device.getInfo());
+
     await this.storageService
       .get(AppConstant.storageKeys.deviceId)
       .then(async (val) => {
@@ -52,38 +54,45 @@ export class DeviceService {
     return this.deviceId$;
   }
 
+  public get deviceInfo() {
+    return this.deviceInfo$;
+  }
+
   public get devicesList() {
     return this.devicesList$;
   }
 
   public getList() {
-    return this.firebaseService.get(this.docRef);
+    return this.firebaseService.get(AppConstant.docEndPoint.devices);
   }
 
   // public async getDetail(id?: string) {
   //   this.firebaseService
-  //     .getById(this.docRef, id ? id : this.deviceId.value)
+  //     .getById(AppConstant.docEndPoint.devices, id ? id : this.deviceId.value)
   //     .subscribe((res: DeviceInfo) => {
   //       return res;
   //     });
   // }
 
   public getDetail(id?: string) {
-    return this.firebaseService.getWhereId(this.docRef, id ? id : this.deviceId.value);
+    return this.firebaseService.getWhereId(
+      AppConstant.docEndPoint.devices,
+      id ? id : this.deviceId.value
+    );
   }
 
   public async setDeviceInfo() {
-    const params = {
+    const params: TDeviceInfoDTO = {
       id: this.deviceId.value,
       isActivated: true,
-      name: (await Device.getInfo()).name || null,
-      os: (await Device.getInfo()).operatingSystem || null,
-      platform: (await Device.getInfo()).platform || null,
+      name: this.deviceInfo.value?.name || null,
+      os: this.deviceInfo.value?.operatingSystem,
+      platform: this.deviceInfo.value?.platform,
       uid: await this.authService.userId,
     };
 
     this.firebaseService.setDoc(
-      `${this.docRef}/${await this.authService.userId}.${this.deviceId.value}`,
+      `${AppConstant.docEndPoint.devices}/${await this.authService.userId}.${this.deviceId.value}`,
       params
     );
   }
