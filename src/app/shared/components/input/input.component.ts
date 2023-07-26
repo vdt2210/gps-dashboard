@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import AppConstant from 'src/app/utilities/app-constant';
+
+import { AppConstant } from '@utilities/index';
 
 @Component({
   selector: 'app-input',

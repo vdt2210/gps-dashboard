@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import AppConstant from 'src/app/utilities/app-constant';
 
-import { StorageService } from '../storage/storage.service';
+import { StorageService } from '@services/index';
+
+import { AppConstant } from '@utilities/index';
 
 @Injectable({
   providedIn: 'root',

@@ -10,12 +10,14 @@ import { Drivers } from '@ionic/storage';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { environment } from 'src/environments/environment';
 
-import { AppComponent } from './app.component';
+import { SharedModule } from '@shared/shared.module';
+
+import { LoaderComponent } from '@components/loader/loader.component';
+import { environment } from '@environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
-import { LoaderComponent } from './shared/components/loader/loader.component';
-import { SharedModule } from './shared/shared.module';
+import { AppComponent } from './app.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');

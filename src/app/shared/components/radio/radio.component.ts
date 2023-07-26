@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-interface Item {
-  id?: string;
-  name: string;
-  value?: string;
-}
+export type RadioOption = {
+  label: string | null;
+  value: string;
+  disabled?: boolean;
+};
 
 @Component({
   selector: 'app-radio',
@@ -13,9 +13,9 @@ interface Item {
 })
 export class RadioComponent {
   @Input() selectedValue = '';
-  @Input() listItems: Item[] = [];
+  @Input() listItems: RadioOption[] = [];
 
-  @Output() changeEmit = new EventEmitter();
+  @Output() changeEmit = new EventEmitter<string>();
 
   public onChangeValue(ev: any) {
     this.changeEmit.emit(ev.detail.value);

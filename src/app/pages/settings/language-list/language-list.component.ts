@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { LanguageService } from 'src/app/core/services/language/language.service';
-import AppConstant from 'src/app/utilities/app-constant';
 
-interface Language {
-  name: string;
-  value: string;
-}
+import { LanguageService } from '@services/index';
+
+import { AppConstant } from '@utilities/index';
+
+import { RadioOption } from '@components/radio/radio.component';
 
 @Component({
   selector: 'app-language-list',
@@ -17,7 +16,10 @@ export class LanguageSelectListComponent {
 
   public appConstant = AppConstant;
   public selectedLanguage: string = this.languageService.getCurrentLanguage();
-  public languagesList: Language[] = Object.values(AppConstant.languages);
+  public languagesList: RadioOption[] = Object.values(AppConstant.languages).map((item) => ({
+    label: item.name,
+    value: item.value,
+  }));
 
   constructor(private languageService: LanguageService) {}
 

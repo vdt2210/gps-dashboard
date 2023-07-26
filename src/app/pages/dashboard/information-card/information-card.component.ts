@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { UnitParams } from 'src/app/core/models/unit.model';
-import AppConstant from 'src/app/utilities/app-constant';
+
+import { AppConstant } from '@utilities/index';
+
+import { UnitParams } from '@models/index';
 
 interface data {
   label: string;

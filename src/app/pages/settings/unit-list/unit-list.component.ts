@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { UnitService } from 'src/app/core/services/unit/unit.service';
-import AppConstant from 'src/app/utilities/app-constant';
 
-interface Unit {
-  name: string;
-  value: string;
-}
+import { UnitService } from '@services/unit/unit.service';
+
+import { AppConstant } from '@utilities/index';
+
+import { RadioOption } from '@components/radio/radio.component';
 
 @Component({
   selector: 'app-unit-list',
@@ -17,8 +16,8 @@ export class UnitListComponent {
 
   public appConstant = AppConstant;
   public selectedUnit: string = this.unitService.getUnit().getValue().value;
-  public unitsList: Unit[] = Object.values(AppConstant.unit).map((el) => ({
-    name: el.value,
+  public unitsList: RadioOption[] = Object.values(AppConstant.unit).map((el) => ({
+    label: el.value,
     value: el.value,
   }));
 

@@ -1,0 +1,22 @@
+<ion-header>
+  <div class="d-flex ion-justify-content-between header-bar">
+    <div class="left-side ion-align-items-center d-flex">
+      <ion-icon
+        id="gpsStatus"
+        name="locate"
+        [color]="gpsStatusColor"
+      />
+    </div>
+
+    <p class="ion-no-margin">{{ totalTime }}</p>
+
+    <div class="right-side d-flex">
+      <ion-buttons>
+        <app-icon-only-button
+          icon="settings-outline"
+          (clickEmit)="goToSetting()"
+        />
+      </ion-buttons>
+    </div>
+  </div>
+</ion-header>

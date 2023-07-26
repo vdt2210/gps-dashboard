@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import appConstant from 'src/app/utilities/app-constant';
 
-import { authService } from '../auth/auth.service';
-import { DeviceService } from '../device/device.service';
-import { DistanceService } from '../distance/distance.service';
-import { FirebaseService } from '../firebase/firebase.service';
-import { StorageService } from '../storage/storage.service';
-import { TimerService } from '../timer/timer.service';
-import { TopSpeedService } from '../top-speed/top-speed.service';
+import { AppConstant } from '@utilities/index';
+
+import { TSyncDataDTO } from '../../models/sync-data.model';
+import {
+  DeviceService,
+  DistanceService,
+  FirebaseService,
+  authService,
+  StorageService,
+  TimerService,
+  TopSpeedService,
+} from '../index';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SyncDataService {
-  docRef = 'data';
-
   constructor(
     private storageService: StorageService,
     private deviceService: DeviceService,
@@ -25,42 +27,51 @@ export class SyncDataService {
     private distanceService: DistanceService
   ) {}
 
-  public async setBackupValue() {
-    let params: { [key: string]: any } = {};
-    for (const key of appConstant.backupKeys) {
-      params[key] = await this.storageService.get(
-        (appConstant.storageKeys as { [key: string]: string })[key]
-      );
-    }
-
-    const dataId = `${await this.authService.userId}.${this.deviceService.deviceId.value}`;
-
-    params = {
-      deviceId: this.deviceService.deviceId.value,
-      id: dataId,
-      uid: await this.authService.userId,
-      ...params,
-    };
-
-    this.firebaseService.setDoc(`${this.docRef}/${dataId}`, params);
+  public getList() {
+    return this.firebaseService.get(AppConstant.docEndPoint.data);
   }
 
-  public async getAndPatchBackupValue(deviceId: string) {
-    const dataId = `${await this.authService.userId}.${deviceId}`;
-
-    this.firebaseService.getById(this.docRef, dataId).subscribe(async (data) => {
-      if (data) {
-        for (const key of appConstant.backupKeys) {
-          await this.storageService.set(
-            (appConstant.storageKeys as { [key: string]: string })[key],
-            data[key]
-          );
-        }
-
-        this.distanceService.setInitialDistance();
-        this.topSpeedService.setInitialTopSpeed();
-        this.timerService.setInitialTotalTime();
-      }
+  public async setBackupValue() {
+    const dataObject: Record<string, number | string> = {};
+    const promises = AppConstant.backupKeys.map(async (key) => {
+      dataObject[key] = await this.storageService.get(
+        (AppConstant.storageKeys as { [key: string]: string })[key]
+      );
     });
+    await Promise.all(promises);
+
+    const { value: deviceId } = this.deviceService.deviceId;
+    const { value: deviceInfo } = this.deviceService.deviceInfo;
+    const userId = await this.authService.userId;
+    const dataId = `${userId}.${deviceId}`;
+
+    const params: TSyncDataDTO = {
+      deviceId,
+      deviceName: deviceInfo?.name ?? null,
+      id: dataId,
+      uid: userId,
+      ...dataObject,
+    };
+
+    this.firebaseService.setDoc(`${AppConstant.docEndPoint.data}/${dataId}`, params);
+  }
+
+  public async getAndPatchBackupValue(syncDataId: string) {
+    this.firebaseService
+      .getById(AppConstant.docEndPoint.data, syncDataId)
+      .subscribe(async (data) => {
+        if (data) {
+          for (const key of AppConstant.backupKeys) {
+            await this.storageService.set(
+              (AppConstant.storageKeys as { [key: string]: string })[key],
+              data[key]
+            );
+          }
+
+          this.distanceService.setInitialDistance();
+          this.topSpeedService.setInitialTopSpeed();
+          this.timerService.setInitialTotalTime();
+        }
+      });
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import AppConstant from 'src/app/utilities/app-constant';
+
+import { AppConstant } from '@utilities/index';
 
 import { DistanceParams } from '../../models/distance.model';
 import { StorageService } from '../storage/storage.service';

@@ -1,109 +1,108 @@
 @import 'src/styles/mixin.scss';
 
-.header-bar,
 .footer-bar {
-	padding: 10px;
-	min-height: 40px;
-	align-items: center;
-	font-size: 22px;
-	gap: 10%;
+  padding: 10px;
+  min-height: 40px;
+  align-items: center;
+  font-size: 22px;
+  gap: 10%;
 
-	// .left-side,
-	// .right-side {
-	// 	width: 100%;
-	// }
+  // .left-side,
+  // .right-side {
+  // 	width: 100%;
+  // }
 
-	// .right-side {
-	// 	justify-content: right;
-	// }
+  // .right-side {
+  // 	justify-content: right;
+  // }
 }
 
 .center {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	// height: calc(100vh - 80px);
-	height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  // height: calc(100vh - 80px);
+  height: 100%;
 }
 
 .speed-container {
-	aspect-ratio: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	transition: height 0.5s;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: height 0.5s;
 
-	@include portrait {
-		width: 80%;
-	}
+  @include portrait {
+    width: 80%;
+  }
 
-	@include landscape {
-		height: 200px;
-		border-radius: 50%;
-		background: linear-gradient(to top, var(--ion-color-step-50), var(--ion-color-step-100));
-		border: 2px solid var(--ion-color-step-150);
+  @include landscape {
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(to top, var(--ion-color-step-50), var(--ion-color-step-100));
+    border: 2px solid var(--ion-color-step-150);
 
-		@include tablet {
-			height: 250px;
-		}
+    @include tablet {
+      height: 250px;
+    }
 
-		@include desktop {
-			height: 300px;
-		}
-	}
+    @include desktop {
+      height: 300px;
+    }
+  }
 
-	.speed {
-		transition: font-size 0.5s;
+  .speed {
+    transition: font-size 0.5s;
 
-		@include portrait {
-			font-size: 100px;
+    @include portrait {
+      font-size: 100px;
 
-			@include tablet {
-				font-size: 120px;
-			}
+      @include tablet {
+        font-size: 120px;
+      }
 
-			@include desktop {
-				font-size: 140px;
-			}
-		}
+      @include desktop {
+        font-size: 140px;
+      }
+    }
 
-		@include landscape {
-			font-size: 60px;
+    @include landscape {
+      font-size: 60px;
 
-			@include tablet {
-				font-size: 80px;
-			}
+      @include tablet {
+        font-size: 80px;
+      }
 
-			@include desktop {
-				font-size: 100px;
-			}
-		}
-	}
+      @include desktop {
+        font-size: 100px;
+      }
+    }
+  }
 
-	.unit {
-		transition: font-size 0.5s;
+  .unit {
+    transition: font-size 0.5s;
 
-		font-size: 20px;
+    font-size: 20px;
 
-		@include tablet {
-			font-size: 24px;
-		}
+    @include tablet {
+      font-size: 24px;
+    }
 
-		@include desktop {
-			font-size: 30px;
-		}
-	}
+    @include desktop {
+      font-size: 30px;
+    }
+  }
 }
 
 .landscape-coordinates {
-	font-size: 14px;
-	color: var(--ion-color-step-600);
-	display: inline-flex;
-	gap: 5px;
+  font-size: 14px;
+  color: var(--ion-color-step-600);
+  display: inline-flex;
+  gap: 5px;
 
-	@include portrait {
-		display: none;
-	}
+  @include portrait {
+    display: none;
+  }
 }

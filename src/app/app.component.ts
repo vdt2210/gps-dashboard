@@ -6,12 +6,15 @@ import { SplashScreen } from '@capacitor/splash-screen';
 import { KeepAwake } from '@capacitor-community/keep-awake';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 
-import { CalculateService } from './core/services/calculate/calculate.service';
-import { DeviceService } from './core/services/device/device.service';
-import { GeolocationService } from './core/services/geolocation/geolocation.service';
-import { LanguageService } from './core/services/language/language.service';
-import { TimerService } from './core/services/timer/timer.service';
-import { AppRoutes } from './utilities/app-routes';
+import {
+  CalculateService,
+  DeviceService,
+  GeolocationService,
+  LanguageService,
+  TimerService,
+} from '@services/index';
+
+import { AppRoutes } from '@utilities/index';
 
 @Component({
   selector: 'app-root',

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { App } from '@capacitor/app';
-import { authService } from 'src/app/core/services/auth/auth.service';
-import { GeolocationService } from 'src/app/core/services/geolocation/geolocation.service';
-import { AppRoutes } from 'src/app/utilities/app-routes';
+
+import { authService, GeolocationService } from '@services/index';
+
+import { AppRoutes } from '@utilities/index';
 
 interface SettingModel {
   action: any;
@@ -54,7 +55,10 @@ export class SettingsPage implements OnInit {
   public isSpeedCorrection = false;
   public isClearData = false;
 
-  constructor(private geolocationService: GeolocationService, private authService: authService) {
+  constructor(
+    private geolocationService: GeolocationService,
+    private authService: authService
+  ) {
     this.geolocationService
       .getSpeedCorrection()
       .subscribe((val) => (this.settingsList[4].value = `+${val}%`));

@@ -2,13 +2,13 @@ import { Injectable, NgZone } from '@angular/core';
 import { registerPlugin } from '@capacitor/core';
 import { BackgroundGeolocationPlugin } from '@capacitor-community/background-geolocation';
 import { BehaviorSubject } from 'rxjs';
-import AppConstant from 'src/app/utilities/app-constant';
-import AppUtil from 'src/app/utilities/app-util';
 
-import { Geolocation } from '../../models/geolocation.model';
-import { TimerService } from '../timer/timer.service';
-import { TopSpeedService } from '../top-speed/top-speed.service';
-import { StorageService } from './../storage/storage.service';
+import { AppConstant, AppUtil } from '@utilities/index';
+
+import { EGpsStatusColor, TGeolocation } from '@models/index';
+
+import { StorageService, TimerService, TopSpeedService } from '../index';
+
 const BackgroundGeolocation = registerPlugin<BackgroundGeolocationPlugin>('BackgroundGeolocation');
 
 @Injectable({
@@ -17,12 +17,12 @@ const BackgroundGeolocation = registerPlugin<BackgroundGeolocationPlugin>('Backg
 export class GeolocationService {
   private watcherId = '';
   private speedCorrection$ = new BehaviorSubject<number>(0);
-  private location$ = new BehaviorSubject<Geolocation>({
+  private location$ = new BehaviorSubject<TGeolocation>({
     accuracy: null,
     altitude: null,
     altitudeAccuracy: null,
     bearing: null,
-    gpsStatus: '',
+    gpsStatusColor: '' as EGpsStatusColor,
     latitude: '-.-',
     longitude: '-.-',
     simulated: false,
@@ -55,7 +55,7 @@ export class GeolocationService {
     );
   }
 
-  public getLocation(): BehaviorSubject<Geolocation> {
+  public getLocation(): BehaviorSubject<TGeolocation> {
     return this.location$;
   }
 
@@ -86,16 +86,12 @@ export class GeolocationService {
         (await this.storageService.get(AppConstant.storageKeys.speedCorrection)) || 0
       );
       location.time = this.setTime(location.time, location.speed);
-      location.gpsStatus = this.getGpsStatus(location.accuracy);
+      location.gpsStatusColor = AppUtil.getGpsStatusColor(location.accuracy);
       this.location$.next(location);
       this.topSpeedService.setTopSpeed(location.speed);
     });
 
     return location;
-  }
-
-  private getGpsStatus(accuracy: number): string {
-    return accuracy ? (accuracy <= 6 ? 'success' : accuracy <= 25 ? 'warning' : 'danger') : '';
   }
 
   public async setInitialSpeedCorrection(): Promise<void> {

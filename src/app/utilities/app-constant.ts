@@ -1,4 +1,4 @@
-const appConstant = Object.freeze({
+export const AppConstant = Object.freeze({
   backupKeys: [
     'totalDistance',
     'tripDistance',
@@ -29,6 +29,12 @@ const appConstant = Object.freeze({
     success: 'success',
     tertiary: 'tertiary',
     warning: 'warning',
+  },
+
+  docEndPoint: {
+    data: 'data',
+    devices: 'devices',
+    users: 'users',
   },
 
   fill: {
@@ -80,5 +86,3 @@ const appConstant = Object.freeze({
     },
   },
 });
-
-export default appConstant;

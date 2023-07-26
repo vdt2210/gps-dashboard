@@ -1,7 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { authService } from 'src/app/core/services/auth/auth.service';
-import APP_CONSTANT from 'src/app/utilities/app-constant';
+
+import { authService } from '@services/index';
+
+import { AppConstant } from '@utilities/index';
 
 const ICONS = {
   eye: 'eye',
@@ -16,13 +18,16 @@ const ICONS = {
 export class SignUpFormComponent implements OnInit {
   @Output() buttonEmit = new EventEmitter();
 
-  public appConstant = APP_CONSTANT;
+  public appConstant = AppConstant;
 
   public signUpForm: FormGroup;
   public isShowPassword = false;
   public passwordIcon = ICONS.eyeOff;
 
-  constructor(private formBuilder: FormBuilder, private authService: authService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: authService
+  ) {
     this.signUpForm = this.formBuilder.group({
       confirmPassword: ['', Validators.required],
       displayName: ['', Validators.required],
