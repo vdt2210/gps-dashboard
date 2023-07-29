@@ -4,7 +4,7 @@ import { UnitService } from '@services/unit/unit.service';
 
 import { AppConstant } from '@utilities/index';
 
-import { RadioOption } from '@components/radio/radio.component';
+import { RadioOption } from '@components/index';
 
 @Component({
   selector: 'app-unit-list',

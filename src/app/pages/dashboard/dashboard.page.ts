@@ -1,35 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 
 import { CalculateService, GeolocationService, TimerService, UnitService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
-import { CalculatedData, UnitParams, EGpsStatusColor, TGeolocationDashboard } from '@models/index';
+import { IUnit, EGpsStatusColor, TGeolocationDashboard, TCalculatedData } from '@models/index';
 
 @Component({
   selector: 'app-dashboard',
   styleUrls: ['dashboard.page.scss'],
   templateUrl: 'dashboard.page.html',
 })
-export class DashboardPage implements OnInit {
-  public totalTime = '00:00:00';
+export class DashboardPage implements OnInit, OnDestroy {
+  private onDestroy$: Subject<void> = new Subject<void>();
+
+  public totalTime: string = '00:00:00';
   public location: TGeolocationDashboard = {
     gpsStatusColor: '' as EGpsStatusColor,
     latitude: '-.-',
     longitude: '-.-',
   };
 
-  public calculatedData: CalculatedData = {
+  public calculatedData: TCalculatedData = {
     accuracy: '-',
     altitude: '-.-',
     avgSpeed: '-.-',
     speed: '-',
     topSpeed: '-',
-    totalDistance: '-',
-    tripDistance: '-.-',
+    totalDistance: 0,
+    tripDistance: '0.0',
   };
 
-  public unitData: UnitParams = {
+  public unitData: IUnit = {
     distanceUnit: '',
     lengthUnit: '',
     speedUnit: '',
@@ -44,21 +47,37 @@ export class DashboardPage implements OnInit {
   ) {}
 
   public ngOnInit() {
-    this.timerService.getTotalTime().subscribe((data) => {
-      this.totalTime = data;
-    });
+    this.timerService
+      .getTotalTime()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((data) => {
+        this.totalTime = data;
+      });
 
-    this.geolocationService.getLocation().subscribe((data) => {
-      this.location = data;
-    });
+    this.geolocationService
+      .getLocation()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((data) => {
+        this.location = data;
+      });
 
-    this.calculateService.getCalculateData().subscribe((data) => {
-      this.calculatedData = data;
-    });
+    this.calculateService
+      .getCalculateData()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((data) => {
+        this.calculatedData = data;
+      });
 
-    this.unitService.getUnit().subscribe((data) => {
-      this.unitData = data;
-    });
+    this.unitService
+      .getUnit()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((data) => {
+        this.unitData = data;
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.onDestroy$.unsubscribe();
   }
 
   public switchUnit() {

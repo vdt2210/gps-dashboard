@@ -1,0 +1,7 @@
+@import 'src/styles/mixin.scss';
+
+.main-container {
+  @include portrait {
+    margin-bottom: 5px;
+  }
+}

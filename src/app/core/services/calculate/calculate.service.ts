@@ -11,7 +11,7 @@ import {
 
 import { AppUtil, AppConstant } from '@utilities/index';
 
-import { TGeolocation, CalculatedData, DistanceParams } from '@models/index';
+import { TGeolocation, ICalculatedData, DistanceParams } from '@models/index';
 
 interface speedTime {
   speed: number;
@@ -24,20 +24,20 @@ const VALUE: speedTime[] = [];
   providedIn: 'root',
 })
 export class CalculateService {
-  calculateData$ = new BehaviorSubject<CalculatedData>({
+  calculateData$ = new BehaviorSubject<ICalculatedData>({
     accuracy: 0,
     altitude: '-.-',
     avgSpeed: '-.-',
     speed: 0,
     topSpeed: 0,
     totalDistance: 0,
-    tripDistance: '-.-',
+    tripDistance: '0.0',
   });
 
   public speed!: number | string;
   public topSpeed!: number | string;
   public accuracy!: number | string;
-  public totalDistance!: number | string;
+  public totalDistance!: number;
   public speedCorrection!: number;
   private rawSpeed!: number | null;
   private rawTopSpeed!: number | null;
@@ -45,7 +45,7 @@ export class CalculateService {
   private rawAltitude!: number | null;
   private avgSpeedTotalTime!: number;
 
-  public tripDistance!: number | string;
+  public tripDistance!: string;
   public altitude!: number | string;
   public avgSpeed!: number | string;
 
@@ -171,16 +171,12 @@ export class CalculateService {
       this.altitude = '-.-';
     }
 
-    if (this.distances.totalDistance >= 0) {
-      this.totalDistance = Math.trunc(this.distances.totalDistance / 1000);
-    } else {
-      this.totalDistance = '-.-';
-    }
+    this.totalDistance = Math.trunc(this.distances.totalDistance / 1000);
 
     if (this.distances.tripDistance >= 0) {
       this.tripDistance = AppUtil.toFixedNoRounding(this.distances.tripDistance / 1000, 1);
     } else {
-      this.tripDistance = '-.-';
+      this.tripDistance = '0.0';
     }
 
     if (this.distances.avgSpeedTotalDistance >= 0 && this.avgSpeedTotalTime > 0) {
@@ -229,11 +225,7 @@ export class CalculateService {
       this.altitude = '-.-';
     }
 
-    if (this.distances.totalDistance >= 0) {
-      this.totalDistance = Math.trunc(this.distances.totalDistance * 0.000621371192);
-    } else {
-      this.totalDistance = '-.-';
-    }
+    this.totalDistance = Math.trunc(this.distances.totalDistance * 0.000621371192);
 
     if (this.distances.tripDistance >= 0) {
       this.tripDistance = AppUtil.toFixedNoRounding(
@@ -241,7 +233,7 @@ export class CalculateService {
         1
       );
     } else {
-      this.tripDistance = '-.-';
+      this.tripDistance = '0.0';
     }
 
     if (this.distances.avgSpeedTotalDistance >= 0 && this.avgSpeedTotalTime > 0) {

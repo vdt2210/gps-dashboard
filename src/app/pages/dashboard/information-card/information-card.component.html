@@ -1,11 +1,11 @@
 <div class="information-container">
-	<div
-		*ngFor="let data of dataList"
-		class="ion-justify-content-between d-flex ion-align-items-center detail-card"
-	>
-		<span>
-			<strong [translate]="data.label"></strong>
-		</span>
-		<span> {{ data.value }} {{ data.unit }}</span>
-	</div>
+  <div
+    *ngFor="let data of dataList"
+    class="ion-justify-content-between flex ion-align-items-center detail-card"
+  >
+    <span>
+      <strong [translate]="data.label"></strong>
+    </span>
+    <span> {{ data.value }} {{ data.unit }}</span>
+  </div>
 </div>

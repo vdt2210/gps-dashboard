@@ -13,7 +13,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { SharedModule } from '@shared/shared.module';
 
-import { LoaderComponent } from '@components/loader/loader.component';
+import { LoaderComponent } from '@components/index';
 import { environment } from '@environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';

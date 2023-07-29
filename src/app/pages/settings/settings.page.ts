@@ -1,26 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { App } from '@capacitor/app';
+import { Subject, takeUntil } from 'rxjs';
 
 import { authService, GeolocationService } from '@services/index';
 
 import { AppRoutes } from '@utilities/index';
 
-interface SettingModel {
-  action: any;
-  icon: string;
-  label: string;
-  value?: string;
-}
+import { TButtonCardOption } from '@components/index';
 
 @Component({
   selector: 'app-settings',
   styleUrls: ['settings.page.scss'],
   templateUrl: 'settings.page.html',
 })
-export class SettingsPage implements OnInit {
+export class SettingsPage implements OnInit, OnDestroy {
+  private onDestroy$: Subject<void> = new Subject<void>();
+
   public appRoutes = AppRoutes;
 
-  public settingsList: SettingModel[] = [
+  public settingsList: TButtonCardOption[] = [
     { action: 'account', icon: 'person-outline', label: 'account' },
     {
       action: 'syncData',
@@ -33,7 +31,7 @@ export class SettingsPage implements OnInit {
       action: 'speedCorrection',
       icon: 'speedometer-outline',
       label: 'speedCorrection',
-      value: '+0%',
+      subText: '+0%',
     },
     { action: 'clearData', icon: 'trash-outline', label: 'clearData' },
     {
@@ -61,11 +59,16 @@ export class SettingsPage implements OnInit {
   ) {
     this.geolocationService
       .getSpeedCorrection()
-      .subscribe((val) => (this.settingsList[4].value = `+${val}%`));
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((val) => (this.settingsList[4].subText = `+${val}%`));
   }
 
-  async ngOnInit(): Promise<void> {
+  public async ngOnInit(): Promise<void> {
     this.appVersion = (await App.getInfo()).version;
+  }
+
+  public ngOnDestroy(): void {
+    this.onDestroy$.unsubscribe();
   }
 
   public async onClickCard(action: string) {

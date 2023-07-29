@@ -2,13 +2,22 @@ import { Component, Input, OnChanges } from '@angular/core';
 
 import { AppConstant } from '@utilities/index';
 
-import { UnitParams } from '@models/index';
+import { ICalculatedData, IGeolocation, IUnit } from '@models/index';
 
-interface data {
+type TDataList = {
   label: string;
   unit?: string;
   value: number | string;
-}
+};
+
+export type TInformationCardCalculatedData = Pick<
+  ICalculatedData,
+  'accuracy' | 'altitude' | 'avgSpeed' | 'topSpeed'
+>;
+
+export type TInformationCardGeolocationData = Pick<IGeolocation, 'latitude' | 'longitude'>;
+
+export type TInformationCardUnit = Pick<IUnit, 'lengthUnit' | 'speedUnit'>;
 
 @Component({
   selector: 'app-information-card',
@@ -16,50 +25,53 @@ interface data {
   templateUrl: './information-card.component.html',
 })
 export class InformationCardComponent implements OnChanges {
-  @Input() topSpeed: number | string = '-.-';
-  @Input() avgSpeed: number | string = '-.-';
-  @Input() accuracy: number | string = '-';
-  @Input() altitude: number | string = '-.-';
-  @Input() latitude: number | string = '-.-';
-  @Input() longitude: number | string = '-.-';
-  @Input() unitData: UnitParams = {
-    distanceUnit: AppConstant.unit.metric.distanceUnit,
-    lengthUnit: AppConstant.unit.metric.lengthUnit,
-    speedUnit: AppConstant.unit.metric.speedUnit,
-    value: AppConstant.unit.metric.value,
+  @Input() calculatedData: TInformationCardCalculatedData = {
+    accuracy: '-',
+    altitude: '-.-',
+    avgSpeed: '-.-',
+    topSpeed: '-.-',
   };
 
-  public dataList: data[] = [];
+  @Input() geolocationData: TInformationCardGeolocationData = {
+    latitude: '-.-',
+    longitude: '-.-',
+  };
+  @Input() unitData: TInformationCardUnit = {
+    lengthUnit: AppConstant.unit.metric.lengthUnit,
+    speedUnit: AppConstant.unit.metric.speedUnit,
+  };
+
+  public dataList: TDataList[] = [];
 
   ngOnChanges(): void {
     this.dataList = [
       {
         label: 'topSpeed',
         unit: this.unitData.speedUnit,
-        value: this.topSpeed,
+        value: this.calculatedData.topSpeed,
       },
       {
         label: 'averageSpeed',
         unit: this.unitData.speedUnit,
-        value: this.avgSpeed,
+        value: this.calculatedData.avgSpeed,
       },
       {
         label: 'accuracy',
         unit: this.unitData.lengthUnit,
-        value: this.accuracy,
+        value: this.calculatedData.accuracy,
       },
       {
         label: 'altitude',
         unit: this.unitData.lengthUnit,
-        value: this.altitude,
+        value: this.calculatedData.altitude,
       },
       {
         label: 'latitude',
-        value: this.latitude,
+        value: this.geolocationData.latitude,
       },
       {
         label: 'longitude',
-        value: this.longitude,
+        value: this.geolocationData.longitude,
       },
     ];
   }

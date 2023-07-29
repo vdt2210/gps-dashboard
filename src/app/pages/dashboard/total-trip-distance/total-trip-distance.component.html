@@ -1,0 +1,18 @@
+<div
+  (click)="switchDisplay()"
+  class="mx-auto w-fit main-container"
+>
+  <p
+    *ngIf="isShowTotalDistance"
+    class="ion-no-margin"
+  >
+    Total {{ totalDistance }} {{ distanceUnit }}
+  </p>
+
+  <p
+    *ngIf="!isShowTotalDistance"
+    class="ion-no-margin"
+  >
+    Trip {{ tripDistance }} {{ distanceUnit }}
+  </p>
+</div>

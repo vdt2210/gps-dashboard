@@ -1,15 +1,35 @@
-.d-flex {
-	display: flex;
+.flex {
+  display: flex;
 }
 
-.d-hidden {
-	display: hidden;
+.hidden {
+  display: hidden;
 }
 
-.d-unset {
-	display: unset;
+.w-fit {
+  width: fit-content;
 }
 
 .w-full {
-	width: 100%;
+  width: 100%;
+}
+
+.h-fit {
+  height: fit-content;
+}
+
+.h-full {
+  width: 100%;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.my-auto {
+  margin-block: auto;
+}
+
+.mx-auto {
+  margin-inline: auto;
 }

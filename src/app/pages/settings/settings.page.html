@@ -19,10 +19,8 @@
       sizeXl="2"
     >
       <app-button-card
-        [icon]="setting.icon"
-        [cardLabel]="setting.label"
-        [value]="setting.value"
-        (clickEmit)="onClickCard(setting.action)"
+        [buttonOption]="setting"
+        (clickEmit)="onClickCard($event)"
       />
     </ion-col>
   </ion-row>
