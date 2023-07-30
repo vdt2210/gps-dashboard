@@ -28,8 +28,8 @@ export class CalculateService {
     accuracy: 0,
     altitude: '-.-',
     avgSpeed: '-.-',
-    speed: 0,
-    topSpeed: 0,
+    speed: null,
+    topSpeed: null,
     totalDistance: 0,
     tripDistance: '0.0',
   });
@@ -147,17 +147,9 @@ export class CalculateService {
 
   // * calculate in metric unit
   private metricUnit() {
-    if (this.rawSpeed != null) {
-      this.speed = Math.round(this.rawSpeed * 3.6);
-    } else {
-      this.speed = '-';
-    }
+    const speed = this.rawSpeed !== null ? Math.round(this.rawSpeed * 3.6) : null;
 
-    if (this.rawTopSpeed != null) {
-      this.topSpeed = Math.round(this.rawTopSpeed * 3.6);
-    } else {
-      this.topSpeed = '-';
-    }
+    const topSpeed = this.rawTopSpeed !== null ? Math.round(this.rawTopSpeed * 3.6) : null;
 
     if (this.rawAccuracy != null) {
       this.accuracy = Math.round(this.rawAccuracy);
@@ -192,8 +184,8 @@ export class CalculateService {
       accuracy: this.accuracy,
       altitude: this.altitude,
       avgSpeed: this.avgSpeed,
-      speed: this.speed,
-      topSpeed: this.topSpeed,
+      speed,
+      topSpeed,
       totalDistance: this.totalDistance,
       tripDistance: this.tripDistance,
     });
@@ -201,17 +193,9 @@ export class CalculateService {
 
   // * calculate in imperial unit
   private imperialUnit() {
-    if (this.rawSpeed != null) {
-      this.speed = Math.round(this.rawSpeed * 2.23693629);
-    } else {
-      this.speed = '-';
-    }
+    const speed = this.rawSpeed !== null ? Math.round(this.rawSpeed * 2.23693629) : null;
 
-    if (this.rawTopSpeed != null) {
-      this.topSpeed = Math.round(this.rawTopSpeed * 2.23693629);
-    } else {
-      this.topSpeed = '-';
-    }
+    const topSpeed = this.rawTopSpeed !== null ? Math.round(this.rawTopSpeed * 2.23693629) : null;
 
     if (this.rawAccuracy != null) {
       this.accuracy = Math.round(this.rawAccuracy * 3.2808399);
@@ -249,8 +233,8 @@ export class CalculateService {
       accuracy: this.accuracy,
       altitude: this.altitude,
       avgSpeed: this.avgSpeed,
-      speed: this.speed,
-      topSpeed: this.topSpeed,
+      speed,
+      topSpeed,
       totalDistance: this.totalDistance,
       tripDistance: this.tripDistance,
     });

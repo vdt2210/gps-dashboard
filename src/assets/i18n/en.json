@@ -33,5 +33,7 @@
   "newPassword": "New password",
   "syncData": "Sync data",
   "import": "Import",
-  "export": "Export"
+  "export": "Export",
+  "total": "Total",
+  "trip": "Trip"
 }

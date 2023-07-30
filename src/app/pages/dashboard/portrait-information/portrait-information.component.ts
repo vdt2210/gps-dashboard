@@ -7,35 +7,36 @@ import { ICalculatedData, IGeolocation, IUnit } from '@models/index';
 type TDataList = {
   label: string;
   unit?: string;
-  value: number | string;
+  value: number | string | null;
 };
 
-export type TInformationCardCalculatedData = Pick<
+type TInformationCardCalculatedData = Pick<
   ICalculatedData,
   'accuracy' | 'altitude' | 'avgSpeed' | 'topSpeed'
 >;
 
-export type TInformationCardGeolocationData = Pick<IGeolocation, 'latitude' | 'longitude'>;
+type TInformationCardGeolocationData = Pick<IGeolocation, 'latitude' | 'longitude'>;
 
-export type TInformationCardUnit = Pick<IUnit, 'lengthUnit' | 'speedUnit'>;
+type TInformationCardUnit = Pick<IUnit, 'lengthUnit' | 'speedUnit'>;
 
 @Component({
-  selector: 'app-information-card',
-  styleUrls: ['./information-card.component.scss'],
-  templateUrl: './information-card.component.html',
+  selector: 'app-portrait-information',
+  styleUrls: ['./portrait-information.component.scss'],
+  templateUrl: './portrait-information.component.html',
 })
-export class InformationCardComponent implements OnChanges {
+export class PortraitInformationComponent implements OnChanges {
   @Input() calculatedData: TInformationCardCalculatedData = {
     accuracy: '-',
     altitude: '-.-',
     avgSpeed: '-.-',
-    topSpeed: '-.-',
+    topSpeed: null,
   };
 
   @Input() geolocationData: TInformationCardGeolocationData = {
     latitude: '-.-',
     longitude: '-.-',
   };
+
   @Input() unitData: TInformationCardUnit = {
     lengthUnit: AppConstant.unit.metric.lengthUnit,
     speedUnit: AppConstant.unit.metric.speedUnit,

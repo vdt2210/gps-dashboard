@@ -26,8 +26,8 @@ export class DashboardPage implements OnInit, OnDestroy {
     accuracy: '-',
     altitude: '-.-',
     avgSpeed: '-.-',
-    speed: '-',
-    topSpeed: '-',
+    speed: null,
+    topSpeed: null,
     totalDistance: 0,
     tripDistance: '0.0',
   };

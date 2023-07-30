@@ -4,48 +4,35 @@
 />
 
 <ion-content [fullscreen]="true">
-  <div class="center">
-    <div class="speed-container">
-      <div>
-        <div class="speed">{{ calculatedData.speed }}</div>
-        <div
-          class="unit"
-          (click)="switchUnit()"
-        >
-          {{ unitData.speedUnit }}
-        </div>
-      </div>
+  <div class="flex h-full items-center">
+    <div class="flex h-fit w-full justify-center px-[10%]">
+      <app-speed
+        [speed]="calculatedData.speed"
+        [unit]="unitData.speedUnit"
+        (switchUnitEmit)="switchUnit()"
+      />
+
+      <app-landscape-information
+        class="flex w-full max-w-lg flex-col rounded-r-3xl border-2 border-l-0 border-gray-800 bg-gradient-to-l from-gray-950 transition duration-500 portrait:hidden"
+        [calculatedData]="calculatedData"
+        [unitData]="unitData"
+      />
     </div>
   </div>
 </ion-content>
 
-<ion-footer>
-  <div class="footer-bar">
-    <div>
-      <app-total-trip-distance
-        [totalDistance]="calculatedData.totalDistance"
-        [tripDistance]="calculatedData.tripDistance"
-        [distanceUnit]="unitData.distanceUnit"
-      />
+<ion-footer class="footer-bar">
+  <app-total-trip-distance
+    [totalDistance]="calculatedData.totalDistance"
+    [tripDistance]="calculatedData.tripDistance"
+    [distanceUnit]="unitData.distanceUnit"
+  />
 
-      <!-- <div class="right-side flex">
-        <span class="landscape-coordinates">
-          <span class="ion-text-left">
-            <div>{{ "latitude" | translate }}:</div>
-            <div>{{ "longitude" | translate }}:</div>
-          </span>
-          <span class="ion-text-left">
-            <div>{{ location.latitude }}</div>
-            <div>{{ location.longitude }}</div>
-          </span>
-        </span>
-      </div> -->
-    </div>
+  <app-portrait-information
+    [calculatedData]="calculatedData"
+    [geolocationData]="location"
+    [unitData]="unitData"
+  />
 
-    <app-information-card
-      [calculatedData]="calculatedData"
-      [geolocationData]="location"
-      [unitData]="unitData"
-    />
-  </div>
+  <app-landscape-coordinates [geolocationData]="location" />
 </ion-footer>

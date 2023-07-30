@@ -1,18 +1,12 @@
 <div
   (click)="switchDisplay()"
-  class="mx-auto w-fit main-container"
+  class="mx-auto w-fit cursor-pointer portrait:mb-2"
 >
-  <p
-    *ngIf="isShowTotalDistance"
-    class="ion-no-margin"
-  >
-    Total {{ totalDistance }} {{ distanceUnit }}
-  </p>
+  <div class="flex items-end gap-2.5">
+    {{ isShowTotalDistance ? ('total' | translate) : ('trip' | translate) }}
 
-  <p
-    *ngIf="!isShowTotalDistance"
-    class="ion-no-margin"
-  >
-    Trip {{ tripDistance }} {{ distanceUnit }}
-  </p>
+    <div class="text-2xl">
+      {{ isShowTotalDistance ? totalDistance : tripDistance }} {{ distanceUnit }}
+    </div>
+  </div>
 </div>
