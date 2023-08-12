@@ -1,0 +1,12 @@
+<div
+  (click)="switchDisplay()"
+  class="mx-auto w-fit cursor-pointer portrait:mb-2"
+>
+  <div class="flex items-end gap-2.5">
+    {{ isShowTotalDistance ? ('total' | translate) : ('trip' | translate) }}
+
+    <div class="text-2xl">
+      {{ isShowTotalDistance ? totalDistance : tripDistance }} {{ distanceUnit }}
+    </div>
+  </div>
+</div>

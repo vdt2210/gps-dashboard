@@ -5,16 +5,16 @@ import { StorageService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
-import { UnitParams } from '@models/index';
+import { IUnit } from '@models/index';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UnitService {
-  private unitParams$: BehaviorSubject<UnitParams>;
+  private unitParams$: BehaviorSubject<IUnit>;
 
   constructor(private storageService: StorageService) {
-    this.unitParams$ = new BehaviorSubject<UnitParams>({
+    this.unitParams$ = new BehaviorSubject<IUnit>({
       distanceUnit: '',
       lengthUnit: '',
       speedUnit: '',

@@ -1,0 +1,11 @@
+<div class="speed-container">
+  <div>
+    <div class="speed !leading-normal">{{ speed ?? '-' }}</div>
+    <div
+      class="unit !leading-normal"
+      (click)="switchUnit()"
+    >
+      {{ unit }}
+    </div>
+  </div>
+</div>

@@ -32,6 +32,8 @@
   "currentPassword": "Mật khẩu hiện tại",
   "newPassword": "Mật khẩu mới",
   "syncData": "Đồng bộ dữ liệu",
-  "import": "Import",
-  "export": "Export"
+  "import": "Nhập",
+  "export": "Xuất",
+  "total": "Tổng",
+  "trip": "Hành trình"
 }

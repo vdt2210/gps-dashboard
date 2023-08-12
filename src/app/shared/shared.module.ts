@@ -5,15 +5,16 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { AvatarComponent } from '@components/avatar/avatar.component';
-import { BackButtonComponent } from '@components/back-button/back-button.component';
-import { ButtonComponent } from '@components/button/button.component';
-import { ButtonCardComponent } from '@components/button-card/button-card.component';
-import { CheckboxComponent } from '@components/checkbox/checkbox.component';
-import { IconOnlyButtonComponent } from '@components/icon-only-button/icon-only-button.component';
-import { InputComponent } from '@components/input/input.component';
-import { RadioComponent } from '@components/radio/radio.component';
-import { RangeComponent } from '@components/range/range.component';
+import {
+  BackButtonComponent,
+  ButtonComponent,
+  ButtonCardComponent,
+  CheckboxComponent,
+  IconOnlyButtonComponent,
+  InputComponent,
+  RadioComponent,
+  RangeComponent,
+} from '@components/index';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,6 @@ import { RangeComponent } from '@components/range/range.component';
     ButtonComponent,
     IconOnlyButtonComponent,
     BackButtonComponent,
-    AvatarComponent,
     RadioComponent,
     RangeComponent,
     CheckboxComponent,
@@ -37,7 +37,6 @@ import { RangeComponent } from '@components/range/range.component';
     ButtonComponent,
     IconOnlyButtonComponent,
     BackButtonComponent,
-    AvatarComponent,
     RadioComponent,
     RangeComponent,
     CheckboxComponent,

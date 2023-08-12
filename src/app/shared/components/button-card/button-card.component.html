@@ -1,24 +1,25 @@
 <ion-card
   button
   class="ion-text-center"
-  (click)="onClick()"
-  [disabled]="isDisabled"
+  (click)="onClick(buttonOption.action)"
+  [disabled]="buttonOption.isDisabled"
 >
   <ion-card-content>
     <div class="card-top">
-      <ion-icon [name]="icon" />
+      <ion-icon [name]="buttonOption.icon" />
+
       <p
-        *ngIf="value !== undefined"
-        class="card-value"
+        *ngIf="buttonOption.subText"
+        class="card-sub-text"
       >
-        {{ value }}
+        {{ buttonOption.subText }}
       </p>
     </div>
 
     <div class="card-bottom">
       <p
         class="text-ellipsis"
-        [translate]="cardLabel"
+        [translate]="buttonOption.label"
       ></p>
     </div>
   </ion-card-content>

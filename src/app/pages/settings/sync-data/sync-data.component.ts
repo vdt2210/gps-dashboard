@@ -5,7 +5,7 @@ import { authService, SyncDataService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
-import { RadioOption } from '@components/radio/radio.component';
+import { RadioOption } from '@components/index';
 import { TSyncData } from '@models/index';
 
 @Component({

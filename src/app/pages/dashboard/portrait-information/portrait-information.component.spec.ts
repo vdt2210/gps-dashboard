@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AvatarComponent } from './avatar.component';
+import { PortraitInformationComponent } from './portrait-information.component';
 
-describe('AvatarComponent', () => {
-  let component: AvatarComponent;
-  let fixture: ComponentFixture<AvatarComponent>;
+describe('InformationCardComponent', () => {
+  let component: PortraitInformationComponent;
+  let fixture: ComponentFixture<PortraitInformationComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AvatarComponent],
+      declarations: [PortraitInformationComponent],
       imports: [IonicModule.forRoot()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AvatarComponent);
+    fixture = TestBed.createComponent(PortraitInformationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

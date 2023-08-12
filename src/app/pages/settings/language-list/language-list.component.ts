@@ -4,7 +4,7 @@ import { LanguageService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
-import { RadioOption } from '@components/radio/radio.component';
+import { RadioOption } from '@components/index';
 
 @Component({
   selector: 'app-language-list',

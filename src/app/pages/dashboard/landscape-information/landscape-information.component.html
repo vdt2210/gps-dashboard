@@ -1,0 +1,9 @@
+<ng-container *ngFor="let data of dataList">
+  <div class="flex flex-1 items-center justify-between px-5 text-base">
+    <span>
+      <strong [translate]="data.label"></strong>
+    </span>
+
+    <span>{{ data.value ?? '-' }} {{ data.unit }}</span>
+  </div>
+</ng-container>
