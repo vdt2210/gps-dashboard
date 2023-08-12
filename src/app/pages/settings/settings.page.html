@@ -26,19 +26,14 @@
   </ion-row>
 </ion-content>
 
-<ion-footer
-  [translucent]="true"
-  class="ion-no-border ion-text-center"
->
+<ion-footer class="flex items-center justify-center text-center">
   <ion-toolbar>
-    <div class="version-text">
-      <ion-text
-        color="medium"
-        translate="version"
-        [translateParams]="{value: appVersion}"
-      >
-      </ion-text>
-    </div>
+    <ion-text
+      color="medium"
+      translate="version"
+      [translateParams]="{value: appVersion}"
+    >
+    </ion-text>
   </ion-toolbar>
 </ion-footer>
 

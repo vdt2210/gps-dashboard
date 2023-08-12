@@ -1,5 +1,5 @@
 .information-container {
-  @apply rounded-3xl border-2 border-gray-700 bg-black bg-gradient-to-b from-gray-950 text-base landscape:hidden;
+  @apply rounded-3xl border-2 border-red-900 bg-black bg-gradient-to-b from-red-950 text-base landscape:hidden;
 
   .detail-card {
     @apply flex items-center justify-between border-b-2 border-gray-800 p-2.5 last:border-none;

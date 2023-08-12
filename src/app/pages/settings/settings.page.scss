@@ -2,9 +2,6 @@ ion-modal {
   --height: auto;
 
   .modal-content {
-    width: 100%;
-    max-height: 90vh;
-    padding: 16px;
-    overflow: auto;
+    @apply max-h-[90vh] w-full overflow-auto p-4;
   }
 }

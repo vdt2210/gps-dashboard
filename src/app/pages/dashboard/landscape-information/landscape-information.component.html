@@ -1,9 +1,13 @@
-<ng-container *ngFor="let data of dataList">
-  <div class="flex flex-1 items-center justify-between px-5 text-base">
-    <span>
-      <strong [translate]="data.label"></strong>
-    </span>
+<div
+  class="flex h-full w-full flex-col rounded-r-3xl border-2 border-l-0 border-red-900 bg-black bg-gradient-to-l from-red-950 transition duration-500"
+>
+  <ng-container *ngFor="let data of dataList">
+    <div class="flex flex-1 items-center justify-between px-5 text-base">
+      <span>
+        <strong [translate]="data.label"></strong>
+      </span>
 
-    <span>{{ data.value ?? '-' }} {{ data.unit }}</span>
-  </div>
-</ng-container>
+      <span>{{ data.value ?? '-' }} {{ data.unit }}</span>
+    </div>
+  </ng-container>
+</div>

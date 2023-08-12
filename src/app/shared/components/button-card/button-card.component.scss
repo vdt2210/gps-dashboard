@@ -1,33 +1,19 @@
-ion-card {
-  color: var(--ion-text-color);
-  margin: unset;
-  display: flex;
-  height: 100%;
-  border-radius: 10px;
-  border: 2px solid var(--ion-color-step-150);
-}
-
 ion-card-content {
-  padding: 10px;
+  @apply flex flex-col gap-2.5 p-2.5;
 
   p {
-    margin: 0;
-    font-size: 18px;
+    @apply m-0 text-lg;
   }
 
   ion-icon {
-    font-size: 36px;
+    @apply text-4xl;
   }
 
   .card-top {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin-bottom: 10px;
+    @apply flex items-center justify-center gap-1;
 
     .card-sub-text {
-      font-size: 24px;
+      @apply text-2xl;
     }
   }
 }
