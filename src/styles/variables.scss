@@ -205,10 +205,10 @@ ion-footer {
     @apply p-0;
 
     ion-toolbar {
-      @apply flex min-h-[2.5rem] items-center px-2.5;
+      @apply flex min-h-[2.5rem] items-center px-2.5 text-base  duration-500 md:text-lg lg:text-xl;
 
       ion-title {
-        @apply text-xl transition-[font-size] duration-500 md:text-2xl lg:text-3xl;
+        @apply text-lg  duration-500 md:text-xl lg:text-2xl;
       }
     }
   }
@@ -216,7 +216,7 @@ ion-footer {
 
 //* Icon
 ion-icon {
-  @apply text-2xl text-white transition-[font-size] duration-500 md:text-3xl lg:text-4xl;
+  @apply text-2xl text-white  duration-500 md:text-3xl lg:text-4xl;
 }
 
 //* Buttons
