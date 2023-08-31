@@ -1,7 +1,8 @@
 <h1
-  class="ion-text-center"
+  class="mb-5 text-center text-2xl font-medium"
   translate="login"
 ></h1>
+
 <form
   [formGroup]="loginForm"
   (submit)="onSubmit()"
@@ -37,7 +38,7 @@
     </ion-list>
   </div>
 
-  <div class="ion-text-center">
+  <div class="flex justify-center">
     <app-button
       buttonLabel="login"
       [expand]="appConstant.buttonExpand.full"

@@ -1,11 +1,11 @@
 .speed-container {
-  @apply flex aspect-square items-center justify-center text-center transition-size duration-500 landscape:h-[12.5rem] landscape:rounded-l-full landscape:border-y-2 landscape:border-l-2 landscape:border-gray-800 landscape:bg-gradient-to-r landscape:from-gray-950 landscape:md:h-[15.625rem] landscape:lg:h-[18.75rem];
+  @apply flex aspect-square items-center justify-center text-center transition-size duration-500 landscape:h-[12.5rem] landscape:rounded-l-full landscape:border-y-2 landscape:border-l-2 landscape:border-red-900 landscape:bg-gradient-to-r landscape:from-red-950 landscape:md:h-[15.625rem] landscape:lg:h-[18.75rem];
 
   .speed {
-    @apply text-xl transition-[font-size] duration-500 portrait:text-[6.25rem] portrait:md:text-[7.5rem] portrait:lg:text-[8.75rem] landscape:text-6xl landscape:md:text-[5rem] landscape:lg:text-[6.25rem];
+    @apply text-xl duration-500 portrait:text-[6.25rem] portrait:md:text-[7.5rem] portrait:lg:text-[8.75rem] landscape:text-6xl landscape:md:text-[5rem] landscape:lg:text-[6.25rem];
   }
 
   .unit {
-    @apply cursor-pointer text-xl transition-[font-size] duration-500 md:text-2xl lg:text-3xl;
+    @apply cursor-pointer text-xl  duration-500 md:text-2xl lg:text-3xl;
   }
 }

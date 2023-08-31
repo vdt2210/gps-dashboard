@@ -4,8 +4,8 @@
 />
 
 <ion-content [fullscreen]="true">
-  <div class="flex h-full items-center">
-    <div class="flex h-fit w-full justify-center px-[10%]">
+  <div class="flex h-full flex-col items-center justify-center">
+    <div class="flex h-fit w-full justify-center px-[10%] landscape:mb-2.5">
       <app-speed
         [speed]="calculatedData.speed"
         [unit]="unitData.speedUnit"
@@ -13,26 +13,28 @@
       />
 
       <app-landscape-information
-        class="flex w-full max-w-lg flex-col rounded-r-3xl border-2 border-l-0 border-gray-800 bg-gradient-to-l from-gray-950 transition duration-500 portrait:hidden"
+        class="w-full max-w-lg portrait:hidden"
         [calculatedData]="calculatedData"
         [unitData]="unitData"
       />
     </div>
+
+    <app-landscape-coordinates [geolocationData]="location" />
   </div>
 </ion-content>
 
-<ion-footer class="footer-bar">
-  <app-total-trip-distance
-    [totalDistance]="calculatedData.totalDistance"
-    [tripDistance]="calculatedData.tripDistance"
-    [distanceUnit]="unitData.distanceUnit"
-  />
+<ion-footer>
+  <div class="w-full">
+    <app-total-trip-distance
+      [totalDistance]="calculatedData.totalDistance"
+      [tripDistance]="calculatedData.tripDistance"
+      [distanceUnit]="unitData.distanceUnit"
+    />
 
-  <app-portrait-information
-    [calculatedData]="calculatedData"
-    [geolocationData]="location"
-    [unitData]="unitData"
-  />
-
-  <app-landscape-coordinates [geolocationData]="location" />
+    <app-portrait-information
+      [calculatedData]="calculatedData"
+      [geolocationData]="location"
+      [unitData]="unitData"
+    />
+  </div>
 </ion-footer>
