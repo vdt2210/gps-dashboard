@@ -4,7 +4,7 @@ const config: CapacitorConfig = {
   android: {
     useLegacyBridge: true,
   },
-  appId: 'io.ionic.starter',
+  appId: 'com.vdt.gpsdashboard',
   appName: 'GPS Dashboard',
   webDir: 'www',
 };

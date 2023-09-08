@@ -140,7 +140,7 @@ export class FirebaseService {
   }
 
   async setDoc(path: string, params: object) {
-    this.loaderService.show();
+    // this.loaderService.show();
     try {
       const ref = doc(this.firestore, path);
       if (await this.checkDocExists(path)) {

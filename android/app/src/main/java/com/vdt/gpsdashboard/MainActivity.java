@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.vdt.gpsdashboard;
 
 import com.getcapacitor.BridgeActivity;
 

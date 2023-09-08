@@ -5,7 +5,6 @@
 
 <form
   [formGroup]="loginForm"
-  (submit)="onSubmit()"
   (keydown.enter)="onSubmit()"
 >
   <div class="form-input-container">
@@ -44,6 +43,7 @@
       [expand]="appConstant.buttonExpand.full"
       [isDisabled]="loginForm.invalid || loginForm.disabled"
       [buttonType]="appConstant.buttonType.submit"
+      (clickEmit)='onSubmit()'
     ></app-button>
 
     <app-button
