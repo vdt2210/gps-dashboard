@@ -3,13 +3,13 @@
 >
   <ng-container *ngFor="let data of dataList">
     <div
-      class="flex flex-1 items-center justify-between px-5 text-base duration-500 md:text-lg lg:text-xl"
+      class="flex flex-1 items-center justify-between gap-2 px-5 text-base duration-500 md:text-lg lg:text-xl"
     >
-      <span>
+      <span class="truncate">
         <strong [translate]="data.label"></strong>
       </span>
 
-      <span>{{ data.value ?? '-' }} {{ data.unit }}</span>
+      <span class="whitespace-nowrap">{{ data.value ?? '-' }} {{ data.unit }}</span>
     </div>
   </ng-container>
 </div>

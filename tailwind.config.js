@@ -1,15 +1,6 @@
-interface Config {
-  content: string[];
-  theme: {
-    fontFamily: Record<string, unknown>;
-    extend: Record<string, unknown>;
-  };
-  plugins: unknown[];
-}
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: ['./src/**/*.{html,ts}'],
-  plugins: [],
   theme: {
     extend: {
       transitionProperty: {
@@ -21,6 +12,5 @@ const config: Config = {
       primary: ['Tektur'],
     },
   },
+  plugins: [],
 };
-
-export default config;
