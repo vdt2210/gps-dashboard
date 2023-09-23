@@ -43,6 +43,13 @@
       [expand]="appConstant.buttonExpand.full"
       [buttonType]="appConstant.buttonType.submit"
     ></app-button>
+
+    <app-button
+    buttonLabel="logOut"
+    [buttonType]="appConstant.buttonType.button"
+    [fill]="appConstant.fill.clear"
+    (clickEmit)="onLogOut()"
+  ></app-button>
   </div>
 </form>
 

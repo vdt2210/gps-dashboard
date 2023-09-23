@@ -1,8 +1,8 @@
 {
   "name": "gps-dashboard",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "0.4.0",
+  "author": "VDT",
+  "homepage": "https://fb.com/vdt.2210",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -54,7 +54,7 @@
     "@angular/compiler": "^16.1.6",
     "@angular/compiler-cli": "^16.1.6",
     "@angular/language-service": "^16.1.6",
-    "@capacitor/cli": "^5.2.2",
+    "@capacitor/cli": "5.2.2",
     "@ionic/angular-toolkit": "^10.0.0",
     "@types/jasmine": "~4.3.5",
     "@types/node": "^20.4.4",
@@ -77,6 +77,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.3",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ngx-tailwind": "^4.0.0",
     "postcss": "^8.4.27",
     "postcss-import": "^15.1.0",
     "postcss-nesting": "^12.0.0",
@@ -86,5 +87,5 @@
     "ts-node": "~10.9.1",
     "typescript": "^5.1.6"
   },
-  "description": "An Ionic project"
+  "description": "A GPS Dashboard application build on Ionic and Angular."
 }
