@@ -35,6 +35,7 @@
     "@ionic/storage-angular": "^4.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "dayjs": "^1.11.10",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "firebase": "^10.1.0",
     "ionicons": "^7.1.2",

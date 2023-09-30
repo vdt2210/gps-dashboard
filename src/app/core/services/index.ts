@@ -1,4 +1,3 @@
-export * from './account/account.service';
 export * from './auth/auth.service';
 export * from './calculate/calculate.service';
 export * from './device/device.service';
@@ -12,3 +11,4 @@ export * from './sync-data/sync-data.service';
 export * from './timer/timer.service';
 export * from './top-speed/top-speed.service';
 export * from './unit/unit.service';
+export * from './user/user.service';

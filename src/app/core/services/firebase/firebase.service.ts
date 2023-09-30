@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   addDoc,
+  arrayUnion,
   collection,
   collectionData,
   deleteDoc,
@@ -12,6 +13,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  updateDoc,
   where,
 } from '@angular/fire/firestore';
 import { catchError, finalize, from, map, Observable, switchMap, tap } from 'rxjs';
@@ -140,7 +142,8 @@ export class FirebaseService {
   }
 
   async setDoc(path: string, params: object) {
-    // this.loaderService.show();
+    this.loaderService.show();
+
     try {
       const ref = doc(this.firestore, path);
       if (await this.checkDocExists(path)) {
@@ -153,6 +156,22 @@ export class FirebaseService {
       this.loaderService.hide();
       return;
     }
+
+    this.loaderService.hide();
+  }
+
+  async updateDocArrayUnion(path: string, field: string, params: object) {
+    this.loaderService.show();
+
+    try {
+      const ref = doc(this.firestore, path);
+      await updateDoc(ref, field, arrayUnion(params));
+    } catch (error) {
+      console.error(error);
+      this.loaderService.hide();
+      return;
+    }
+
     this.loaderService.hide();
   }
 

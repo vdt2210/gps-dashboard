@@ -8,7 +8,7 @@ import { AlertController, ModalController, PopoverController } from '@ionic/angu
 
 import {
   CalculateService,
-  DeviceService,
+  // DeviceService,
   GeolocationService,
   LanguageService,
   TimerService,
@@ -31,8 +31,7 @@ export class AppComponent implements OnInit {
     private languageService: LanguageService,
     private geolocationService: GeolocationService,
     private calculateService: CalculateService,
-    private timerService: TimerService,
-    private deviceService: DeviceService
+    private timerService: TimerService // private deviceService: DeviceService
   ) {
     this.getStorageValue();
     SplashScreen.hide();
@@ -56,7 +55,7 @@ export class AppComponent implements OnInit {
     this.geolocationService.startBackgroundGeolocation();
     this.timerService.setInitialTotalTime();
     this.calculateService.initialCalculate();
-    this.deviceService.setInitialDeviceId();
+    // this.deviceService.setInitialDeviceId();
   }
 
   private async keepScreenOn() {

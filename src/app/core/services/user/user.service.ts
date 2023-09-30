@@ -7,7 +7,7 @@ import { FirebaseService } from '../index';
 @Injectable({
   providedIn: 'root',
 })
-export class AccountService {
+export class UserService {
   docRef = 'users';
 
   userDetail$: BehaviorSubject<User | null>;

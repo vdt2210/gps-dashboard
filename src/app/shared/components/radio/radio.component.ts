@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export type RadioOption = {
   label: string | null;
-  value: string;
+  value: string | object;
   disabled?: boolean;
 };
 

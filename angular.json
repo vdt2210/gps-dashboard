@@ -38,7 +38,7 @@
             ],
             "styles": ["src/styles/variables.scss", "src/global.scss"],
             "scripts": [],
-            "allowedCommonJsDependencies": ["localforage"]
+            "allowedCommonJsDependencies": ["localforage", "dayjs"]
           },
           "configurations": {
             "production": {
