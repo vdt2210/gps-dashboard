@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import * as dayjs from 'dayjs';
 import { Subject, takeUntil } from 'rxjs';
 
 import { authService, SyncDataService } from '@services/index';
@@ -6,7 +7,7 @@ import { authService, SyncDataService } from '@services/index';
 import { AppConstant } from '@utilities/index';
 
 import { RadioOption } from '@components/index';
-import { TSyncData } from '@models/index';
+import { ITrip, TSyncTrip } from '@models/index';
 
 @Component({
   selector: 'app-sync-data',
@@ -19,9 +20,9 @@ export class SyncDataComponent implements OnInit, OnDestroy {
   private onDestroy$: Subject<void> = new Subject<void>();
 
   public appConstant = AppConstant;
-  public listSyncData: TSyncData[] = [];
+  public listSyncData: ITrip[] = [];
   public listSyncDataOptions: RadioOption[] = [];
-  public selectedSyncDataId?: string;
+  public selectedSyncData?: string;
 
   constructor(
     private authService: authService,
@@ -36,12 +37,20 @@ export class SyncDataComponent implements OnInit, OnDestroy {
 
     (await this.syncDataService.getList())
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe((res: TSyncData[]) => {
-        this.listSyncData = res;
-        this.listSyncDataOptions = res.map((item) => ({
-          label: item.deviceName,
-          value: item.id,
-        }));
+      .subscribe((res: TSyncTrip) => {
+        this.listSyncData = res?.trips.sort((prev, curr) => curr.createdDate - prev.createdDate);
+
+        this.listSyncDataOptions = res?.trips?.map((item) => {
+          return {
+            label: dayjs(item?.createdDate).format('DD MMMM, YYYY HH:mm:ss.SSS'),
+            value: {
+              avgSpeedTotalDistance: item.avgSpeedTotalDistance,
+              avgSpeedTotalTime: item.avgSpeedTotalTime,
+              topSpeed: item.topSpeed,
+              tripDistance: item.tripDistance,
+            },
+          };
+        });
       });
   }
 
@@ -54,11 +63,10 @@ export class SyncDataComponent implements OnInit, OnDestroy {
   }
 
   public importData() {
-    if (this.selectedSyncDataId) {
+    if (this.selectedSyncData) {
       //TODO show confirm popup
-      console.log(this.selectedSyncDataId);
 
-      this.syncDataService.getAndPatchBackupValue(this.selectedSyncDataId);
+      this.syncDataService.setTripValue(JSON.parse(JSON.stringify(this.selectedSyncData)));
       this.buttonClick();
     }
   }

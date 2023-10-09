@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
-import { AccountService, authService } from '@services/index';
+import { UserService, authService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
@@ -35,7 +35,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private authService: authService,
-    private accountService: AccountService
+    private accountService: UserService
   ) {
     this.detailForm = this.formBuilder.group({
       displayName: ['', Validators.required],

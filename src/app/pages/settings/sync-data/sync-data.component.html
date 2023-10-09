@@ -6,7 +6,7 @@
 <div class="mb-5">
   <app-radio
     [listItems]="listSyncDataOptions"
-    (changeEmit)="selectedSyncDataId = $event"
+    (changeEmit)="selectedSyncData = $event"
   />
 </div>
 
@@ -14,12 +14,12 @@
   <app-button
     buttonLabel="import"
     (clickEmit)="importData()"
-    [isDisabled]="!!!selectedSyncDataId"
+    [isDisabled]="!!!selectedSyncData"
   />
 
   <app-button
     buttonLabel="export"
     (clickEmit)="exportData()"
-    [isDisabled]="!!selectedSyncDataId"
+    [isDisabled]="!!selectedSyncData"
   />
 </div>

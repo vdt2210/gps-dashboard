@@ -67,9 +67,18 @@ export class authService {
 
   public async logOut() {
     this.loaderService.show();
-    await signOut(this.auth);
-    this.storageService.remove(AppConstant.storageKeys.jwtToken);
-    this.storageService.remove(AppConstant.storageKeys.uid);
+
+    await Promise.all([
+      signOut(this.auth),
+      this.storageService.remove(AppConstant.storageKeys.jwtToken),
+      this.storageService.remove(AppConstant.storageKeys.uid),
+      this.storageService.remove(AppConstant.storageKeys.avgSpeedTotalDistance),
+      this.storageService.remove(AppConstant.storageKeys.avgSpeedTotalTime),
+      this.storageService.remove(AppConstant.storageKeys.topSpeed),
+      this.storageService.remove(AppConstant.storageKeys.totalDistance),
+      this.storageService.remove(AppConstant.storageKeys.totalTime),
+    ]);
+
     this.loaderService.hide();
   }
 

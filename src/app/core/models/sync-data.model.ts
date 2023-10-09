@@ -1,42 +1,23 @@
-export interface ISyncData {
-  avgSpeedTotalDistance: number;
-  avgSpeedTotalTime: number;
-  createdDate: string;
-  deviceId: string;
-  id: string;
-  topSpeed: number;
-  deviceName: string | null;
+export interface ISyncUserData {
+  lastUpdated: { seconds: number; nanoseconds: number };
+  createdDate: { seconds: number; nanoseconds: number };
   totalDistance: number;
   totalTime: number;
-  tripDistance: number;
-  uid: string;
 }
 
-export type TSyncData = Pick<
-  ISyncData,
-  | 'avgSpeedTotalDistance'
-  | 'avgSpeedTotalTime'
-  | 'createdDate'
-  | 'deviceId'
-  | 'id'
-  | 'topSpeed'
-  | 'totalDistance'
-  | 'totalTime'
-  | 'tripDistance'
-  | 'uid'
-  | 'deviceName'
->;
+export interface ITrip {
+  avgSpeedTotalDistance: number;
+  avgSpeedTotalTime: number;
+  createdDate: number;
+  topSpeed: number;
+  tripDistance: number;
+}
 
-export type TSyncDataDTO = Pick<ISyncData, 'deviceId' | 'id' | 'uid' | 'deviceName'> &
-  Partial<
-    Pick<
-      ISyncData,
-      | 'avgSpeedTotalDistance'
-      | 'avgSpeedTotalTime'
-      | 'createdDate'
-      | 'topSpeed'
-      | 'totalDistance'
-      | 'totalTime'
-      | 'tripDistance'
-    >
-  >;
+export type TSyncTrip = { trips: ITrip[] };
+
+export type TSyncUserDataDTO = Partial<Pick<ISyncUserData, 'totalDistance' | 'totalTime'>>;
+
+export type TTripDTO = Pick<
+  ITrip,
+  'avgSpeedTotalDistance' | 'avgSpeedTotalTime' | 'topSpeed' | 'tripDistance' | 'createdDate'
+>;

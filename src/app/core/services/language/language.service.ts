@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Device } from '@capacitor/device';
 import { TranslateService } from '@ngx-translate/core';
+import * as dayjs from 'dayjs';
 
 import { StorageService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
+import 'dayjs/locale/vi';
+import 'dayjs/locale/en';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +25,7 @@ export class LanguageService {
         if (val) {
           this.translateService.use(val);
           document.documentElement.lang = val;
+          dayjs.locale(val);
         } else {
           this.setLanguage(this.getSupportedLanguage((await Device.getLanguageCode()).value));
         }
@@ -39,6 +43,7 @@ export class LanguageService {
     await this.storageService.set(AppConstant.storageKeys.language, lang);
     this.translateService.use(lang);
     document.documentElement.lang = lang;
+    dayjs.locale(lang);
   }
 
   public translate(key: string, params?: any) {
