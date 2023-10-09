@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Subject, take } from 'rxjs';
 
 import { AppConstant } from '@utilities/index';
 
-import { ISyncData, TSyncDataDTO, TTripDTO } from '../../models/sync-data.model';
+import { ISyncUserData, ITrip, TSyncUserDataDTO, TTripDTO } from '@models/index';
+
 import {
-  DeviceService,
   DistanceService,
   FirebaseService,
   authService,
@@ -17,11 +18,20 @@ import {
   providedIn: 'root',
 })
 export class SyncDataService {
+  private onDestroy$: Subject<void> = new Subject<void>();
+
   private userId = this.authService.userId;
+  private storageData = {
+    avgSpeedTotalDistance: this.storageService.get(AppConstant.storageKeys.avgSpeedTotalDistance),
+    avgSpeedTotalTime: this.storageService.get(AppConstant.storageKeys.avgSpeedTotalTime),
+    topSpeed: this.storageService.get(AppConstant.storageKeys.topSpeed),
+    totalDistance: this.storageService.get(AppConstant.storageKeys.totalDistance),
+    totalTime: this.storageService.get(AppConstant.storageKeys.totalTime),
+    tripDistance: this.storageService.get(AppConstant.storageKeys.tripDistance),
+  };
 
   constructor(
     private storageService: StorageService,
-    private deviceService: DeviceService,
     private firebaseService: FirebaseService,
     private authService: authService,
     private topSpeedService: TopSpeedService,
@@ -30,66 +40,87 @@ export class SyncDataService {
   ) {}
 
   public async getList() {
-    return this.firebaseService.getById(AppConstant.docEndPoint.data, await this.userId);
+    return this.firebaseService.getById(AppConstant.docEndPoint.trips, await this.userId);
   }
 
   public async setBackupValue() {
-    const dataObject: Record<string, number> = {};
-    const promises = AppConstant.backupKeys.map(async (key) => {
-      dataObject[key] = await this.storageService.get(
-        (AppConstant.storageKeys as { [key: string]: string })[key]
-      );
-    });
-    await Promise.all(promises);
-
-    await this.handleSyncData(dataObject as unknown as TSyncDataDTO);
-    await this.handleTripsData(dataObject as unknown as TTripDTO);
-  }
-
-  private async handleSyncData(dataObject: TSyncDataDTO) {
-    const { value: deviceId } = this.deviceService.deviceId;
-    const { value: deviceInfo } = this.deviceService.deviceInfo;
-
-    const params: TSyncDataDTO = {
-      deviceId,
-      deviceName: deviceInfo?.name ?? null,
-      id: await this.userId,
-      totalDistance: dataObject.totalDistance,
-      totalTime: dataObject.totalTime,
-    };
-
-    await this.firebaseService.setDoc(`${AppConstant.docEndPoint.data}/${params.id}`, params);
-  }
-
-  private async handleTripsData(dataObject: TTripDTO) {
     const tripParams: TTripDTO = {
-      avgSpeedTotalDistance: dataObject.avgSpeedTotalDistance,
-      avgSpeedTotalTime: dataObject.avgSpeedTotalTime,
+      avgSpeedTotalDistance: await this.storageData.avgSpeedTotalDistance,
+      avgSpeedTotalTime: await this.storageData.avgSpeedTotalTime,
       createdDate: new Date().getTime(),
-      id: await this.userId,
-      topSpeed: dataObject.topSpeed,
-      tripDistance: dataObject.tripDistance,
+      topSpeed: await this.storageData.topSpeed,
+      tripDistance: await this.storageData.tripDistance,
     };
 
     await this.firebaseService.updateDocArrayUnion(
-      `${AppConstant.docEndPoint.data}/${await this.userId}`,
+      `${AppConstant.docEndPoint.trips}/${await this.userId}`,
       'trips',
       tripParams
     );
   }
 
-  public async getAndPatchBackupValue(syncData: ISyncData) {
+  public async setTripValue(data: ITrip) {
     for (const key of AppConstant.backupKeys) {
       await this.storageService.set(
         (AppConstant.storageKeys as { [key: string]: string })[key],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        syncData[key]
+        data[key]
       );
     }
 
     this.distanceService.setInitialDistance();
     this.topSpeedService.setInitialTopSpeed();
+    this.timerService.setInitialTotalTime();
+  }
+
+  public async getUserData() {
+    if (!(await this.userId)) return;
+
+    this.firebaseService
+      .getById(AppConstant.docEndPoint.userData, await this.userId)
+      .pipe(take(1))
+      .subscribe(async (data: ISyncUserData) => {
+        if (data) {
+          const { totalDistance, totalTime } = data;
+
+          const { totalDistance: storageTotalDistance, totalTime: storageTotalTime } =
+            this.storageData;
+
+          if (totalDistance > (await storageTotalDistance)) {
+            await this.storageService.set(AppConstant.storageKeys.totalDistance, totalDistance);
+          }
+
+          if (totalTime > (await storageTotalTime)) {
+            await this.storageService.set(AppConstant.storageKeys.totalTime, totalTime);
+          }
+
+          if (
+            totalDistance < (await storageTotalDistance) ||
+            totalTime < (await storageTotalTime)
+          ) {
+            this.setUserData();
+          }
+
+          return;
+        }
+      });
+
+    this.setUserData();
+  }
+
+  public async setUserData() {
+    const params: TSyncUserDataDTO = {
+      totalDistance: await this.storageData.totalDistance,
+      totalTime: await this.storageData.totalTime,
+    };
+
+    await this.firebaseService.setDoc(
+      `${AppConstant.docEndPoint.userData}/${await this.userId}`,
+      params
+    );
+
+    this.distanceService.setInitialDistance();
     this.timerService.setInitialTotalTime();
   }
 }

@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import { DistanceService, TopSpeedService, TimerService } from '@services/index';
+import {
+  DistanceService,
+  TopSpeedService,
+  TimerService,
+  GeolocationService,
+} from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
@@ -23,7 +28,8 @@ export class ClearDataComponent {
   constructor(
     private distanceService: DistanceService,
     private timerService: TimerService,
-    private topSpeedService: TopSpeedService
+    private topSpeedService: TopSpeedService,
+    private geolocationService: GeolocationService
   ) {}
 
   public onSelect(ev: { checked: boolean; value: string }) {
@@ -34,29 +40,35 @@ export class ClearDataComponent {
     return this.clearableKeys.filter((val) => val.isChecked).length > 0;
   }
 
-  public onConfirm() {
-    this.clearableKeys.forEach((val) => {
+  public async onConfirm() {
+    const promises = [];
+
+    for (const val of this.clearableKeys) {
       if (val.isChecked) {
         switch (val.name) {
           case 'averageSpeed':
-            this.distanceService.removeAvgSpeedTotalDistance();
-            this.timerService.resetAvgSpeedTotalTime();
+            promises.push(this.distanceService.removeAvgSpeedTotalDistance());
+            promises.push(this.timerService.resetAvgSpeedTotalTime());
             break;
 
           case AppConstant.storageKeys.topSpeed:
-            this.topSpeedService.clearTopSpeed();
+            promises.push(this.topSpeedService.clearTopSpeed());
             break;
 
           case AppConstant.storageKeys.totalTime:
-            this.timerService.resetTotalTime();
+            promises.push(this.timerService.resetTotalTime());
             break;
 
           case AppConstant.storageKeys.tripDistance:
-            this.distanceService.removeTripDistance();
+            promises.push(this.distanceService.removeTripDistance());
             break;
         }
       }
-    });
+    }
+
+    await Promise.all(promises);
+
+    this.geolocationService.startBackgroundGeolocation();
 
     this.buttonEmit.emit();
   }

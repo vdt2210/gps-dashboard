@@ -1,6 +1,5 @@
 export * from './auth/auth.service';
 export * from './calculate/calculate.service';
-export * from './device/device.service';
 export * from './distance/distance.service';
 export * from './firebase/firebase.service';
 export * from './geolocation/geolocation.service';

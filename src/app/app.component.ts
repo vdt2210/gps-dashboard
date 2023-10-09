@@ -11,6 +11,7 @@ import {
   // DeviceService,
   GeolocationService,
   LanguageService,
+  SyncDataService,
   TimerService,
 } from '@services/index';
 
@@ -31,7 +32,8 @@ export class AppComponent implements OnInit {
     private languageService: LanguageService,
     private geolocationService: GeolocationService,
     private calculateService: CalculateService,
-    private timerService: TimerService // private deviceService: DeviceService
+    private timerService: TimerService,
+    private syncDataService: SyncDataService
   ) {
     this.getStorageValue();
     SplashScreen.hide();
@@ -55,7 +57,7 @@ export class AppComponent implements OnInit {
     this.geolocationService.startBackgroundGeolocation();
     this.timerService.setInitialTotalTime();
     this.calculateService.initialCalculate();
-    // this.deviceService.setInitialDeviceId();
+    this.syncDataService.getUserData();
   }
 
   private async keepScreenOn() {
@@ -77,6 +79,7 @@ export class AppComponent implements OnInit {
         : this.router.url === `/${AppRoutes.dashboard.path}`
         ? (this.geolocationService.stopBackgroundGeolocation(),
           KeepAwake.allowSleep(),
+          await this.syncDataService.getUserData(),
           App.exitApp())
         : this.location.back();
     });

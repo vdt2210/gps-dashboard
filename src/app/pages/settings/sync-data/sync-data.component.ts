@@ -7,7 +7,7 @@ import { authService, SyncDataService } from '@services/index';
 import { AppConstant } from '@utilities/index';
 
 import { RadioOption } from '@components/index';
-import { ITrip, TSyncData } from '@models/index';
+import { ITrip, TSyncTrip } from '@models/index';
 
 @Component({
   selector: 'app-sync-data',
@@ -37,20 +37,16 @@ export class SyncDataComponent implements OnInit, OnDestroy {
 
     (await this.syncDataService.getList())
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe((res: TSyncData) => {
-        this.listSyncData = res?.trips;
+      .subscribe((res: TSyncTrip) => {
+        this.listSyncData = res?.trips.sort((prev, curr) => curr.createdDate - prev.createdDate);
 
         this.listSyncDataOptions = res?.trips?.map((item) => {
           return {
-            label: `${dayjs(item?.createdDate).format('DD MMMM, YYYY HH:mm:ss.SSS')}${
-              !!res.deviceName ? ` - ${res.deviceName}` : ''
-            }`,
+            label: dayjs(item?.createdDate).format('DD MMMM, YYYY HH:mm:ss.SSS'),
             value: {
               avgSpeedTotalDistance: item.avgSpeedTotalDistance,
               avgSpeedTotalTime: item.avgSpeedTotalTime,
               topSpeed: item.topSpeed,
-              totalDistance: res.totalDistance,
-              totalTime: res.totalTime,
               tripDistance: item.tripDistance,
             },
           };
@@ -70,9 +66,7 @@ export class SyncDataComponent implements OnInit, OnDestroy {
     if (this.selectedSyncData) {
       //TODO show confirm popup
 
-      this.syncDataService.getAndPatchBackupValue(
-        JSON.parse(JSON.stringify(this.selectedSyncData))
-      );
+      this.syncDataService.setTripValue(JSON.parse(JSON.stringify(this.selectedSyncData)));
       this.buttonClick();
     }
   }

@@ -1,12 +1,5 @@
 export const AppConstant = Object.freeze({
-  backupKeys: [
-    'totalDistance',
-    'tripDistance',
-    'avgSpeedTotalDistance',
-    'totalTime',
-    'avgSpeedTotalTime',
-    'topSpeed',
-  ],
+  backupKeys: ['tripDistance', 'avgSpeedTotalDistance', 'avgSpeedTotalTime', 'topSpeed'],
 
   buttonExpand: {
     block: 'block',
@@ -32,8 +25,9 @@ export const AppConstant = Object.freeze({
   },
 
   docEndPoint: {
-    data: 'data',
     devices: 'devices',
+    trips: 'trips',
+    userData: 'user-data',
     users: 'users',
   },
 
@@ -59,7 +53,6 @@ export const AppConstant = Object.freeze({
   storageKeys: {
     avgSpeedTotalDistance: 'avgSpeedTotalDistance',
     avgSpeedTotalTime: 'avgSpeedTotalTime',
-    deviceId: 'deviceId',
     jwtToken: 'jwtToken',
     language: 'language',
     speedCorrection: 'speedCorrection',

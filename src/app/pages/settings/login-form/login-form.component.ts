@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { authService } from '@services/index';
+import { SyncDataService, authService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
@@ -26,7 +26,8 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: authService
+    private authService: authService,
+    private syncDataService: SyncDataService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -45,6 +46,7 @@ export class LoginFormComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).then((token: string | undefined) => {
         if (token) {
+          this.syncDataService.getUserData();
           this.buttonClick('account');
         }
       });
