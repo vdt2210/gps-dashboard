@@ -46,8 +46,8 @@ export class SignUpFormComponent implements OnInit {
 
   onSubmit() {
     if (this.signUpForm.valid) {
-      this.authService.signUp(this.signUpForm.value).then((token: string | undefined) => {
-        if (token) {
+      this.authService.signUp(this.signUpForm.value).then((uid) => {
+        if (uid) {
           this.buttonClick('account');
         }
       });

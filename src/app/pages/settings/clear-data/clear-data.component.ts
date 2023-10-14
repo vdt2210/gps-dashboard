@@ -56,7 +56,7 @@ export class ClearDataComponent {
             break;
 
           case AppConstant.storageKeys.totalTime:
-            promises.push(this.timerService.resetTotalTime());
+            promises.push(this.timerService.resetTripTime());
             break;
 
           case AppConstant.storageKeys.tripDistance:

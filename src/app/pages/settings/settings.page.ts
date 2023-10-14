@@ -34,11 +34,11 @@ export class SettingsPage implements OnInit, OnDestroy {
       subText: '+0%',
     },
     { action: 'clearData', icon: 'trash-outline', label: 'clearData' },
-    {
-      action: 'checkForUpdate',
-      icon: 'download-outline',
-      label: 'checkForUpdate',
-    },
+    // {
+    //   action: 'checkForUpdate',
+    //   icon: 'download-outline',
+    //   label: 'checkForUpdate',
+    // },
   ];
 
   public appVersion = '-';

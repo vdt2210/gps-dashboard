@@ -37,16 +37,17 @@
     </ion-list>
   </div>
 
-  <div class="flex justify-center">
+  <div>
     <app-button
       buttonLabel="login"
       [expand]="appConstant.buttonExpand.full"
       [isDisabled]="loginForm.invalid || loginForm.disabled"
       [buttonType]="appConstant.buttonType.submit"
-      (clickEmit)='onSubmit()'
+      (clickEmit)="onSubmit()"
     ></app-button>
 
     <app-button
+      class="flex justify-center"
       buttonLabel="signUp"
       [buttonType]="appConstant.buttonType.button"
       [fill]="appConstant.fill.clear"

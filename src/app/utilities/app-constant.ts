@@ -60,6 +60,7 @@ export const AppConstant = Object.freeze({
     totalDistance: 'totalDistance',
     totalTime: 'totalTime',
     tripDistance: 'tripDistance',
+    tripTime: 'tripTime',
     uid: 'uid',
     unit: 'unit',
   },

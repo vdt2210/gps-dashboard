@@ -120,7 +120,7 @@ export class GeolocationService {
     const newTime = this.lastTimestamp && speed ? (time - this.lastTimestamp) / 1000 : 0;
     this.lastTimestamp = time;
 
-    this.timerService.saveTotalTime(newTime);
+    this.timerService.setTime(newTime);
 
     return newTime;
   }

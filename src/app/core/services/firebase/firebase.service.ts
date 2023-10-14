@@ -29,6 +29,7 @@ export class FirebaseService {
 
   getById(path: string, id: string): Observable<any> {
     this.loaderService.show();
+
     const ref = doc(this.firestore, `${path}/${id}`);
     return docSnapshots(ref).pipe(
       map((doc) => {

@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
-  idToken,
   signInWithEmailAndPassword,
   signOut,
+  user,
 } from '@angular/fire/auth';
 
-import { LoaderService, StorageService } from '@services/index';
+import {
+  DistanceService,
+  LoaderService,
+  StorageService,
+  TimerService,
+  TopSpeedService,
+} from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
@@ -20,7 +26,10 @@ export class authService {
   constructor(
     private auth: Auth,
     private storageService: StorageService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private distanceService: DistanceService,
+    private timerService: TimerService,
+    private topSpeedService: TopSpeedService
   ) {
     this.observableToken();
   }
@@ -29,7 +38,7 @@ export class authService {
     return this.storageService.get(AppConstant.storageKeys.jwtToken);
   }
 
-  public get userId() {
+  public get uid() {
     return this.storageService.get(AppConstant.storageKeys.uid);
   }
 
@@ -37,11 +46,10 @@ export class authService {
     this.loaderService.show();
     try {
       return await createUserWithEmailAndPassword(this.auth, params.email, params.password).then(
-        () => {
-          return this.auth.currentUser?.getIdToken(true).then((token) => {
-            this.loaderService.hide();
-            return token;
-          });
+        async (auth) => {
+          this.loaderService.hide();
+          await auth.user.getIdToken(true);
+          return auth.user.uid;
         }
       );
     } catch (error) {
@@ -52,13 +60,15 @@ export class authService {
 
   public async login(params: loginParams) {
     this.loaderService.show();
+
     try {
-      return await signInWithEmailAndPassword(this.auth, params.email, params.password).then(() => {
-        return this.auth.currentUser?.getIdToken(true).then((token) => {
+      return await signInWithEmailAndPassword(this.auth, params.email, params.password).then(
+        async (auth) => {
           this.loaderService.hide();
-          return token;
-        });
-      });
+          await auth.user.getIdToken(true);
+          return auth.user.uid;
+        }
+      );
     } catch (error) {
       this.loaderService.hide();
       return;
@@ -68,28 +78,25 @@ export class authService {
   public async logOut() {
     this.loaderService.show();
 
-    await Promise.all([
-      signOut(this.auth),
-      this.storageService.remove(AppConstant.storageKeys.jwtToken),
-      this.storageService.remove(AppConstant.storageKeys.uid),
-      this.storageService.remove(AppConstant.storageKeys.avgSpeedTotalDistance),
-      this.storageService.remove(AppConstant.storageKeys.avgSpeedTotalTime),
-      this.storageService.remove(AppConstant.storageKeys.topSpeed),
-      this.storageService.remove(AppConstant.storageKeys.totalDistance),
-      this.storageService.remove(AppConstant.storageKeys.totalTime),
-    ]);
+    signOut(this.auth);
+
+    await this.auth.currentUser?.getIdToken(true);
+
+    await this.distanceService.removeTotalDistance();
+    await this.timerService.resetTripTime();
+    await this.topSpeedService.clearTopSpeed();
 
     this.loaderService.hide();
   }
 
   public observableToken() {
-    idToken(this.auth).subscribe((token: string | null) => {
-      if (token) {
-        this.storageService.set(AppConstant.storageKeys.jwtToken, token);
-        this.storageService.set(AppConstant.storageKeys.uid, this.auth.currentUser?.uid);
+    user(this.auth).subscribe(async (detail) => {
+      if (detail) {
+        await this.storageService.set(AppConstant.storageKeys.uid, detail.uid);
+        await this.storageService.set(AppConstant.storageKeys.jwtToken, await detail.getIdToken());
       } else {
-        this.storageService.remove(AppConstant.storageKeys.jwtToken);
-        this.storageService.remove(AppConstant.storageKeys.uid);
+        await this.storageService.remove(AppConstant.storageKeys.uid);
+        await this.storageService.remove(AppConstant.storageKeys.jwtToken);
       }
     });
   }

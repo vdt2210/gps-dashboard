@@ -37,7 +37,7 @@
     </ion-list>
   </div>
 
-  <div class="flex justify-center">
+  <div>
     <app-button
       buttonLabel="updateInformation"
       [expand]="appConstant.buttonExpand.full"
@@ -45,11 +45,12 @@
     ></app-button>
 
     <app-button
-    buttonLabel="logOut"
-    [buttonType]="appConstant.buttonType.button"
-    [fill]="appConstant.fill.clear"
-    (clickEmit)="onLogOut()"
-  ></app-button>
+      class="flex justify-center"
+      buttonLabel="logOut"
+      [buttonType]="appConstant.buttonType.button"
+      [fill]="appConstant.fill.clear"
+      (clickEmit)="onLogOut()"
+    ></app-button>
   </div>
 </form>
 

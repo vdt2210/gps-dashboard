@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, take } from 'rxjs';
+import { take } from 'rxjs';
 
 import { AppConstant } from '@utilities/index';
 
@@ -18,18 +18,6 @@ import {
   providedIn: 'root',
 })
 export class SyncDataService {
-  private onDestroy$: Subject<void> = new Subject<void>();
-
-  private userId = this.authService.userId;
-  private storageData = {
-    avgSpeedTotalDistance: this.storageService.get(AppConstant.storageKeys.avgSpeedTotalDistance),
-    avgSpeedTotalTime: this.storageService.get(AppConstant.storageKeys.avgSpeedTotalTime),
-    topSpeed: this.storageService.get(AppConstant.storageKeys.topSpeed),
-    totalDistance: this.storageService.get(AppConstant.storageKeys.totalDistance),
-    totalTime: this.storageService.get(AppConstant.storageKeys.totalTime),
-    tripDistance: this.storageService.get(AppConstant.storageKeys.tripDistance),
-  };
-
   constructor(
     private storageService: StorageService,
     private firebaseService: FirebaseService,
@@ -39,21 +27,38 @@ export class SyncDataService {
     private distanceService: DistanceService
   ) {}
 
+  private storageData() {
+    return {
+      avgSpeedTotalDistance: this.distanceService.getDistances().getValue().avgSpeedTotalDistance,
+      avgSpeedTotalTime: this.timerService.getAvgSpeedTotalTime().getValue(),
+      topSpeed: this.topSpeedService.getTopSpeed().getValue(),
+      totalDistance: this.distanceService.getDistances().getValue().totalDistance,
+      totalTime: this.timerService.getTotalTime().getValue(),
+      tripDistance: this.distanceService.getDistances().getValue().tripDistance,
+      tripTime: this.storageService.get(AppConstant.storageKeys.tripTime),
+    };
+  }
+
+  private async userId() {
+    return await this.authService.uid;
+  }
+
   public async getList() {
-    return this.firebaseService.getById(AppConstant.docEndPoint.trips, await this.userId);
+    return this.firebaseService.getById(AppConstant.docEndPoint.trips, await this.userId());
   }
 
   public async setBackupValue() {
     const tripParams: TTripDTO = {
-      avgSpeedTotalDistance: await this.storageData.avgSpeedTotalDistance,
-      avgSpeedTotalTime: await this.storageData.avgSpeedTotalTime,
+      avgSpeedTotalDistance: this.storageData().avgSpeedTotalDistance,
+      avgSpeedTotalTime: this.storageData().avgSpeedTotalTime,
       createdDate: new Date().getTime(),
-      topSpeed: await this.storageData.topSpeed,
-      tripDistance: await this.storageData.tripDistance,
+      topSpeed: this.storageData().topSpeed,
+      tripDistance: this.storageData().tripDistance,
+      tripTime: await this.storageData().tripTime,
     };
 
     await this.firebaseService.updateDocArrayUnion(
-      `${AppConstant.docEndPoint.trips}/${await this.userId}`,
+      `${AppConstant.docEndPoint.trips}/${await this.userId()}`,
       'trips',
       tripParams
     );
@@ -75,44 +80,45 @@ export class SyncDataService {
   }
 
   public async getUserData() {
-    if (!(await this.userId)) return;
+    const uid = await this.userId();
+
+    if (!uid) return;
 
     this.firebaseService
-      .getById(AppConstant.docEndPoint.userData, await this.userId)
+      .getById(AppConstant.docEndPoint.userData, uid)
       .pipe(take(1))
       .subscribe(async (data: ISyncUserData) => {
-        if (data) {
+        if (!!data) {
           const { totalDistance, totalTime } = data;
 
           const { totalDistance: storageTotalDistance, totalTime: storageTotalTime } =
-            this.storageData;
+            this.storageData();
 
-          if (totalDistance > (await storageTotalDistance)) {
+          if (totalDistance > storageTotalDistance) {
             await this.storageService.set(AppConstant.storageKeys.totalDistance, totalDistance);
+            this.distanceService.setInitialDistance();
           }
 
-          if (totalTime > (await storageTotalTime)) {
+          if (totalTime > storageTotalTime) {
             await this.storageService.set(AppConstant.storageKeys.totalTime, totalTime);
+            this.timerService.setInitialTotalTime();
           }
 
-          if (
-            totalDistance < (await storageTotalDistance) ||
-            totalTime < (await storageTotalTime)
-          ) {
+          if (totalDistance < storageTotalDistance || totalTime < storageTotalTime) {
             this.setUserData();
           }
 
           return;
         }
-      });
 
-    this.setUserData();
+        this.setUserData();
+      });
   }
 
   public async setUserData() {
     const params: TSyncUserDataDTO = {
-      totalDistance: await this.storageData.totalDistance,
-      totalTime: await this.storageData.totalTime,
+      totalDistance: this.storageData().totalDistance,
+      totalTime: this.storageData().totalTime,
     };
 
     await this.firebaseService.setDoc(

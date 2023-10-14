@@ -76,6 +76,12 @@ export class DistanceService {
     });
   }
 
+  public async removeTotalDistance() {
+    await this.storageService
+      .remove(AppConstant.storageKeys.totalDistance)
+      .then(() => this.setInitialDistance());
+  }
+
   public async removeTripDistance() {
     await this.storageService
       .remove(AppConstant.storageKeys.tripDistance)
