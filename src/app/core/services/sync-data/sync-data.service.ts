@@ -95,7 +95,8 @@ export class SyncDataService {
             this.storageData();
 
           if (totalDistance > storageTotalDistance) {
-            await this.storageService.set(AppConstant.storageKeys.totalDistance, totalDistance);
+            // await this.storageService.set(AppConstant.storageKeys.totalDistance, totalDistance);
+            await this.distanceService.setTotalDistance(totalDistance);
             this.distanceService.setInitialDistance();
           }
 
@@ -122,7 +123,7 @@ export class SyncDataService {
     };
 
     await this.firebaseService.setDoc(
-      `${AppConstant.docEndPoint.userData}/${await this.userId}`,
+      `${AppConstant.docEndPoint.userData}/${await this.userId()}`,
       params
     );
 

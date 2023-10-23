@@ -1,11 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import {
-  DistanceService,
-  TopSpeedService,
-  TimerService,
-  GeolocationService,
-} from '@services/index';
+import { DistanceService, TopSpeedService, TimerService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
@@ -25,11 +20,14 @@ export class ClearDataComponent {
     { isChecked: false, name: AppConstant.storageKeys.tripDistance },
   ];
 
+  test = {
+    avgDistance: this.distanceService.getDistances().getValue().avgSpeedTotalDistance,
+    avgTimer: this.timerService.getAvgSpeedTotalTime().getValue(),
+  };
   constructor(
     private distanceService: DistanceService,
     private timerService: TimerService,
-    private topSpeedService: TopSpeedService,
-    private geolocationService: GeolocationService
+    private topSpeedService: TopSpeedService
   ) {}
 
   public onSelect(ev: { checked: boolean; value: string }) {
@@ -67,9 +65,6 @@ export class ClearDataComponent {
     }
 
     await Promise.all(promises);
-
-    this.geolocationService.startBackgroundGeolocation();
-
     this.buttonEmit.emit();
   }
 }
