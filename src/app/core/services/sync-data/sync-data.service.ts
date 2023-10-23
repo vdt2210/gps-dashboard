@@ -95,7 +95,6 @@ export class SyncDataService {
             this.storageData();
 
           if (totalDistance > storageTotalDistance) {
-            // await this.storageService.set(AppConstant.storageKeys.totalDistance, totalDistance);
             await this.distanceService.setTotalDistance(totalDistance);
             this.distanceService.setInitialDistance();
           }
