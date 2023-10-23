@@ -44,8 +44,8 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).then((token: string | undefined) => {
-        if (token) {
+      this.authService.login(this.loginForm.value).then((uid) => {
+        if (uid) {
           this.syncDataService.getUserData();
           this.buttonClick('account');
         }

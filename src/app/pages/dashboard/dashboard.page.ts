@@ -48,7 +48,7 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   public ngOnInit() {
     this.timerService
-      .getTotalTime()
+      .getTripTime()
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((data) => {
         this.totalTime = data;

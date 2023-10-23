@@ -111,7 +111,7 @@ export class CalculateService {
         tripDistance = val.speed * val.time;
       }
 
-      this.distanceService.setDistance(tripDistance);
+      this.distanceService.setDistances(tripDistance);
     }
 
     this.convert();

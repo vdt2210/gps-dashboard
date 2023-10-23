@@ -3,6 +3,10 @@
   translate="clearData"
 ></h1>
 
+<div>
+  <code> {{ test | json }} </code>
+</div>
+
 <app-checkbox
   [listItems]="clearableKeys"
   (selectEmit)="onSelect($event)"

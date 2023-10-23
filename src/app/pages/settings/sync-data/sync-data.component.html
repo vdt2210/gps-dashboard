@@ -10,15 +10,17 @@
   />
 </div>
 
-<div class="flex justify-center">
+<div>
   <app-button
     buttonLabel="import"
+    [expand]="appConstant.buttonExpand.full"
     (clickEmit)="importData()"
     [isDisabled]="!!!selectedSyncData"
   />
 
   <app-button
     buttonLabel="export"
+    [expand]="appConstant.buttonExpand.full"
     (clickEmit)="exportData()"
     [isDisabled]="!!selectedSyncData"
   />

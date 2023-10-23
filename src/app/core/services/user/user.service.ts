@@ -25,6 +25,7 @@ export class UserService {
   }
 
   public getDetail() {
+    // TODO handle stop when log out
     user(this.auth).subscribe((userDetail: User | null) => {
       if (userDetail) {
         this.firebaseService

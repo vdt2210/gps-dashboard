@@ -27,7 +27,7 @@ export class DistanceService {
       !(await this.storageService.get(AppConstant.storageKeys.tripDistance)) ||
       !(await this.storageService.get(AppConstant.storageKeys.avgSpeedTotalDistance))
     ) {
-      this.setDistance(0);
+      this.setDistances(0);
     }
 
     this.distanceParams$.next({
@@ -43,7 +43,15 @@ export class DistanceService {
     return this.distanceParams$;
   }
 
-  public async setDistance(distance: number) {
+  public async setDistances(distance: number) {
+    this.distanceParams$.next({
+      avgSpeedTotalDistance: await this.setAvgSpeedTotalDistance(distance),
+      totalDistance: await this.setTotalDistance(distance),
+      tripDistance: await this.setTripDistance(distance),
+    });
+  }
+
+  public async setTotalDistance(distance: number) {
     const currentTotalDistance = await this.storageService.get(
       AppConstant.storageKeys.totalDistance
     );
@@ -52,12 +60,20 @@ export class DistanceService {
 
     await this.storageService.set(AppConstant.storageKeys.totalDistance, newTotalDistance);
 
+    return newTotalDistance;
+  }
+
+  public async setTripDistance(distance: number) {
     const currentTripDistance = await this.storageService.get(AppConstant.storageKeys.tripDistance);
 
     const newTripDistance = currentTripDistance + distance;
 
     await this.storageService.set(AppConstant.storageKeys.tripDistance, newTripDistance);
 
+    return newTripDistance;
+  }
+
+  public async setAvgSpeedTotalDistance(distance: number) {
     const currentAvgSpeedTotalDistance = await this.storageService.get(
       AppConstant.storageKeys.avgSpeedTotalDistance
     );
@@ -69,11 +85,13 @@ export class DistanceService {
       newAvgSpeedTotalDistance
     );
 
-    this.distanceParams$.next({
-      avgSpeedTotalDistance: newAvgSpeedTotalDistance,
-      totalDistance: newTotalDistance,
-      tripDistance: newTripDistance,
-    });
+    return newAvgSpeedTotalDistance;
+  }
+
+  public async removeTotalDistance() {
+    await this.storageService
+      .remove(AppConstant.storageKeys.totalDistance)
+      .then(() => this.setInitialDistance());
   }
 
   public async removeTripDistance() {
