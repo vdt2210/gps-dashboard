@@ -35,5 +35,8 @@
   "import": "Nhập",
   "export": "Xuất",
   "total": "Tổng",
-  "trip": "Hành trình"
+  "trip": "Hành trình",
+  "loading": "Đang tải",
+  "dataCleared": "Đẫ xóa dữ liệu",
+  "dataImported": "Dữ liệu đã được nhập"
 }

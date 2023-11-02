@@ -7,3 +7,4 @@ export * from './input/input.component';
 export * from './loader/loader.component';
 export * from './radio/radio.component';
 export * from './range/range.component';
+export * from './toast/toast.component';
