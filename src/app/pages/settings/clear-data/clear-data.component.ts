@@ -20,10 +20,6 @@ export class ClearDataComponent {
     { isChecked: false, name: AppConstant.storageKeys.tripDistance },
   ];
 
-  test = {
-    avgDistance: this.distanceService.getDistances().getValue().avgSpeedTotalDistance,
-    avgTimer: this.timerService.getAvgSpeedTotalTime().getValue(),
-  };
   constructor(
     private distanceService: DistanceService,
     private timerService: TimerService,

@@ -1,3 +1,5 @@
+//** All times are in second */
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -70,23 +72,21 @@ export class TimerService {
   }
 
   public async setTime(time: number) {
-    if (time < 0) return;
-
-    await this.setTotalTime(time);
-    await this.setTripTime(time);
-    await this.setAvgSpeedTotalTime(time);
+    this.setTotalTime(time);
+    this.setTripTime(time);
+    this.setAvgSpeedTotalTime(time);
   }
 
   private async setTotalTime(time: number) {
     const currentTotalTime = await this.storageService.get(AppConstant.storageKeys.totalTime);
-    const newTotalTime = currentTotalTime + Math.floor(time);
+    const newTotalTime = currentTotalTime + time;
 
-    await this.storageService.set(AppConstant.storageKeys.totalTime, newTotalTime).then(() => {});
+    await this.storageService.set(AppConstant.storageKeys.totalTime, newTotalTime);
   }
 
   private async setTripTime(time: number) {
     const currentTripTime = await this.storageService.get(AppConstant.storageKeys.tripTime);
-    const newTripTime = currentTripTime + Math.floor(time);
+    const newTripTime = currentTripTime + time;
 
     await this.storageService
       .set(AppConstant.storageKeys.tripTime, newTripTime)
@@ -97,7 +97,7 @@ export class TimerService {
     const currentAvgSpeedTotalTime = await this.storageService.get(
       AppConstant.storageKeys.avgSpeedTotalTime
     );
-    const newAgSpeedTotalTime = currentAvgSpeedTotalTime + Math.floor(time);
+    const newAgSpeedTotalTime = currentAvgSpeedTotalTime + time;
 
     await this.storageService
       .set(AppConstant.storageKeys.avgSpeedTotalTime, newAgSpeedTotalTime)
@@ -119,7 +119,7 @@ export class TimerService {
   private formatTime(time: number) {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor(time / 60) % 60;
-    const seconds = time % 60;
+    const seconds = Math.floor(time % 60);
     this.tripTime$.next(
       [hours, minutes, seconds].map((n) => n.toString().padStart(2, '0')).join(':')
     );
