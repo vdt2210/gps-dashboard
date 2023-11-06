@@ -22,13 +22,9 @@ export class LanguageService {
     await this.storageService
       .get(AppConstant.storageKeys.language)
       .then(async (val) => {
-        if (val) {
-          this.translateService.use(val);
-          document.documentElement.lang = val;
-          dayjs.locale(val);
-        } else {
-          this.setLanguage(this.getSupportedLanguage((await Device.getLanguageCode()).value));
-        }
+        await this.setLanguage(
+          this.getSupportedLanguage(val ? val : (await Device.getLanguageCode()).value)
+        );
       })
       .catch((err) => {
         console.error(err);

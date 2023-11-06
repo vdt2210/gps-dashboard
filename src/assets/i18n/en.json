@@ -35,5 +35,8 @@
   "import": "Import",
   "export": "Export",
   "total": "Total",
-  "trip": "Trip"
+  "trip": "Trip",
+  "loading": "Loading",
+  "dataCleared": "Data cleared",
+  "dataImported": "Data imported"
 }

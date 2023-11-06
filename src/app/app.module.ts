@@ -13,7 +13,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { SharedModule } from '@shared/shared.module';
 
-import { LoaderComponent } from '@components/index';
+import { LoaderComponent, ToastComponent } from '@components/index';
 import { environment } from '@environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,6 +45,6 @@ export function createTranslateLoader(http: HttpClient) {
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [ToastComponent, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
 })
 export class AppModule {}

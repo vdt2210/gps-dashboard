@@ -2,6 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 import { DistanceService, TopSpeedService, TimerService } from '@services/index';
 
+import { ToastComponent } from '@shared/components';
+
 import { AppConstant } from '@utilities/index';
 
 @Component({
@@ -27,7 +29,8 @@ export class ClearDataComponent {
   constructor(
     private distanceService: DistanceService,
     private timerService: TimerService,
-    private topSpeedService: TopSpeedService
+    private topSpeedService: TopSpeedService,
+    private toastComponent: ToastComponent
   ) {}
 
   public onSelect(ev: { checked: boolean; value: string }) {
@@ -65,6 +68,8 @@ export class ClearDataComponent {
     }
 
     await Promise.all(promises);
+
+    this.toastComponent.presentToast({ color: AppConstant.color.success, msg: 'dataCleared' });
     this.buttonEmit.emit();
   }
 }

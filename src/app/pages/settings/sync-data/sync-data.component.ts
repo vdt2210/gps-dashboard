@@ -6,7 +6,7 @@ import { authService, SyncDataService } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
 
-import { RadioOption } from '@components/index';
+import { RadioOption, ToastComponent } from '@components/index';
 import { ITrip, TSyncTrip } from '@models/index';
 
 @Component({
@@ -26,7 +26,8 @@ export class SyncDataComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: authService,
-    private syncDataService: SyncDataService
+    private syncDataService: SyncDataService,
+    private toastComponent: ToastComponent
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -62,11 +63,12 @@ export class SyncDataComponent implements OnInit, OnDestroy {
     this.buttonEmit.emit(action);
   }
 
-  public importData() {
+  public async importData() {
     if (this.selectedSyncData) {
       //TODO show confirm popup
 
-      this.syncDataService.setTripValue(JSON.parse(JSON.stringify(this.selectedSyncData)));
+      await this.syncDataService.setTripValue(JSON.parse(JSON.stringify(this.selectedSyncData)));
+      this.toastComponent.presentToast({ color: AppConstant.color.success, msg: 'dataImported' });
       this.buttonClick();
     }
   }
