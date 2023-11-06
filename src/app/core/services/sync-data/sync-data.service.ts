@@ -88,39 +88,49 @@ export class SyncDataService {
       .getById(AppConstant.docEndPoint.userData, uid)
       .pipe(take(1))
       .subscribe(async (data: ISyncUserData) => {
+        const { totalDistance: storageTotalDistance, totalTime: storageTotalTime } =
+          this.storageData();
+
         if (!!data) {
           const { totalDistance, totalTime } = data;
 
-          const { totalDistance: storageTotalDistance, totalTime: storageTotalTime } =
-            this.storageData();
-
           if (totalDistance > storageTotalDistance) {
-            await this.distanceService.setTotalDistance(totalDistance);
+            await this.storageService.set(AppConstant.storageKeys.totalDistance, totalDistance);
             this.distanceService.setInitialDistance();
+          } else {
+            const params: TSyncUserDataDTO = {
+              totalDistance: storageTotalDistance,
+              totalTime: totalTime,
+            };
+
+            await this.setUserData(params);
           }
 
           if (totalTime > storageTotalTime) {
             await this.storageService.set(AppConstant.storageKeys.totalTime, totalTime);
             this.timerService.setInitialTotalTime();
-          }
+          } else {
+            const params: TSyncUserDataDTO = {
+              totalDistance: totalDistance,
+              totalTime: storageTotalTime,
+            };
 
-          if (totalDistance < storageTotalDistance || totalTime < storageTotalTime) {
-            this.setUserData();
+            await this.setUserData(params);
           }
 
           return;
         }
 
-        this.setUserData();
+        const params: TSyncUserDataDTO = {
+          totalDistance: storageTotalDistance,
+          totalTime: storageTotalTime,
+        };
+
+        await this.setUserData(params);
       });
   }
 
-  public async setUserData() {
-    const params: TSyncUserDataDTO = {
-      totalDistance: this.storageData().totalDistance,
-      totalTime: this.storageData().totalTime,
-    };
-
+  public async setUserData(params: TSyncUserDataDTO) {
     await this.firebaseService.setDoc(
       `${AppConstant.docEndPoint.userData}/${await this.userId()}`,
       params

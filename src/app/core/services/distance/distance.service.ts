@@ -1,3 +1,5 @@
+//** All distances are in meter unit */
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
