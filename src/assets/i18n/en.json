@@ -38,5 +38,10 @@
   "trip": "Trip",
   "loading": "Loading",
   "dataCleared": "Data cleared",
-  "dataImported": "Data imported"
+  "dataImported": "Data imported",
+  "areYouSure": "Are you sure?",
+  "thisActionCantRevert": "This action cant revert.",
+  "clear": "Clear",
+  "error": "Error",
+  "areYouSureYouWantToImportThisData": "Are you sure you want to import this data?"
 }

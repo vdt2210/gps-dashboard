@@ -1,3 +1,4 @@
+export * from './alert/aler.component';
 export * from './back-button/back-button.component';
 export * from './button/button.component';
 export * from './button-card/button-card.component';

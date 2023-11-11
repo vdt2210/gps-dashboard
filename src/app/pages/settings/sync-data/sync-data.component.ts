@@ -1,12 +1,13 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { IonicSafeString } from '@ionic/angular';
 import * as dayjs from 'dayjs';
 import { Subject, takeUntil } from 'rxjs';
 
-import { authService, SyncDataService } from '@services/index';
+import { authService, LanguageService, SyncDataService, TimerService } from '@services/index';
 
-import { AppConstant } from '@utilities/index';
+import { AppConstant, AppUtil } from '@utilities/index';
 
-import { RadioOption, ToastComponent } from '@components/index';
+import { AlertComponent, RadioOption, ToastComponent } from '@components/index';
 import { ITrip, TSyncTrip } from '@models/index';
 
 @Component({
@@ -22,12 +23,15 @@ export class SyncDataComponent implements OnInit, OnDestroy {
   public appConstant = AppConstant;
   public listSyncData: ITrip[] = [];
   public listSyncDataOptions: RadioOption[] = [];
-  public selectedSyncData?: string;
+  public selectedSyncData?: ITrip;
 
   constructor(
     private authService: authService,
     private syncDataService: SyncDataService,
-    private toastComponent: ToastComponent
+    private toastComponent: ToastComponent,
+    private alertComponent: AlertComponent,
+    private languageService: LanguageService,
+    private timerService: TimerService
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -49,6 +53,7 @@ export class SyncDataComponent implements OnInit, OnDestroy {
               avgSpeedTotalTime: item.avgSpeedTotalTime,
               topSpeed: item.topSpeed,
               tripDistance: item.tripDistance,
+              tripTime: item.tripTime,
             },
           };
         });
@@ -63,14 +68,74 @@ export class SyncDataComponent implements OnInit, OnDestroy {
     this.buttonEmit.emit(action);
   }
 
-  public async importData() {
-    if (this.selectedSyncData) {
-      //TODO show confirm popup
+  public handleSelectedData(data: string) {
+    this.selectedSyncData = JSON.parse(JSON.stringify(data));
+  }
 
-      await this.syncDataService.setTripValue(JSON.parse(JSON.stringify(this.selectedSyncData)));
-      this.toastComponent.presentToast({ color: AppConstant.color.success, msg: 'dataImported' });
-      this.buttonClick();
-    }
+  public async showConfirm() {
+    if (!this.selectedSyncData) return;
+
+    this.alertComponent.presentAlert({
+      buttons: [
+        {
+          role: 'cancel',
+          text: this.languageService.translate('cancel'),
+        },
+        {
+          handler: async () => {
+            await this.importData();
+          },
+          text: this.languageService.translate('import'),
+        },
+      ],
+      header: this.languageService.translate('areYouSureYouWantToImportThisData'),
+      //TODO modify calc service
+      message: new IonicSafeString(`
+                                    <div>
+                                      <div class='flex justify-between'>
+                                        <p>${this.languageService.translate('avgSpeed')}</p>
+                                        <p>${AppUtil.toFixedNoRounding(
+                                          (this.selectedSyncData.avgSpeedTotalDistance /
+                                            this.selectedSyncData.avgSpeedTotalTime) *
+                                            3.6,
+                                          2
+                                        )} ${AppConstant.unit.metric.speedUnit}</p>
+                                      </div>
+                                    
+                                      <div class='flex justify-between'>
+                                        <p>${this.languageService.translate('topSpeed')}</p>
+                                        <p>${
+                                          this.selectedSyncData.topSpeed
+                                            ? this.selectedSyncData.topSpeed * 3.6
+                                            : '-'
+                                        } ${AppConstant.unit.metric.speedUnit}</p>
+                                      </div>
+
+                                      <div class='flex justify-between'>
+                                        <p>${this.languageService.translate('trip')}</p>
+                                        <p>${AppUtil.toFixedNoRounding(
+                                          this.selectedSyncData.tripDistance / 1000,
+                                          2
+                                        )} ${AppConstant.unit.metric.distanceUnit}</p>
+                                      </div>
+
+                                      <div class='flex justify-between'>
+                                        <p>${this.languageService.translate('time')}</p>
+                                        <p>${this.timerService.formatTime(
+                                          this.selectedSyncData.tripTime
+                                        )}</p>
+                                      </div>
+                                    </div>`),
+    });
+  }
+
+  private async importData() {
+    if (!this.selectedSyncData) return;
+
+    await this.syncDataService.setTripValue(this.selectedSyncData);
+    this.toastComponent.presentToast({ color: AppConstant.color.success, msg: 'dataImported' });
+    await this.alertComponent.dismissAlert();
+    this.buttonClick();
   }
 
   public async exportData() {
