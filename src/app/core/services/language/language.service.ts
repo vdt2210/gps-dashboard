@@ -42,7 +42,7 @@ export class LanguageService {
     dayjs.locale(lang);
   }
 
-  public translate(key: string, params?: any) {
+  public translate(key: string, params?: object) {
     return this.translateService.instant(key, params);
   }
 

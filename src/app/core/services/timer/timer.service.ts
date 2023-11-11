@@ -40,7 +40,7 @@ export class TimerService {
       .get(AppConstant.storageKeys.tripTime)
       .then((val) => {
         if (val) {
-          this.formatTime(val);
+          this.tripTime$.next(this.formatTime(val));
         } else {
           this.setTime(0);
         }
@@ -90,7 +90,7 @@ export class TimerService {
 
     await this.storageService
       .set(AppConstant.storageKeys.tripTime, newTripTime)
-      .then(() => this.formatTime(newTripTime));
+      .then(() => this.tripTime$.next(this.formatTime(newTripTime)));
   }
 
   private async setAvgSpeedTotalTime(time: number) {
@@ -116,12 +116,15 @@ export class TimerService {
       .then(() => this.setInitialTotalTime());
   }
 
-  private formatTime(time: number) {
+  public formatTime(time: number) {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor(time / 60) % 60;
     const seconds = Math.floor(time % 60);
-    this.tripTime$.next(
-      [hours, minutes, seconds].map((n) => n.toString().padStart(2, '0')).join(':')
-    );
+
+    const parsedTimer = [hours, minutes, seconds]
+      .map((n) => n.toString().padStart(2, '0'))
+      .join(':');
+
+    return parsedTimer;
   }
 }

@@ -38,5 +38,10 @@
   "trip": "Hành trình",
   "loading": "Đang tải",
   "dataCleared": "Đẫ xóa dữ liệu",
-  "dataImported": "Dữ liệu đã được nhập"
+  "dataImported": "Dữ liệu đã được nhập",
+  "areYouSure": "Bạn có chắc chưa?",
+  "thisActionCantRevert": "Hành động này không thể hoàn tác.",
+  "clear": "Xóa",
+  "error": "Lỗi",
+  "areYouSureYouWantToImportThisData": "Bạn có chắc bạn muốn nhập dữ liệu này?"
 }

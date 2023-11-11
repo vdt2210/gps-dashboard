@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import { DistanceService, TopSpeedService, TimerService } from '@services/index';
+import { DistanceService, TopSpeedService, TimerService, LanguageService } from '@services/index';
 
-import { ToastComponent } from '@shared/components';
+import { AlertComponent, ToastComponent } from '@shared/components';
 
 import { AppConstant } from '@utilities/index';
 
@@ -26,7 +26,9 @@ export class ClearDataComponent {
     private distanceService: DistanceService,
     private timerService: TimerService,
     private topSpeedService: TopSpeedService,
-    private toastComponent: ToastComponent
+    private toastComponent: ToastComponent,
+    private alertComponent: AlertComponent,
+    private languageService: LanguageService
   ) {}
 
   public onSelect(ev: { checked: boolean; value: string }) {
@@ -37,7 +39,26 @@ export class ClearDataComponent {
     return this.clearableKeys.filter((val) => val.isChecked).length > 0;
   }
 
-  public async onConfirm() {
+  public async showConfirm() {
+    this.alertComponent.presentAlert({
+      buttons: [
+        {
+          role: 'cancel',
+          text: this.languageService.translate('cancel'),
+        },
+        {
+          handler: async () => {
+            await this.onClearData();
+          },
+          text: this.languageService.translate('clear'),
+        },
+      ],
+      header: this.languageService.translate('areYouSure'),
+      message: this.languageService.translate('thisActionCantRevert'),
+    });
+  }
+
+  public async onClearData() {
     const promises = [];
 
     for (const val of this.clearableKeys) {
@@ -66,6 +87,7 @@ export class ClearDataComponent {
     await Promise.all(promises);
 
     this.toastComponent.presentToast({ color: AppConstant.color.success, msg: 'dataCleared' });
+    await this.alertComponent.dismissAlert();
     this.buttonEmit.emit();
   }
 }

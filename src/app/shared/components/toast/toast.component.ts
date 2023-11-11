@@ -14,6 +14,8 @@ type Props = {
   selector: 'app-toast',
   template: '',
 })
+
+//TODO define type like alert component
 export class ToastComponent {
   constructor(
     private toastController: ToastController,
@@ -40,7 +42,6 @@ export class ToastComponent {
         cssClass: 'custom-toast',
         duration: time || 2000,
         message: this.languageService.translate(msg, { msgValue }),
-        mode: 'ios',
         position: 'top',
       })
       .then((toast) => {
