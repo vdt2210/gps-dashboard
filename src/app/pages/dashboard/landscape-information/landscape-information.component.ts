@@ -7,7 +7,7 @@ import { ICalculatedData, IUnit } from '@models/index';
 type TDataList = {
   label: string;
   unit?: string;
-  value: number | string | null;
+  value?: number | string | null;
 };
 
 type TInformationCardCalculatedData = Pick<
@@ -24,9 +24,9 @@ type TInformationCardUnit = Pick<IUnit, 'lengthUnit' | 'speedUnit'>;
 })
 export class LandscapeInformationComponent implements OnChanges {
   @Input() calculatedData: TInformationCardCalculatedData = {
-    accuracy: '-',
-    altitude: '-.-',
-    avgSpeed: '-.-',
+    accuracy: null,
+    altitude: null,
+    avgSpeed: null,
     topSpeed: null,
   };
 

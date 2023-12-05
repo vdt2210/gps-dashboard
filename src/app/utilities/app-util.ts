@@ -38,14 +38,16 @@ export const AppUtil = {
     }
   },
 
-  toFixedNoRounding(value: number, n: number) {
-    const reg = new RegExp('^-?\\d+(?:\\.\\d{0,' + n + '})?', 'g');
+  toFixedNoRounding(value: number, number: number) {
+    if (!value) return '';
+
+    const reg = new RegExp('^-?\\d+(?:\\.\\d{0,' + number + '})?', 'g');
     const a = value.toString().match(reg)![0];
     const dot = a.indexOf('.');
     if (dot === -1) {
-      return a + '.' + '0'.repeat(n);
+      return a + '.' + '0'.repeat(number);
     }
-    const b = n - (a.length - dot) + 1;
+    const b = number - (a.length - dot) + 1;
     return b > 0 ? a + '0'.repeat(b) : a;
   },
 };

@@ -43,5 +43,6 @@
   "thisActionCantRevert": "This action cant revert.",
   "clear": "Clear",
   "error": "Error",
-  "areYouSureYouWantToImportThisData": "Are you sure you want to import this data?"
+  "areYouSureYouWantToImportThisData": "Are you sure you want to import this data?",
+  "tripTime": "Trip time"
 }
