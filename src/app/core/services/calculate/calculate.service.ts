@@ -70,7 +70,9 @@ export class CalculateService {
   }
 
   public initialCalculate() {
-    this.updateUnitSystem();
+    this.unitService.getUnit().subscribe(() => {
+      this.convert();
+    });
 
     this.geolocationService.getLocation().subscribe((value: TGeolocation) => {
       this.handleGeolocationData(value);
@@ -118,71 +120,37 @@ export class CalculateService {
   }
 
   private convert() {
-    let data: TCalculatedData;
+    const rawData: TCalculatingData = {
+      accuracy: this.rawAccuracy,
+      altitude: this.rawAltitude,
+      avgSpeedTotalDistance: this.distances.avgSpeedTotalDistance,
+      avgSpeedTotalTime: this.avgSpeedTotalTime,
+      speed: this.rawSpeed,
+      topSpeed: this.rawTopSpeed,
+      totalDistance: this.distances.totalDistance,
+      tripDistance: this.distances.tripDistance,
+    };
+    let calculatedData: TCalculatedData;
 
     switch (this.unitService.getUnit().getValue().value) {
       case AppConstant.unit.imperial.value:
-        data = this.calculateImperial({
-          accuracy: this.rawAccuracy,
-          altitude: this.rawAltitude,
-          avgSpeedTotalDistance: this.distances.avgSpeedTotalDistance,
-          avgSpeedTotalTime: this.avgSpeedTotalTime,
-          speed: this.rawSpeed,
-          topSpeed: this.topSpeed,
-          totalDistance: this.distances.totalDistance,
-          tripDistance: this.distances.tripDistance,
-        });
-
-        this.calculateData$.next({
-          accuracy: data.accuracy,
-          altitude: data.altitude,
-          avgSpeed: data.avgSpeed,
-          speed: data.speed,
-          topSpeed: data.topSpeed,
-          totalDistance: data.totalDistance,
-          tripDistance: data.tripDistance,
-        });
+        calculatedData = this.calculateImperial(rawData);
         break;
 
       case AppConstant.unit.metric.value:
       default:
-        data = this.calculateMetric({
-          accuracy: this.rawAccuracy,
-          altitude: this.rawAltitude,
-          avgSpeedTotalDistance: this.distances.avgSpeedTotalDistance,
-          avgSpeedTotalTime: this.avgSpeedTotalTime,
-          speed: this.rawSpeed,
-          topSpeed: this.topSpeed,
-          totalDistance: this.distances.totalDistance,
-          tripDistance: this.distances.tripDistance,
-        });
-
-        this.calculateData$.next({
-          accuracy: data.accuracy,
-          altitude: data.altitude,
-          avgSpeed: data.avgSpeed,
-          speed: data.speed,
-          topSpeed: data.topSpeed,
-          totalDistance: data.totalDistance,
-          tripDistance: data.tripDistance,
-        });
+        calculatedData = this.calculateMetric(rawData);
         break;
     }
-  }
 
-  private updateUnitSystem() {
-    this.unitService.getUnit().subscribe((data) => {
-      this.convert();
-      switch (data.value) {
-        case AppConstant.unit.imperial.value:
-          // this.imperialUnit();
-          break;
-
-        case AppConstant.unit.metric.value:
-        default:
-          // this.metricUnit();
-          break;
-      }
+    this.calculateData$.next({
+      accuracy: calculatedData.accuracy,
+      altitude: calculatedData.altitude,
+      avgSpeed: calculatedData.avgSpeed,
+      speed: calculatedData.speed,
+      topSpeed: calculatedData.topSpeed,
+      totalDistance: calculatedData.totalDistance,
+      tripDistance: calculatedData.tripDistance,
     });
   }
 
@@ -259,30 +227,6 @@ export class CalculateService {
   //   });
   // }
 
-  public calculateMetric({
-    speed,
-    topSpeed,
-    accuracy,
-    altitude,
-    totalDistance,
-    tripDistance,
-    avgSpeedTotalDistance,
-    avgSpeedTotalTime,
-  }: TCalculatingData) {
-    const data = {
-      accuracy: accuracy != null ? Math.round(accuracy) : null,
-      altitude: altitude != null ? AppUtil.toFixedNoRounding(Number(altitude), 1) : null,
-      avgSpeed:
-        AppUtil.toFixedNoRounding((avgSpeedTotalDistance / avgSpeedTotalTime) * 3.6, 1) ?? null,
-      speed: speed != null ? Math.round(speed * 3.6) : null,
-      topSpeed: topSpeed != null ? Math.round(topSpeed * 3.6) : null,
-      totalDistance: totalDistance != null ? Math.trunc(totalDistance / 1000) : null,
-      tripDistance: AppUtil.toFixedNoRounding(Number(tripDistance) / 1000, 1) ?? null,
-    };
-
-    return data;
-  }
-
   // * calculate in imperial unit
   // private imperialUnit() {
   //   const speed = this.rawSpeed !== null ? Math.round(this.rawSpeed * 2.23693629) : null;
@@ -331,6 +275,32 @@ export class CalculateService {
   //     tripDistance: this.tripDistance,
   //   });
   // }
+
+  // * calculate by unit v2
+
+  public calculateMetric({
+    speed,
+    topSpeed,
+    accuracy,
+    altitude,
+    totalDistance,
+    tripDistance,
+    avgSpeedTotalDistance,
+    avgSpeedTotalTime,
+  }: TCalculatingData) {
+    const data = {
+      accuracy: accuracy != null ? Math.round(accuracy) : null,
+      altitude: altitude != null ? AppUtil.toFixedNoRounding(Number(altitude), 1) : null,
+      avgSpeed:
+        AppUtil.toFixedNoRounding((avgSpeedTotalDistance / avgSpeedTotalTime) * 3.6, 1) ?? null,
+      speed: speed != null ? Math.round(speed * 3.6) : null,
+      topSpeed: topSpeed != null ? Math.round(topSpeed * 3.6) : null,
+      totalDistance: totalDistance != null ? Math.trunc(totalDistance / 1000) : null,
+      tripDistance: AppUtil.toFixedNoRounding(Number(tripDistance) / 1000, 1) ?? null,
+    };
+
+    return data;
+  }
 
   public calculateImperial({
     speed,
