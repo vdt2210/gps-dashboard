@@ -23,9 +23,9 @@ export class DashboardPage implements OnInit, OnDestroy {
   };
 
   public calculatedData: TCalculatedData = {
-    accuracy: '-',
-    altitude: '-.-',
-    avgSpeed: '-.-',
+    accuracy: null,
+    altitude: null,
+    avgSpeed: null,
     speed: null,
     topSpeed: null,
     totalDistance: 0,

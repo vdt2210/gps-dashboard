@@ -3,9 +3,16 @@ import { IonicSafeString } from '@ionic/angular';
 import * as dayjs from 'dayjs';
 import { Subject, takeUntil } from 'rxjs';
 
-import { authService, LanguageService, SyncDataService, TimerService } from '@services/index';
+import {
+  authService,
+  CalculateService,
+  LanguageService,
+  SyncDataService,
+  TimerService,
+  UnitService,
+} from '@services/index';
 
-import { AppConstant, AppUtil } from '@utilities/index';
+import { AppConstant } from '@utilities/index';
 
 import { AlertComponent, RadioOption, ToastComponent } from '@components/index';
 import { ITrip, TSyncTrip } from '@models/index';
@@ -31,7 +38,9 @@ export class SyncDataComponent implements OnInit, OnDestroy {
     private toastComponent: ToastComponent,
     private alertComponent: AlertComponent,
     private languageService: LanguageService,
-    private timerService: TimerService
+    private timerService: TimerService,
+    private calculateService: CalculateService,
+    private unitService: UnitService
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -75,6 +84,13 @@ export class SyncDataComponent implements OnInit, OnDestroy {
   public async showConfirm() {
     if (!this.selectedSyncData) return;
 
+    const syncValue = this.calculateService.convertTripData({
+      avgSpeedTotalDistance: this.selectedSyncData.avgSpeedTotalDistance,
+      avgSpeedTotalTime: this.selectedSyncData.avgSpeedTotalTime,
+      topSpeed: this.selectedSyncData.topSpeed,
+      tripDistance: this.selectedSyncData.tripDistance,
+    });
+
     this.alertComponent.presentAlert({
       buttons: [
         {
@@ -89,38 +105,39 @@ export class SyncDataComponent implements OnInit, OnDestroy {
         },
       ],
       header: this.languageService.translate('areYouSureYouWantToImportThisData'),
-      //TODO modify calc service
       message: new IonicSafeString(`
                                     <div>
                                       <div class='flex justify-between'>
-                                        <p>${this.languageService.translate('avgSpeed')}</p>
-                                        <p>${AppUtil.toFixedNoRounding(
-                                          (this.selectedSyncData.avgSpeedTotalDistance /
-                                            this.selectedSyncData.avgSpeedTotalTime) *
-                                            3.6,
-                                          2
-                                        )} ${AppConstant.unit.metric.speedUnit}</p>
+                                        <p class='text-ellipsis'>${this.languageService.translate(
+                                          'trip'
+                                        )}: </p>
+                                        <p>${syncValue.tripDistance} ${
+                                          this.unitService.getUnit().value.distanceUnit
+                                        }</p>
+                                      </div>
+
+                                      <div class='flex justify-between'>
+                                        <p class='text-ellipsis'>${this.languageService.translate(
+                                          'averageSpeed'
+                                        )}: </p>
+                                        <p>${syncValue.avgSpeed} ${
+                                          this.unitService.getUnit().value.speedUnit
+                                        }</p>
                                       </div>
                                     
                                       <div class='flex justify-between'>
-                                        <p>${this.languageService.translate('topSpeed')}</p>
-                                        <p>${
-                                          this.selectedSyncData.topSpeed
-                                            ? this.selectedSyncData.topSpeed * 3.6
-                                            : '-'
-                                        } ${AppConstant.unit.metric.speedUnit}</p>
+                                        <p class='text-ellipsis'>${this.languageService.translate(
+                                          'topSpeed'
+                                        )}: </p>
+                                        <p>${syncValue.topSpeed} ${
+                                          this.unitService.getUnit().value.speedUnit
+                                        }</p>
                                       </div>
-
+                                      
                                       <div class='flex justify-between'>
-                                        <p>${this.languageService.translate('trip')}</p>
-                                        <p>${AppUtil.toFixedNoRounding(
-                                          this.selectedSyncData.tripDistance / 1000,
-                                          2
-                                        )} ${AppConstant.unit.metric.distanceUnit}</p>
-                                      </div>
-
-                                      <div class='flex justify-between'>
-                                        <p>${this.languageService.translate('time')}</p>
+                                        <p class='text-ellipsis'>${this.languageService.translate(
+                                          'tripTime'
+                                        )}: </p>
                                         <p>${this.timerService.formatTime(
                                           this.selectedSyncData.tripTime
                                         )}</p>

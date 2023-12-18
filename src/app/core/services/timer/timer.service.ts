@@ -28,8 +28,9 @@ export class TimerService {
       .get(AppConstant.storageKeys.totalTime)
       .then((val) => {
         if (val) {
+          this.totalTime$.next(val);
         } else {
-          this.setTime(0);
+          this.setTotalTime(0);
         }
       })
       .catch((err) => {
@@ -42,7 +43,7 @@ export class TimerService {
         if (val) {
           this.tripTime$.next(this.formatTime(val));
         } else {
-          this.setTime(0);
+          this.setTripTime(0);
         }
       })
       .catch((err) => {
@@ -52,7 +53,11 @@ export class TimerService {
     await this.storageService
       .get(AppConstant.storageKeys.avgSpeedTotalTime)
       .then((val) => {
-        this.avgSpeedTotalTime$.next(val || 0);
+        if (val) {
+          this.avgSpeedTotalTime$.next(val);
+        } else {
+          this.setAvgSpeedTotalTime(0);
+        }
       })
       .catch((err) => {
         console.error(err);

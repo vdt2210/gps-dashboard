@@ -8,7 +8,7 @@ import { AppConstant } from '@utilities/index';
   templateUrl: './speed.component.html',
 })
 export class SpeedComponent {
-  @Input() speed: number | null = null;
+  @Input() speed?: number | null = null;
   @Input() unit: string = AppConstant.unit.metric.speedUnit;
 
   @Output() switchUnitEmit = new EventEmitter();

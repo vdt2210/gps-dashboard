@@ -43,5 +43,6 @@
   "thisActionCantRevert": "Hành động này không thể hoàn tác.",
   "clear": "Xóa",
   "error": "Lỗi",
-  "areYouSureYouWantToImportThisData": "Bạn có chắc bạn muốn nhập dữ liệu này?"
+  "areYouSureYouWantToImportThisData": "Bạn có chắc bạn muốn nhập dữ liệu này?",
+  "tripTime": "Thời gian hành trình"
 }
