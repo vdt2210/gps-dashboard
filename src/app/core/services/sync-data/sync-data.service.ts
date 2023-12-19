@@ -51,7 +51,6 @@ export class SyncDataService {
     const tripParams: TTripDTO = {
       avgSpeedTotalDistance: this.storageData().avgSpeedTotalDistance,
       avgSpeedTotalTime: this.storageData().avgSpeedTotalTime,
-      createdDate: new Date().getTime(),
       topSpeed: this.storageData().topSpeed,
       tripDistance: this.storageData().tripDistance,
       tripTime: await this.storageData().tripTime,

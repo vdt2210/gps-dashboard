@@ -32,6 +32,7 @@ export class FirebaseService {
 
   getById(path: string, id: string): Observable<any> {
     const ref = doc(this.firestore, `${path}/${id}`);
+
     return docSnapshots(ref).pipe(
       map((doc) => {
         return doc.data();
@@ -62,7 +63,12 @@ export class FirebaseService {
   async updateDocArrayUnion(path: string, field: string, params: object) {
     try {
       const ref = doc(this.firestore, path);
-      await updateDoc(ref, field, arrayUnion(params));
+
+      if (await this.checkDocExists(path)) {
+        await updateDoc(ref, field, arrayUnion({ ...params, createdDate: new Date().getTime() }));
+      } else {
+        await setDoc(ref, { [field]: [{ ...params, createdDate: new Date().getTime() }] });
+      }
     } catch (error) {
       console.error(error);
       this.handleError(error);
