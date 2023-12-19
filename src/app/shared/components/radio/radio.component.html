@@ -14,7 +14,7 @@
       <ion-radio
         [value]="item.value"
         aria-label=""
-        [disabled]="item.disabled"
+        [disabled]="!!item.disabled"
       >
         <p>
           {{ item.label ? (item.label | translate) : item.value }}

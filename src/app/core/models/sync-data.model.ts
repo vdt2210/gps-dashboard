@@ -18,4 +18,7 @@ export type TSyncTrip = { trips: ITrip[] };
 
 export type TSyncUserDataDTO = Partial<Pick<ISyncUserData, 'totalDistance' | 'totalTime'>>;
 
-export type TTripDTO = ITrip;
+export type TTripDTO = Pick<
+  ITrip,
+  'avgSpeedTotalDistance' | 'avgSpeedTotalTime' | 'topSpeed' | 'tripDistance' | 'tripTime'
+>;

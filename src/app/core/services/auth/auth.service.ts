@@ -13,6 +13,7 @@ import {
   StorageService,
   TimerService,
   TopSpeedService,
+  UserService,
 } from '@services/index';
 
 import { AppConstant } from '@utilities/index';
@@ -29,7 +30,8 @@ export class authService {
     private loaderService: LoaderService,
     private distanceService: DistanceService,
     private timerService: TimerService,
-    private topSpeedService: TopSpeedService
+    private topSpeedService: TopSpeedService,
+    private userService: UserService
   ) {
     this.observableToken();
   }
@@ -78,13 +80,17 @@ export class authService {
   public async logOut() {
     this.loaderService.show();
 
-    signOut(this.auth);
+    const promises = [
+      signOut(this.auth),
+      this.auth.currentUser?.getIdToken(true),
+      // this.distanceService.removeTotalDistance(),
+      // this.distanceService.removeAvgSpeedTotalDistance(),
+      // this.timerService.resetTripTime(),
+      // this.timerService.resetAvgSpeedTotalTime(),
+      // this.topSpeedService.clearTopSpeed(),
+    ];
 
-    await this.auth.currentUser?.getIdToken(true);
-
-    await this.distanceService.removeTotalDistance();
-    await this.timerService.resetTripTime();
-    await this.topSpeedService.clearTopSpeed();
+    await Promise.all(promises);
 
     this.loaderService.hide();
   }

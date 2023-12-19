@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, User, user } from '@angular/fire/auth';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, takeWhile } from 'rxjs';
 
 import { FirebaseService } from '../index';
 
@@ -25,16 +25,16 @@ export class UserService {
   }
 
   public getDetail() {
-    // TODO handle stop when log out
-    user(this.auth).subscribe((userDetail: User | null) => {
+    user(this.auth).subscribe((userDetail) => {
       if (userDetail) {
         this.firebaseService
           .getById(this.docRef, userDetail.uid)
+          .pipe(takeWhile(() => !!this.auth.currentUser))
           .subscribe((user: User | undefined) => {
             this.userDetail$.next({
               ...userDetail,
-              displayName: user?.displayName || null,
-              photoURL: user?.photoURL || null,
+              displayName: user?.displayName ?? null,
+              photoURL: user?.photoURL ?? null,
             });
           });
       }
