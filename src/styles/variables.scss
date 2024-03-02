@@ -188,7 +188,7 @@ ion-modal {
 //* Header & Footer
 ion-header,
 ion-footer {
-  @apply flex min-h-[2.5rem] items-center px-2.5;
+  @apply flex min-h-[2.5rem] items-center p-2.5;
 
   &:has(ion-toolbar) {
     @apply p-0;

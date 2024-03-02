@@ -77,11 +77,11 @@ export class AppComponent implements OnInit {
       overlay
         ? overlay.dismiss()
         : this.router.url === `/${AppRoutes.dashboard.path}`
-        ? (this.geolocationService.stopBackgroundGeolocation(),
-          KeepAwake.allowSleep(),
-          await this.syncDataService.getUserData(),
-          App.exitApp())
-        : this.location.back();
+          ? (this.geolocationService.stopBackgroundGeolocation(),
+            KeepAwake.allowSleep(),
+            await this.syncDataService.getUserData(),
+            App.exitApp())
+          : this.location.back();
     });
   }
 }
