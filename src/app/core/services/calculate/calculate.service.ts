@@ -291,12 +291,13 @@ export class CalculateService {
     const data = {
       accuracy: accuracy != null ? Math.round(accuracy) : null,
       altitude: altitude != null ? AppUtil.toFixedNoRounding(Number(altitude), 1) : null,
-      avgSpeed:
-        AppUtil.toFixedNoRounding((avgSpeedTotalDistance / avgSpeedTotalTime) * 3.6, 1) ?? null,
+      avgSpeed: avgSpeedTotalTime
+        ? AppUtil.toFixedNoRounding((avgSpeedTotalDistance / avgSpeedTotalTime) * 3.6, 1)
+        : null,
       speed: speed != null ? Math.round(speed * 3.6) : null,
       topSpeed: topSpeed != null ? Math.round(topSpeed * 3.6) : null,
       totalDistance: totalDistance != null ? Math.trunc(totalDistance / 1000) : null,
-      tripDistance: AppUtil.toFixedNoRounding(Number(tripDistance) / 1000, 1) ?? null,
+      tripDistance: AppUtil.toFixedNoRounding(Number(tripDistance) / 1000, 1) || '0.0',
     };
 
     return data;
@@ -316,13 +317,13 @@ export class CalculateService {
       accuracy: accuracy != null ? Math.round(accuracy * 3.2808399) : null,
       altitude:
         altitude != null ? AppUtil.toFixedNoRounding(Number(altitude) * 3.2808399, 1) : null,
-      avgSpeed:
-        AppUtil.toFixedNoRounding((avgSpeedTotalDistance / avgSpeedTotalTime) * 2.23693629, 1) ??
-        null,
+      avgSpeed: avgSpeedTotalTime
+        ? AppUtil.toFixedNoRounding((avgSpeedTotalDistance / avgSpeedTotalTime) * 2.23693629, 1)
+        : null,
       speed: speed != null ? Math.round(speed * 2.23693629) : null,
       topSpeed: topSpeed != null ? Math.round(topSpeed * 2.23693629) : null,
       totalDistance: totalDistance != null ? Math.trunc(totalDistance * 0.000621371192) : null,
-      tripDistance: AppUtil.toFixedNoRounding(Number(tripDistance) * 0.000621371192, 1) ?? null,
+      tripDistance: AppUtil.toFixedNoRounding(Number(tripDistance) * 0.000621371192, 1) || '0.0',
     };
 
     return data;
